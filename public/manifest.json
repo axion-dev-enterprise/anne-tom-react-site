@@ -1,0 +1,49 @@
+{
+  "short_name": "Anne & Tom",
+  "name": "Pizzaria Anne & Tom - Pizzas Artesanais",
+  "description": "As melhores pizzas artesanais da Zona Norte de São Paulo",
+  "icons": [
+    {
+      "src": "logopizzaria.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#f59e0b",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "categories": ["food", "restaurant", "delivery"],
+  "shortcuts": [
+    {
+      "name": "Ver Cardápio",
+      "short_name": "Cardápio",
+      "description": "Ver nosso cardápio completo",
+      "url": "/cardapio",
+      "icons": [{ "src": "logopizzaria.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Fazer Pedido",
+      "short_name": "Pedir",
+      "description": "Fazer um pedido agora",
+      "url": "/cardapio",
+      "icons": [{ "src": "logopizzaria.png", "sizes": "192x192" }]
+    }
+  ]
+}

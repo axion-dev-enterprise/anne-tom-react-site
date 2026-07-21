@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0b0f19"/>
+  <circle cx="132" cy="132" r="56" fill="#22d3ee" fill-opacity="0.85"/>
+  <circle cx="412" cy="124" r="36" fill="#a78bfa" fill-opacity="0.75"/>
+  <circle cx="388" cy="392" r="64" fill="#34d399" fill-opacity="0.55"/>
+  <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
+        font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial"
+        font-size="168" font-weight="800" fill="#e5e7eb">A</text>
+</svg>

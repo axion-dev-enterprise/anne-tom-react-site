@@ -1,0 +1,704 @@
+[
+  {
+    "name": "Musa",
+    "slug": "musa",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/bc5b88b7-d9fe-45e0-b794-201dbbc02cc6_20260604002806.webp",
+    "localFilename": "musa.webp"
+  },
+  {
+    "name": "Namorados",
+    "slug": "namorados",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/29b65a94-03b6-41da-8df5-10ab5626203b_20260604002816.webp",
+    "localFilename": "namorados.webp"
+  },
+  {
+    "name": "Três Corações",
+    "slug": "tres_coracoes",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/8bd25aaf-976f-46b8-8fcf-ddff0d2388e1_20260604002824.webp",
+    "localFilename": "tres_coracoes.webp"
+  },
+  {
+    "name": "Amor Perfeito",
+    "slug": "amor_perfeito",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/8176a96a-8499-496c-b7e4-271cabbb0ec2_20260604002832.webp",
+    "localFilename": "amor_perfeito.webp"
+  },
+  {
+    "name": "Napolitana",
+    "slug": "napolitana",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/c3b77836-92eb-4b69-88f4-3f60c27653ca_20260604002847.webp",
+    "localFilename": "napolitana.webp"
+  },
+  {
+    "name": "Musa Rebelde",
+    "slug": "musa_rebelde",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/b3505947-cb97-4af8-8852-059e7114755b_20260604002851.webp",
+    "localFilename": "musa_rebelde.webp"
+  },
+  {
+    "name": "Marguerita",
+    "slug": "marguerita",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/f35de474-14bf-49c1-95b1-ba3814832ea8_20260604002914.webp",
+    "localFilename": "marguerita.webp"
+  },
+  {
+    "name": "Anne & Tom",
+    "slug": "anne_tom",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/55655bd9-7dee-4228-88c9-b4bd8749c862_20260604002934.webp",
+    "localFilename": "anne_tom.webp"
+  },
+  {
+    "name": "Vilarejo",
+    "slug": "vilarejo",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/0b08cf5c-abf2-437c-a381-d0fd46841f04_20260604002946.webp",
+    "localFilename": "vilarejo.webp"
+  },
+  {
+    "name": "Jataí (Catupiry, milho e alho poró)",
+    "slug": "jatai_catupiry_milho_e_alho_poro",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/40a7c8bc-c8c1-4753-9cc2-0708beb93ae4_20260604002955.webp",
+    "localFilename": "jatai_catupiry_milho_e_alho_poro.webp"
+  },
+  {
+    "name": "Musa Perfeita",
+    "slug": "musa_perfeita",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/2c4553a8-7696-4eae-9421-59fe8892194a_20260604003005.webp",
+    "localFilename": "musa_perfeita.webp"
+  },
+  {
+    "name": "Cabuçu  Broto + 1 Coca 600ml",
+    "slug": "cabucu_broto_1_coca_600ml",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/32f03902-b2ce-4e52-a50f-fb4d68c41a38_20260604003214.webp",
+    "localFilename": "cabucu_broto_1_coca_600ml.webp"
+  },
+  {
+    "name": "Promoção Narizinho+Mesclada (Doce)+Coca 2 litros",
+    "slug": "promocao_narizinhomesclada_docecoca_2_litros",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/0021cabe-bda5-48f4-a3b1-96e09d2ce0d9_20260604003212.webp",
+    "localFilename": "promocao_narizinhomesclada_docecoca_2_litros.webp"
+  },
+  {
+    "name": "Promoção Arraial D'Ajuda + REFRI 2 LTS",
+    "slug": "promocao_arraial_dajuda_refri_2_lts",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/cd3a6b98-ef2e-4154-aae3-479e9a822a7c_20260604003205.webp",
+    "localFilename": "promocao_arraial_dajuda_refri_2_lts.webp"
+  },
+  {
+    "name": "Promoção Canastra Catupiry+Guaraná 2 litros",
+    "slug": "promocao_canastra_catupiryguarana_2_litros",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/18f4f901-b77d-4c8a-be8f-cdb952fda209_20260604001706.webp",
+    "localFilename": "promocao_canastra_catupiryguarana_2_litros.webp"
+  },
+  {
+    "name": "Promoção Cuca Caipira + Guaraná 2 Litros",
+    "slug": "promocao_cuca_caipira_guarana_2_litros",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/1b358348-0e34-4a1c-88cd-90072bdc2d4d_20260604001707.webp",
+    "localFilename": "promocao_cuca_caipira_guarana_2_litros.webp"
+  },
+  {
+    "name": "Promoção Combo Pizzas ( Musa, Mucuripe e Marguerita) Grátis Guaraná 2l",
+    "slug": "promocao_combo_pizzas_musa_mucuripe_e_marguerita_gratis_guarana_2l",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/ab655861-81a0-4d6e-94d8-de8708905c17_20260604003206.webp",
+    "localFilename": "promocao_combo_pizzas_musa_mucuripe_e_marguerita_gratis_guarana_2l.webp"
+  },
+  {
+    "name": "Promoção Combo Pizzas (Diamantina, Mucuripe e Cuca C/ Catupiry) Refri.",
+    "slug": "promocao_combo_pizzas_diamantina_mucuripe_e_cuca_c_catupiry_refri",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/ce22fd96-ca7e-4e2b-9950-a998a75fea8d_20260604003211.webp",
+    "localFilename": "promocao_combo_pizzas_diamantina_mucuripe_e_cuca_c_catupiry_refri.webp"
+  },
+  {
+    "name": "Sitio do Pica-Pau",
+    "slug": "sitio_do_pica_pau",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/a37b9fe1-45cc-42a5-a068-1cb4e349dc78_20260604001747.webp",
+    "localFilename": "sitio_do_pica_pau.webp"
+  },
+  {
+    "name": "Cuca (Mussarela)",
+    "slug": "cuca_mussarela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/7dba4168-6196-4e51-84c8-f73eb4b401ca_20260604001759.webp",
+    "localFilename": "cuca_mussarela.webp"
+  },
+  {
+    "name": "Cuca (Catupiry)",
+    "slug": "cuca_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/a557be53-5dec-41b2-b541-395601688ff0_20260604001810.webp",
+    "localFilename": "cuca_catupiry.webp"
+  },
+  {
+    "name": "Cuca Caipira",
+    "slug": "cuca_caipira",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/711064b2-8016-4bcd-8f46-9d92c2996feb_20260604001819.webp",
+    "localFilename": "cuca_caipira.webp"
+  },
+  {
+    "name": "Saci",
+    "slug": "saci",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/d4111285-ba68-4555-8f8b-19a92a3db54d_20260604001828.webp",
+    "localFilename": "saci.webp"
+  },
+  {
+    "name": "Emília",
+    "slug": "emilia",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/6d08baeb-cd10-4087-9395-7b4ceaa949ee_20260604001838.webp",
+    "localFilename": "emilia.webp"
+  },
+  {
+    "name": "Dona Benta",
+    "slug": "dona_benta",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/e45d0d85-fdd4-4a6e-bbfd-8d81c925762a_20260604001851.webp",
+    "localFilename": "dona_benta.webp"
+  },
+  {
+    "name": "Tia Nastácia",
+    "slug": "tia_nastacia",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/553204b1-1f72-48df-9b95-08b82183896c_20260604001900.webp",
+    "localFilename": "tia_nastacia.webp"
+  },
+  {
+    "name": "Tio Barnabé",
+    "slug": "tio_barnabe",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/4cabf4f9-8582-4882-b62c-0d2ab25b9a90_20260604001909.webp",
+    "localFilename": "tio_barnabe.webp"
+  },
+  {
+    "name": "Narizinho",
+    "slug": "narizinho",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/48d3d6aa-5a16-4ce0-8fcc-e42f4ec41229_20260604001911.webp",
+    "localFilename": "narizinho.webp"
+  },
+  {
+    "name": "Visconde de Sabugosa",
+    "slug": "visconde_de_sabugosa",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/1650abf9-1442-466f-a7e3-dbc09dd36f34_20260604001922.webp",
+    "localFilename": "visconde_de_sabugosa.webp"
+  },
+  {
+    "name": "Monteiro Lobato",
+    "slug": "monteiro_lobato",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/d7081d1b-baed-4212-af01-07e6c1bb16c4_20260604001931.webp",
+    "localFilename": "monteiro_lobato.webp"
+  },
+  {
+    "name": "Frango Especial",
+    "slug": "frango_especial",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/0a3c06ea-4527-4736-9221-9bfaea3ff433_20260604001941.webp",
+    "localFilename": "frango_especial.webp"
+  },
+  {
+    "name": "Ouro Preto",
+    "slug": "ouro_preto",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/09b39f92-ae7d-4887-91f3-dbe66a85be54_20260604001950.webp",
+    "localFilename": "ouro_preto.webp"
+  },
+  {
+    "name": "Monte Formoso",
+    "slug": "monte_formoso",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/0cde83e0-899d-4f7d-9cba-449e568f100d_20260604001959.webp",
+    "localFilename": "monte_formoso.webp"
+  },
+  {
+    "name": "Igarapé",
+    "slug": "igarape",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/5c21678d-5f60-4c4c-b8f1-b651160f0f8c_20260604002001.webp",
+    "localFilename": "igarape.webp"
+  },
+  {
+    "name": "Mirante",
+    "slug": "mirante",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/85d92bc1-2015-4554-b03c-86cce37479e3_20260604002020.webp",
+    "localFilename": "mirante.webp"
+  },
+  {
+    "name": "Cabuçú (Mussarela)",
+    "slug": "cabucu_mussarela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/3ca70cff-88c0-4dfc-afba-1c5fad196f42_20260604002032.webp",
+    "localFilename": "cabucu_mussarela.webp"
+  },
+  {
+    "name": "Cabuçú (Catupiry)",
+    "slug": "cabucu_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/07208b3b-7648-4e6f-9077-63cac01d6423_20260604002046.webp",
+    "localFilename": "cabucu_catupiry.webp"
+  },
+  {
+    "name": "Diamantina (Portuguesa)",
+    "slug": "diamantina_portuguesa",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/f050b7ca-6b1b-49a5-b5b4-25ddf3ead76c_20260604002127.webp",
+    "localFilename": "diamantina_portuguesa.webp"
+  },
+  {
+    "name": "Diamantina (Portuguesa) C/ Catupiry",
+    "slug": "diamantina_portuguesa_c_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/590ed5fa-aa90-4d55-b81d-440ddf824f8f_20260604002148.webp",
+    "localFilename": "diamantina_portuguesa_c_catupiry.webp"
+  },
+  {
+    "name": "Guimarães",
+    "slug": "guimaraes",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/10a51eac-261e-444a-8e69-4b3244a0c784_20260604002158.webp",
+    "localFilename": "guimaraes.webp"
+  },
+  {
+    "name": "Platina",
+    "slug": "platina",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/0294d4cd-fb41-4300-a988-0463c4d64a76_20260604002215.webp",
+    "localFilename": "platina.webp"
+  },
+  {
+    "name": "Platina (Com Pimenta)",
+    "slug": "platina_com_pimenta",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/13403f41-600a-4fb3-8429-78dde126e8ca_20260604002218.webp",
+    "localFilename": "platina_com_pimenta.webp"
+  },
+  {
+    "name": "Juazeiro",
+    "slug": "juazeiro",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/826c46f3-55e8-469b-b001-bd3d081bf3d7_20260604002227.webp",
+    "localFilename": "juazeiro.webp"
+  },
+  {
+    "name": "Caruaru",
+    "slug": "caruaru",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/59879987-2d45-48d7-9f22-28c96f70ddf2_20260604002228.webp",
+    "localFilename": "caruaru.webp"
+  },
+  {
+    "name": "Abaeté",
+    "slug": "abaete",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/15adc8fe-706f-4b0a-90cc-0b2d0b95dda3_20260604002236.webp",
+    "localFilename": "abaete.webp"
+  },
+  {
+    "name": "Canastra (Mussarela)",
+    "slug": "canastra_mussarela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/a5e6a0d7-c3d0-41a8-ab9a-8ee26b826c47_20260604002247.webp",
+    "localFilename": "canastra_mussarela.webp"
+  },
+  {
+    "name": "Canastra (Catupiry)",
+    "slug": "canastra_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/1742ecd8-32dd-4d55-9718-15aa3cc447b2_20260604002248.webp",
+    "localFilename": "canastra_catupiry.webp"
+  },
+  {
+    "name": "Cantareira",
+    "slug": "cantareira",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/15bf7908-8b05-41d8-8bae-3c4cce4875cd_20260604002252.webp",
+    "localFilename": "cantareira.webp"
+  },
+  {
+    "name": "Araripe",
+    "slug": "araripe",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/1b32a3cb-22a6-4509-823f-a5e60edd27b6_20260604002258.webp",
+    "localFilename": "araripe.webp"
+  },
+  {
+    "name": "Pedra da Gávea",
+    "slug": "pedra_da_gavea",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/cb597aa6-7958-4ec2-a5a8-68b2c32aff57_20260604002319.webp",
+    "localFilename": "pedra_da_gavea.webp"
+  },
+  {
+    "name": "Monte Roraima",
+    "slug": "monte_roraima",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/954cacec-bd88-47a6-abd2-2cea667c0310_20260604002323.webp",
+    "localFilename": "monte_roraima.webp"
+  },
+  {
+    "name": "Petrolina",
+    "slug": "petrolina",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/2fb8cc48-18f7-4286-a4a8-67947495c408_20260604002338.webp",
+    "localFilename": "petrolina.webp"
+  },
+  {
+    "name": "Pantaneira (Carne seca, ovos, cebola, milho e mussarela.)",
+    "slug": "pantaneira_carne_seca_ovos_cebola_milho_e_mussarela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/806d5fae-cead-49cb-93c3-40ee78189778_20260604002354.webp",
+    "localFilename": "pantaneira_carne_seca_ovos_cebola_milho_e_mussarela.webp"
+  },
+  {
+    "name": "Arraial D'ajuda",
+    "slug": "arraial_dajuda",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/38f80d40-8855-48c1-bb3c-e8ebe2c8c0d6_20260604002403.webp",
+    "localFilename": "arraial_dajuda.webp"
+  },
+  {
+    "name": "Piauí ( Presunto, Mussarela,Catupiry, Palmito e Champignon)",
+    "slug": "piaui_presunto_mussarelacatupiry_palmito_e_champignon",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/1e42fec2-16a3-4b55-8b2c-b289200e1e37_20260604002411.webp",
+    "localFilename": "piaui_presunto_mussarelacatupiry_palmito_e_champignon.webp"
+  },
+  {
+    "name": "Havaiana",
+    "slug": "havaiana",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/e7c0bb9f-0db6-4381-ba81-e5dfeaa07831_20260604002420.webp",
+    "localFilename": "havaiana.webp"
+  },
+  {
+    "name": "Bauru",
+    "slug": "bauru",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/d98c2161-7b00-4751-8a80-ad077d701385_20260604002432.webp",
+    "localFilename": "bauru.webp"
+  },
+  {
+    "name": "Lombo 1",
+    "slug": "lombo_1",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/c6c9cdf1-fe08-479f-9f2b-f641e0a72d39_20260604002438.webp",
+    "localFilename": "lombo_1.webp"
+  },
+  {
+    "name": "Lombo 2",
+    "slug": "lombo_2",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/68bacda8-8c34-4976-8d83-a2bdc6bb5759_20260604002449.webp",
+    "localFilename": "lombo_2.webp"
+  },
+  {
+    "name": "Mucuripe (Calabresa)",
+    "slug": "mucuripe_calabresa",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/7433dca9-9de9-41b1-9852-b283388769b8_20260604002207.webp",
+    "localFilename": "mucuripe_calabresa.webp"
+  },
+  {
+    "name": "Terena",
+    "slug": "terena",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/af8f4716-3e0c-49d0-8d9a-d19d8c46132b_20260604002506.webp",
+    "localFilename": "terena.webp"
+  },
+  {
+    "name": "Xavante",
+    "slug": "xavante",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/2a0c3298-b289-4439-94ed-afc283101860_20260604002515.webp",
+    "localFilename": "xavante.webp"
+  },
+  {
+    "name": "Guarani",
+    "slug": "guarani",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/72bfe824-871f-4511-89d1-74a1e72f7979_20260604002523.webp",
+    "localFilename": "guarani.webp"
+  },
+  {
+    "name": "Pataxó",
+    "slug": "pataxo",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/9b2d6074-b7df-444b-b2db-d36593e052ba_20260604002536.webp",
+    "localFilename": "pataxo.webp"
+  },
+  {
+    "name": "Potiguara",
+    "slug": "potiguara",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/14ca51ee-a04b-4841-b7c2-9b5477adca60_20260604002536.webp",
+    "localFilename": "potiguara.webp"
+  },
+  {
+    "name": "Xingu",
+    "slug": "xingu",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/35b9e103-247f-476f-ab8a-5d5bdddd0fbe_20260604002545.webp",
+    "localFilename": "xingu.webp"
+  },
+  {
+    "name": "Kanindé",
+    "slug": "kaninde",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/efc97018-fc39-4c8c-b4cf-4a1994ba1599_20260604002557.webp",
+    "localFilename": "kaninde.webp"
+  },
+  {
+    "name": "Yanomami",
+    "slug": "yanomami",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/2c1bed2c-2643-42d0-b61f-2cfa552674ea_20260604002559.webp",
+    "localFilename": "yanomami.webp"
+  },
+  {
+    "name": "São Tomé",
+    "slug": "sao_tome",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/f81f26b6-3875-4b6d-a5cb-3871df1194de_20260604002601.webp",
+    "localFilename": "sao_tome.webp"
+  },
+  {
+    "name": "São Tomé (CATUPIRY)",
+    "slug": "sao_tome_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/507998e0-940d-41f3-9f98-6ea0bd95347f_20260604002610.webp",
+    "localFilename": "sao_tome_catupiry.webp"
+  },
+  {
+    "name": "Itaúnas",
+    "slug": "itaunas",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/53599bf7-e7ab-4c52-a310-9da1222ddb81_20260604002621.webp",
+    "localFilename": "itaunas.webp"
+  },
+  {
+    "name": "Monte Verde",
+    "slug": "monte_verde",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/5e54d6c4-2409-4c0d-b063-426f1524c495_20260604002632.webp",
+    "localFilename": "monte_verde.webp"
+  },
+  {
+    "name": "Salvador",
+    "slug": "salvador",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/b3b5aa41-ab1a-4e49-a87d-39c2b86eab74_20260604002644.webp",
+    "localFilename": "salvador.webp"
+  },
+  {
+    "name": "Vegana Mix (Berinjela, Abobrinha, Palmito e Alho Poró.)",
+    "slug": "vegana_mix_berinjela_abobrinha_palmito_e_alho_poro",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/1fb9fb29-8700-4797-8ec4-1f85abfc7bb2_20260604002645.webp",
+    "localFilename": "vegana_mix_berinjela_abobrinha_palmito_e_alho_poro.webp"
+  },
+  {
+    "name": "Vegana Mix 2 (Brócolis, Shitake, Palmito e Tomate Cereja)",
+    "slug": "vegana_mix_2_brocolis_shitake_palmito_e_tomate_cereja",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/ea3eb25d-536f-48cc-97d9-2816a98a75f8_20260604002656.webp",
+    "localFilename": "vegana_mix_2_brocolis_shitake_palmito_e_tomate_cereja.webp"
+  },
+  {
+    "name": "Guaraú",
+    "slug": "guarau",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/4601682a-0d29-498d-99b4-bd42db6ad71f_20260604002707.webp",
+    "localFilename": "guarau.webp"
+  },
+  {
+    "name": "Guarau 2",
+    "slug": "guarau_2",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/254f5691-99d8-4b36-8cc6-5e2d077c59dd_20260604002708.webp",
+    "localFilename": "guarau_2.webp"
+  },
+  {
+    "name": "Paúba",
+    "slug": "pauba",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/81c2945d-dad7-4226-ae45-0eec2c16c828_20260604002710.webp",
+    "localFilename": "pauba.webp"
+  },
+  {
+    "name": "Maresias",
+    "slug": "maresias",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/b56e2afe-bb47-4f2c-9648-b5bdd8f23162_20260604002718.webp",
+    "localFilename": "maresias.webp"
+  },
+  {
+    "name": "Jericoacoara",
+    "slug": "jericoacoara",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/64dd3fbc-e3bc-4b83-aecf-b67e3dee5144_20260604002728.webp",
+    "localFilename": "jericoacoara.webp"
+  },
+  {
+    "name": "Maragogi",
+    "slug": "maragogi",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/3191f660-4f42-45ce-9d4d-899c98dcf8f9_20260604002741.webp",
+    "localFilename": "maragogi.webp"
+  },
+  {
+    "name": "Iporanga",
+    "slug": "iporanga",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/92705c98-0132-48ba-b9c0-a710d6afb004_20260604002751.webp",
+    "localFilename": "iporanga.webp"
+  },
+  {
+    "name": "Veneza",
+    "slug": "veneza",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/058d2709-81a9-408f-b8e8-c704b0053ef5_20260604003157.webp",
+    "localFilename": "veneza.webp"
+  },
+  {
+    "name": "Borda Pãozinho Dois Queijos",
+    "slug": "borda_paozinho_dois_queijos",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/9897f9bd-8cb8-430c-b87e-d980e1da92f4_20260604001741.webp",
+    "localFilename": "borda_paozinho_dois_queijos.webp"
+  },
+  {
+    "name": "Borda Pãozinho Frango Catupiry",
+    "slug": "borda_paozinho_frango_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/ea4354ee-45da-4c93-916f-346b0924e0c8_20260604001745.webp",
+    "localFilename": "borda_paozinho_frango_catupiry.webp"
+  },
+  {
+    "name": "Big  Esfiha Carne Seca e Mussarela",
+    "slug": "big_esfiha_carne_seca_e_mussarela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/54dc86fb-39fc-4184-8169-d974e4027f7f_20260604001611.webp",
+    "localFilename": "big_esfiha_carne_seca_e_mussarela.webp"
+  },
+  {
+    "name": "Big Esfiha Atum e Catupiry",
+    "slug": "big_esfiha_atum_e_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/ba61cd8f-f956-4026-8472-968e50e65ab2_20260604001617.webp",
+    "localFilename": "big_esfiha_atum_e_catupiry.webp"
+  },
+  {
+    "name": "Big Esfiha Atum e Cebola",
+    "slug": "big_esfiha_atum_e_cebola",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/513329bd-3859-4a0e-9eb9-18d184c5e0bc_20260604001618.webp",
+    "localFilename": "big_esfiha_atum_e_cebola.webp"
+  },
+  {
+    "name": "Big Esfiha Catupiry e Bacon",
+    "slug": "big_esfiha_catupiry_e_bacon",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/5217f603-3073-434a-88b8-36bd72f870f1_20260604001620.webp",
+    "localFilename": "big_esfiha_catupiry_e_bacon.webp"
+  },
+  {
+    "name": "Big Esfiha Catupiry e Milho",
+    "slug": "big_esfiha_catupiry_e_milho",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/5d166386-3eb9-41d0-9f21-dbadce98cac1_20260604001620.webp",
+    "localFilename": "big_esfiha_catupiry_e_milho.webp"
+  },
+  {
+    "name": "Big Esfiha Doce de Paçoca",
+    "slug": "big_esfiha_doce_de_pacoca",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/20571dcc-a47f-4200-b20b-0adf341a8241_20260604001645.webp",
+    "localFilename": "big_esfiha_doce_de_pacoca.webp"
+  },
+  {
+    "name": "Big Esfiha Doce Mesclada com M&MS",
+    "slug": "big_esfiha_doce_mesclada_com_mms",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/44513a33-59fa-44f2-8381-5eee306bf70b_20260604001649.webp",
+    "localFilename": "big_esfiha_doce_mesclada_com_mms.webp"
+  },
+  {
+    "name": "Big Esfiha Escarola e Bacon",
+    "slug": "big_esfiha_escarola_e_bacon",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/256ff965-5db6-4021-8809-05c9f3cffd26_20260604001653.webp",
+    "localFilename": "big_esfiha_escarola_e_bacon.webp"
+  },
+  {
+    "name": "Big Esfiha Mussarela com Molho",
+    "slug": "big_esfiha_mussarela_com_molho",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/c4194e25-e83b-466e-86ec-7cfa6f874e9f_20260604001700.webp",
+    "localFilename": "big_esfiha_mussarela_com_molho.webp"
+  },
+  {
+    "name": "Big Esfiha Napolitana",
+    "slug": "big_esfiha_napolitana",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/72a4f9e1-c213-4548-8258-0c40480a194d_20260604001701.webp",
+    "localFilename": "big_esfiha_napolitana.webp"
+  },
+  {
+    "name": "Big Esfiha Palmito e Catupiry",
+    "slug": "big_esfiha_palmito_e_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/032bf912-1ac5-4f29-9fb5-4b21e1e7fcd2_20260604001702.webp",
+    "localFilename": "big_esfiha_palmito_e_catupiry.webp"
+  },
+  {
+    "name": "Big Esfiha Peru com Catupiry e Escarola",
+    "slug": "big_esfiha_peru_com_catupiry_e_escarola",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/226ae1a0-c69e-4feb-a608-a6513af5f75b_20260604001704.webp",
+    "localFilename": "big_esfiha_peru_com_catupiry_e_escarola.webp"
+  },
+  {
+    "name": "Big Esfiha Quatro Queijos",
+    "slug": "big_esfiha_quatro_queijos",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/42f966f1-9564-44ad-932c-3d012ce0ec6d_20260604001705.webp",
+    "localFilename": "big_esfiha_quatro_queijos.webp"
+  },
+  {
+    "name": "Big Esfiha Bauru",
+    "slug": "big_esfiha_bauru",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/6884db09-3e87-478f-b4a1-2e4641766bc8_20260604001618.webp",
+    "localFilename": "big_esfiha_bauru.webp"
+  },
+  {
+    "name": "Big Esfiha Brócolis e Catupiry",
+    "slug": "big_esfiha_brocolis_e_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/06e4b0aa-9a8c-4bc8-9511-97678d146dbf_20260604001619.webp",
+    "localFilename": "big_esfiha_brocolis_e_catupiry.webp"
+  },
+  {
+    "name": "Big Esfiha de Calabresa e Catupiry",
+    "slug": "big_esfiha_de_calabresa_e_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/953d1078-a62f-4b68-97c2-1805661fc82a_20260604001621.webp",
+    "localFilename": "big_esfiha_de_calabresa_e_catupiry.webp"
+  },
+  {
+    "name": "Big Esfiha Dois Queijos",
+    "slug": "big_esfiha_dois_queijos",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/89d7a245-baa7-4ad0-bcbe-e192f7edbdf9_20260604001650.webp",
+    "localFilename": "big_esfiha_dois_queijos.webp"
+  },
+  {
+    "name": "Big Esfiha Dois Queijos e Milho",
+    "slug": "big_esfiha_dois_queijos_e_milho",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/b2b01563-de3b-40e1-8637-c90a972e3fbb_20260604001651.webp",
+    "localFilename": "big_esfiha_dois_queijos_e_milho.webp"
+  },
+  {
+    "name": "Big  Esfiha Frango e Catupiry",
+    "slug": "big_esfiha_frango_e_catupiry",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/8a91c787-1edd-4d5f-9b0f-475fae497def_20260604001616.webp",
+    "localFilename": "big_esfiha_frango_e_catupiry.webp"
+  },
+  {
+    "name": "Big Esfiha Mussarela",
+    "slug": "big_esfiha_mussarela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/aca247eb-e1f2-4b98-aba7-16836c2ac405_20260604001659.webp",
+    "localFilename": "big_esfiha_mussarela.webp"
+  },
+  {
+    "name": "Big Esfiha Marguerita",
+    "slug": "big_esfiha_marguerita",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/f0270d1c-814a-4272-9bd4-5ddc1bf8ff51_20260604001659.webp",
+    "localFilename": "big_esfiha_marguerita.webp"
+  },
+  {
+    "name": "Big Esfiha Pepperoni e Mussarela",
+    "slug": "big_esfiha_pepperoni_e_mussarela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/ffb15037-06d9-4883-a5fc-06b7dddfe098_20260604001703.webp",
+    "localFilename": "big_esfiha_pepperoni_e_mussarela.webp"
+  },
+  {
+    "name": "Big Esfiha Doce Banana com Chocolate e Canela",
+    "slug": "big_esfiha_doce_banana_com_chocolate_e_canela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/49c5c8c0-57ad-4da0-9fbb-a54d5d1bdca0_20260604001629.webp",
+    "localFilename": "big_esfiha_doce_banana_com_chocolate_e_canela.webp"
+  },
+  {
+    "name": "Big Esfiha Doce Chocolate com Morango",
+    "slug": "big_esfiha_doce_chocolate_com_morango",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/50b566ff-d85d-4347-8148-878e45f5eb5d_20260604001633.webp",
+    "localFilename": "big_esfiha_doce_chocolate_com_morango.webp"
+  },
+  {
+    "name": "Big Esfiha Doce de Leite com Canela",
+    "slug": "big_esfiha_doce_de_leite_com_canela",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/a3a67817-dd1a-43ab-8c61-c43dd0a5fea6_20260604001639.webp",
+    "localFilename": "big_esfiha_doce_de_leite_com_canela.webp"
+  },
+  {
+    "name": "Big Esfiha Doce  Prestígio",
+    "slug": "big_esfiha_doce_prestigio",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/bf96c8d7-4e66-4b8e-9e16-6cf57bb81959_20260604001625.webp",
+    "localFilename": "big_esfiha_doce_prestigio.webp"
+  },
+  {
+    "name": "Água 1,5  litros",
+    "slug": "agua_15_litros",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/42cf97bd-165a-4976-8e2e-b428b430fb4b_20260604001610.webp",
+    "localFilename": "agua_15_litros.webp"
+  },
+  {
+    "name": "Suco Del Valle 1 L CAJU",
+    "slug": "suco_del_valle_1_l_caju",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/54874827-0195-4d94-ac12-1e86fe3cf50d_20260604001718.webp",
+    "localFilename": "suco_del_valle_1_l_caju.webp"
+  },
+  {
+    "name": "Suco Del Valle 1 L UVA",
+    "slug": "suco_del_valle_1_l_uva",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/71811fba-570e-4558-962c-c4d7ddf35d3a_20260604001731.webp",
+    "localFilename": "suco_del_valle_1_l_uva.webp"
+  },
+  {
+    "name": "FANTA LARANJA  2 LITROS",
+    "slug": "fanta_laranja_2_litros",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/2c4cc3b2-58f1-4895-9be8-647148577475_20260604001707.webp",
+    "localFilename": "fanta_laranja_2_litros.webp"
+  },
+  {
+    "name": "GUARANÁ ANTARTICA 2 LITROS",
+    "slug": "guarana_antartica_2_litros",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/4132a7ff-4d79-47bc-80cc-aa5c378d3c63_20260604001708.webp",
+    "localFilename": "guarana_antartica_2_litros.webp"
+  },
+  {
+    "name": "SODA 2,0 LITROS",
+    "slug": "soda_20_litros",
+    "originalUrl": "https://files.menudino.com/merchants/c5fc3abc-2faf-11ee-9964-0022483864db/items/images/small/77b7e3b6-7d6c-4ee2-81f4-03a452c1e3d0_20260604001709.webp",
+    "localFilename": "soda_20_litros.webp"
+  }
+]

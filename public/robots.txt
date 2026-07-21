@@ -1,0 +1,19 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://annetom.com.br/sitemap.xml
+
+# Bloquear acesso a arquivos temporários e de sistema
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /*.json$
+Disallow: /api/
+
+# Permitir acesso aos recursos públicos
+Allow: /static/
+Allow: /public/
+Allow: /images/
+Allow: /css/
+Allow: /js/

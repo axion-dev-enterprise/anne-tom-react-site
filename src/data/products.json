@@ -1,0 +1,1418 @@
+{
+  "pizzaria": "Anne & Tom",
+  "atualizado_em": "2025-11-30",
+  "items": [
+    {
+      "id": "001",
+      "nome": "Musa",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela", "Molho de tomate", "Tomate em rodelas", "Orégano"],
+      "preco_broto": 42,
+      "preco_grande": 60
+    },
+    {
+      "id": "002",
+      "nome": "Namorados",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela", "Catupiry", "Molho de tomate", "Orégano"],
+      "preco_broto": 48,
+      "preco_grande": 69
+    },
+    {
+      "id": "003",
+      "nome": "Três Corações",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela de búfala", "Catupiry", "Provolone", "Molho de tomate", "Orégano"],
+      "preco_broto": 55,
+      "preco_grande": 76
+    },
+    {
+      "id": "004",
+      "nome": "Amor Perfeito",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela", "Catupiry", "Gorgonzola", "Parmesão ralado", "Molho de tomate"],
+      "preco_broto": 56,
+      "preco_grande": 80
+    },
+    {
+      "id": "005",
+      "nome": "Napolitana",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela", "Tomate em rodelas", "Parmesão ralado", "Molho de tomate", "Orégão"],
+      "preco_broto": 46,
+      "preco_grande": 66
+    },
+    {
+      "id": "006",
+      "nome": "Musa Rebelde",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela", "Molho de tomate", "Tomate picado", "Salsa fresca", "Pimenta dedo-de-moça"],
+      "preco_broto": 45,
+      "preco_grande": 64
+    },
+    {
+      "id": "007",
+      "nome": "Marguerita",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela", "Tomate em rodelas", "Manjericão fresco", "Parmesão ralado", "Molho de tomate"],
+      "preco_broto": 48,
+      "preco_grande": 68
+    },
+    {
+      "id": "008",
+      "nome": "Anne & Tom",
+      "categoria": "queijo",
+      "ingredientes": ["Provolone", "Cream cheese", "Pesto de manjericão", "Molho de tomate"],
+      "preco_broto": 55,
+      "preco_grande": 76
+    },
+    {
+      "id": "009",
+      "nome": "Vilarejo",
+      "categoria": "queijo",
+      "ingredientes": ["Gorgonzola", "Catupiry", "Queijo branco", "Champignon fatiado", "Pesto de manjericão"],
+      "preco_broto": 56,
+      "preco_grande": 80
+    },
+    {
+      "id": "010",
+      "nome": "Jataí",
+      "categoria": "queijo",
+      "ingredientes": ["Catupiry", "Milho verde", "Alho-poró", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "011",
+      "nome": "Musa Perfeita",
+      "categoria": "queijo",
+      "ingredientes": ["Mussarela", "Molho de tomate extra", "Orégano"],
+      "preco_broto": 43,
+      "preco_grande": 62
+    },
+    {
+      "id": "012",
+      "nome": "Ouro Preto",
+      "categoria": "carne",
+      "ingredientes": ["Lombo suíno fatiado", "Shimeji refogado na manteiga", "Catupiry", "Molho de tomate"],
+      "preco_broto": 52,
+      "preco_grande": 74
+    },
+    {
+      "id": "013",
+      "nome": "Monte Formoso",
+      "categoria": "carne",
+      "ingredientes": ["Lombo", "Mussarela", "Palmito em rodelas", "Parmesão", "Alho dourado", "Molho de tomate"],
+      "preco_broto": 54,
+      "preco_grande": 78
+    },
+    {
+      "id": "014",
+      "nome": "Igarapé",
+      "categoria": "carne",
+      "ingredientes": ["Lombo", "Mussarela", "Bacon em cubos", "Banana em rodelas", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "015",
+      "nome": "Mirante",
+      "categoria": "carne",
+      "ingredientes": ["Pepperoni", "Mussarela", "Tomate em rodelas", "Molho de tomate", "Orégano"],
+      "preco_broto": 52,
+      "preco_grande": 74
+    },
+    {
+      "id": "016",
+      "nome": "Cabuçu (Mussarela)",
+      "categoria": "carne",
+      "ingredientes": ["Bacon", "Mussarela", "Molho de tomate", "Orégano"],
+      "preco_broto": 48,
+      "preco_grande": 69
+    },
+    {
+      "id": "017",
+      "nome": "Cabuçu (Catupiry)",
+      "categoria": "carne",
+      "ingredientes": ["Bacon", "Catupiry", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "018",
+      "nome": "Diamantina (Mussarela)",
+      "categoria": "carne",
+      "ingredientes": ["Presunto", "Mussarela", "Ovos fatiados", "Ervilha", "Cebola", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "019",
+      "nome": "Diamantina (Catupiry)",
+      "categoria": "carne",
+      "ingredientes": ["Presunto", "Catupiry", "Ovos fatiados", "Ervilha", "Cebola", "Molho de tomate"],
+      "preco_broto": 53,
+      "preco_grande": 74
+    },
+    {
+      "id": "020",
+      "nome": "Guimarães",
+      "categoria": "carne",
+      "ingredientes": ["Presunto", "Catupiry", "Champignon", "Alcaparras", "Molho de tomate"],
+      "preco_broto": 59,
+      "preco_grande": 78
+    },
+    {
+      "id": "021",
+      "nome": "Platina",
+      "categoria": "carne",
+      "ingredientes": ["Calabresa fatiada", "Mussarela", "Ovos fatiados", "Cebola", "Molho de tomate"],
+      "preco_broto": 49,
+      "preco_grande": 70
+    },
+    {
+      "id": "022",
+      "nome": "Platina (Pimenta)",
+      "categoria": "carne",
+      "ingredientes": ["Calabresa fatiada", "Mussarela", "Ovos", "Cebola", "Pimenta calabresa", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "023",
+      "nome": "Juazeiro",
+      "categoria": "carne",
+      "ingredientes": ["Carne seca desfiada", "Catupiry", "Cebola", "Pimentão", "Molho de tomate"],
+      "preco_broto": 60,
+      "preco_grande": 86
+    },
+    {
+      "id": "024",
+      "nome": "Caruaru",
+      "categoria": "carne",
+      "ingredientes": ["Carne seca desfiada", "Macaxeira em cubos", "Catupiry", "Salsa", "Molho de tomate"],
+      "preco_broto": 59,
+      "preco_grande": 84
+    },
+    {
+      "id": "025",
+      "nome": "Abaeté",
+      "categoria": "carne",
+      "ingredientes": ["Salame fatiado", "Mussarela", "Pimentão", "Cebola", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "026",
+      "nome": "Canastra (Mussarela)",
+      "categoria": "carne",
+      "ingredientes": ["Calabresa moída", "Mussarela", "Parmesão ralado", "Molho de tomate"],
+      "preco_broto": 48,
+      "preco_grande": 69
+    },
+    {
+      "id": "027",
+      "nome": "Canastra (Catupiry)",
+      "categoria": "carne",
+      "ingredientes": ["Calabresa moída", "Catupiry", "Parmesão ralado", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "028",
+      "nome": "Yanomami",
+      "categoria": "carne",
+      "ingredientes": ["Calabresa artesanal", "Bacon crocante", "Cebola roxa", "Pimenta biquinho", "Mussarela", "Molho de tomate"],
+      "preco_broto": 54,
+      "preco_grande": 78
+    },
+    {
+      "id": "029",
+      "nome": "São Tomé (Mussarela)",
+      "categoria": "carne",
+      "ingredientes": ["Lombo em tiras", "Mussarela", "Tomate em cubos", "Cebola", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "030",
+      "nome": "São Tomé (Catupiry)",
+      "categoria": "carne",
+      "ingredientes": ["Lombo em tiras", "Catupiry", "Tomate em cubos", "Cebola", "Molho de tomate"],
+      "preco_broto": 52,
+      "preco_grande": 74
+    },
+    {
+      "id": "031",
+      "nome": "Itaúnas",
+      "categoria": "carne",
+      "ingredientes": ["Linguiça artesanal", "Mussarela", "Cebola caramelizada", "Azeitonas pretas", "Molho de tomate"],
+      "preco_broto": 56,
+      "preco_grande": 80
+    },
+    {
+      "id": "032",
+      "nome": "Monte Verde",
+      "categoria": "carne",
+      "ingredientes": ["Lombo defumado", "Bacon", "Mussarela", "Tomate seco", "Molho de tomate"],
+      "preco_broto": 54,
+      "preco_grande": 78
+    },
+    {
+      "id": "033",
+      "nome": "Salvador",
+      "categoria": "carne",
+      "ingredientes": ["Carne de sol desfiada", "Mussarela", "Cebola roxa", "Coentro fresco", "Molho de tomate"],
+      "preco_broto": 59,
+      "preco_grande": 78
+    },
+    {
+      "id": "034",
+      "nome": "Vegana Mix 1",
+      "categoria": "vegana",
+      "ingredientes": ["Queijo vegano", "Molho de tomate", "Tomate-cereja", "Rúcula", "Cebola roxa", "Azeitonas pretas"],
+      "preco_broto": 52,
+      "preco_grande": 74
+    },
+    {
+      "id": "035",
+      "nome": "Vegana Mix 2",
+      "categoria": "vegana",
+      "ingredientes": ["Queijo vegano", "Molho de tomate", "Abobrinha grelhada", "Berinjela grelhada", "Tomate seco", "Manjericão"],
+      "preco_broto": 53,
+      "preco_grande": 76
+    },
+    {
+      "id": "036",
+      "nome": "Terena",
+      "categoria": "legumes",
+      "ingredientes": ["Berinjela no alho", "Mussarela", "Bacon", "Molho de tomate"],
+      "preco_broto": 48,
+      "preco_grande": 69
+    },
+    {
+      "id": "037",
+      "nome": "Xavante",
+      "categoria": "legumes",
+      "ingredientes": ["Abobrinha grelhada", "Mussarela", "Gorgonzola", "Orégano", "Molho de tomate"],
+      "preco_broto": 55,
+      "preco_grande": 79
+    },
+    {
+      "id": "038",
+      "nome": "Guarani",
+      "categoria": "legumes",
+      "ingredientes": ["Escarola no alho", "Bacon", "Mussarela", "Molho de tomate"],
+      "preco_broto": 52,
+      "preco_grande": 70
+    },
+    {
+      "id": "039",
+      "nome": "Pataxó",
+      "categoria": "legumes",
+      "ingredientes": ["Mussarela de búfala", "Tomate seco", "Rúcula", "Shitake", "Molho de tomate"],
+      "preco_broto": 56,
+      "preco_grande": 80
+    },
+    {
+      "id": "040",
+      "nome": "Potiguara",
+      "categoria": "legumes",
+      "ingredientes": ["Brócolis ao alho", "Mussarela", "Catupiry", "Molho de tomate"],
+      "preco_broto": 48,
+      "preco_grande": 69
+    },
+    {
+      "id": "041",
+      "nome": "Xingu",
+      "categoria": "legumes",
+      "ingredientes": ["Brócolis", "Bacon", "Catupiry", "Alho-poró", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "042",
+      "nome": "Kanindé",
+      "categoria": "legumes",
+      "ingredientes": ["Escarola", "Frango desfiado", "Tomilho", "Parmesão", "Cream cheese", "Molho de tomate"],
+      "preco_broto": 54,
+      "preco_grande": 76
+    },
+    {
+      "id": "043",
+      "nome": "Guarau",
+      "categoria": "peixes",
+      "ingredientes": ["Atum", "Mussarela", "Cebola", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "044",
+      "nome": "Guarau 2",
+      "categoria": "peixes",
+      "ingredientes": ["Atum", "Cebola", "Molho de tomate"],
+      "preco_broto": 53,
+      "preco_grande": 76
+    },
+    {
+      "id": "045",
+      "nome": "Paúba",
+      "categoria": "peixes",
+      "ingredientes": ["Atum", "Catupiry", "Tomate em rodelas", "Molho de tomate"],
+      "preco_broto": 50,
+      "preco_grande": 72
+    },
+    {
+      "id": "046",
+      "nome": "Maresias",
+      "categoria": "peixes",
+      "ingredientes": ["Atum", "Catupiry", "Tomate seco", "Molho de tomate"],
+      "preco_broto": 53,
+      "preco_grande": 76
+    },
+    {
+      "id": "047",
+      "nome": "Jericoacoara",
+      "categoria": "peixes",
+      "ingredientes": ["Atum", "Escarola no alho", "Mussarela", "Tomate", "Molho de tomate"],
+      "preco_broto": 49,
+      "preco_grande": 70
+    },
+    {
+      "id": "048",
+      "nome": "Maragogi",
+      "categoria": "peixes",
+      "ingredientes": ["Atum", "Mussarela", "Cebola", "Alcaparras", "Parmesão", "Molho de tomate"],
+      "preco_broto": 52,
+      "preco_grande": 74
+    },
+    {
+      "id": "049",
+      "nome": "Iporanga",
+      "categoria": "peixes",
+      "ingredientes": ["Atum", "Palmito", "Mussarela", "Gorgonzola", "Champignon", "Molho de tomate"],
+      "preco_broto": 53,
+      "preco_grande": 76
+    },
+    {
+      "id": "050",
+      "nome": "Frutas",
+      "categoria": "doces",
+      "ingredientes": ["Banana", "Morango", "Abacaxi", "Chocolate branco", "Coco ralado", "Base de creme doce"],
+      "preco_broto": 52,
+      "preco_grande": 70
+    },
+    {
+      "id": "051",
+      "nome": "Mesclada",
+      "categoria": "doces",
+      "ingredientes": ["Chocolate ao leite", "Chocolate branco", "Confeitos tipo M&Ms", "Creme doce"],
+      "preco_broto": 46,
+      "preco_grande": 66
+    },
+    {
+      "id": "052",
+      "nome": "Banana Nevada",
+      "categoria": "doces",
+      "ingredientes": ["Banana", "Chocolate branco", "Canela em pó", "Creme doce"],
+      "preco_broto": 52,
+      "preco_grande": 68
+    },
+    {
+      "id": "053",
+      "nome": "Nuvens",
+      "categoria": "doces",
+      "ingredientes": ["Creme de coco", "Abacaxi em cubos", "Chocolate branco", "Coco ralado"],
+      "preco_broto": 46,
+      "preco_grande": 66
+    },
+    {
+      "id": "054",
+      "nome": "Borda Catupiry",
+      "categoria": "borda",
+      "ingredientes": ["Massa especial de borda", "Catupiry", "Manteiga", "Ervas finas"],
+      "preco_broto": 18,
+      "preco_grande": 18
+    },
+    {
+      "id": "055",
+      "nome": "Borda Dois Queijos",
+      "categoria": "borda",
+      "ingredientes": ["Massa especial de borda", "Mussarela", "Catupiry", "Parmesão ralado"],
+      "preco_broto": 20,
+      "preco_grande": 20
+    },
+    {
+      "id": "056",
+      "nome": "Borda Frango Catupiry",
+      "categoria": "borda",
+      "ingredientes": ["Massa especial de borda", "Frango desfiado temperado", "Catupiry"],
+      "preco_broto": 22,
+      "preco_grande": 22
+    },
+    {
+      "id": "057",
+      "nome": "Borda Pãozinho Dois Queijos",
+      "categoria": "borda",
+      "ingredientes": ["Massa de pãozinho", "Mussarela", "Catupiry", "Parmesão"],
+      "preco_broto": 26,
+      "preco_grande": 26
+    },
+    {
+      "id": "058",
+      "nome": "Borda Pãozinho Frango Catupiry",
+      "categoria": "borda",
+      "ingredientes": ["Massa de pãozinho", "Frango desfiado", "Catupiry"],
+      "preco_broto": 28,
+      "preco_grande": 28
+    },
+    {
+      "id": "059",
+      "nome": "Borda Recheada Frango Catupiry",
+      "categoria": "borda",
+      "ingredientes": ["Massa de borda recheada", "Frango desfiado temperado", "Catupiry"],
+      "preco_broto": 24,
+      "preco_grande": 24
+    },
+    {
+      "id": "060",
+      "nome": "Borda Trançada Dois Queijos",
+      "categoria": "borda",
+      "ingredientes": ["Massa trançada", "Mussarela", "Catupiry", "Parmesão ralado"],
+      "preco_broto": 22,
+      "preco_grande": 22
+    },
+    {
+      "id": "061",
+      "nome": "Borda Vulcão Calabresa",
+      "categoria": "borda",
+      "ingredientes": ["Massa de borda alta", "Calabresa moída", "Mussarela", "Molho de tomate"],
+      "preco_broto": 30,
+      "preco_grande": 30
+    },
+    {
+      "id": "062",
+      "nome": "Borda Vulcão Catupiry",
+      "categoria": "borda",
+      "ingredientes": ["Massa de borda alta", "Catupiry", "Parmesão ralado"],
+      "preco_broto": 28,
+      "preco_grande": 28
+    },
+    {
+      "id": "063",
+      "nome": "Borda Vulcão Frango Catupiry",
+      "categoria": "borda",
+      "ingredientes": ["Massa de borda alta", "Frango desfiado", "Catupiry"],
+      "preco_broto": 32,
+      "preco_grande": 32
+    },
+    {
+      "id": "064",
+      "nome": "Atum e Catupiry",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Atum", "Catupiry", "Cebola", "Orégano"],
+      "preco_broto": 22,
+      "preco_grande": 22
+    },
+    {
+      "id": "065",
+      "nome": "Atum e Cebola",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Atum", "Cebola", "Orégano"],
+      "preco_broto": 21.9,
+      "preco_grande": 21.9
+    },
+    {
+      "id": "066",
+      "nome": "Catupiry e Bacon",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Catupiry", "Bacon em cubos", "Orégano"],
+      "preco_broto": 18.5,
+      "preco_grande": 18.5
+    },
+    {
+      "id": "067",
+      "nome": "Catupiry e Milho",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Catupiry", "Milho verde", "Orégano"],
+      "preco_broto": 18,
+      "preco_grande": 18
+    },
+    {
+      "id": "068",
+      "nome": "Escarola e Bacon",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Escarola refogada no alho", "Bacon em cubos"],
+      "preco_broto": 18.5,
+      "preco_grande": 18.5
+    },
+    {
+      "id": "069",
+      "nome": "Mussarela",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Mussarela", "Molho de tomate", "Orégano"],
+      "preco_broto": 18,
+      "preco_grande": 18
+    },
+    {
+      "id": "070",
+      "nome": "Mussarela com Molho",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Mussarela", "Molho de tomate extra", "Orégano"],
+      "preco_broto": 18.6,
+      "preco_grande": 18.6
+    },
+    {
+      "id": "071",
+      "nome": "Napolitana",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Mussarela", "Tomate", "Parmesão", "Orégano"],
+      "preco_broto": 18.3,
+      "preco_grande": 18.3
+    },
+    {
+      "id": "072",
+      "nome": "Palmito e Catupiry",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Palmito", "Catupiry", "Orégano"],
+      "preco_broto": 22,
+      "preco_grande": 22
+    },
+    {
+      "id": "073",
+      "nome": "Peru c/ Catupiry e Escarola",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Peito de peru", "Catupiry", "Escarola refogada"],
+      "preco_broto": 22.5,
+      "preco_grande": 22.5
+    },
+    {
+      "id": "074",
+      "nome": "Quatro Queijos",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Mussarela", "Parmesão", "Provolone", "Gorgonzola"],
+      "preco_broto": 22,
+      "preco_grande": 22
+    },
+    {
+      "id": "075",
+      "nome": "Bauru",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Presunto", "Mussarela", "Tomate"],
+      "preco_broto": 18,
+      "preco_grande": 18
+    },
+    {
+      "id": "076",
+      "nome": "Brócolis e Catupiry",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Brócolis ao alho", "Catupiry"],
+      "preco_broto": 19.5,
+      "preco_grande": 19.5
+    },
+    {
+      "id": "077",
+      "nome": "Calabresa e Catupiry",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Calabresa moída", "Catupiry"],
+      "preco_broto": 20,
+      "preco_grande": 20
+    },
+    {
+      "id": "078",
+      "nome": "Calabresa com Cebola",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Calabresa fatiada", "Cebola", "Molho de tomate"],
+      "preco_broto": 18,
+      "preco_grande": 18
+    },
+    {
+      "id": "079",
+      "nome": "Dois Queijos",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Mussarela", "Catupiry"],
+      "preco_broto": 18.5,
+      "preco_grande": 18.5
+    },
+    {
+      "id": "080",
+      "nome": "Frango com Catupiry",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Frango desfiado temperado", "Catupiry"],
+      "preco_broto": 20.5,
+      "preco_grande": 20.5
+    },
+    {
+      "id": "081",
+      "nome": "Marguerita",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Mussarela", "Tomate", "Manjericão", "Molho de tomate"],
+      "preco_broto": 18,
+      "preco_grande": 18
+    },
+    {
+      "id": "082",
+      "nome": "Pepperoni com Mussarela",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Pepperoni", "Mussarela", "Molho de tomate"],
+      "preco_broto": 22,
+      "preco_grande": 22
+    },
+    {
+      "id": "083",
+      "nome": "Quatro Queijos com Milho",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa de big esfiha", "Mussarela", "Parmesão", "Provolone", "Gorgonzola", "Milho verde"],
+      "preco_broto": 18.8,
+      "preco_grande": 18.8
+    },
+    {
+      "id": "084",
+      "nome": "Banana Chocolate Canela",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa doce de esfiha", "Banana em rodelas", "Chocolate ao leite", "Canela em pó"],
+      "preco_broto": 22.5,
+      "preco_grande": 22.5
+    },
+    {
+      "id": "085",
+      "nome": "Chocolate com Morango",
+      "categoria": "big_esfiha",
+      "ingredientes": ["Massa doce de esfiha", "Chocolate ao leite", "Morango fresco"],
+      "preco_broto": 22.9,
+      "preco_grande": 22.9
+    },
+    {
+      "id": "086",
+      "nome": "Coca-Cola Zero 2L",
+      "categoria": "refrigerante",
+      "ingredientes": ["Água gaseificada", "Adoçantes artificiais", "Aromas naturais de cola", "Corante caramelo IV", "Conservantes"],
+      "preco_broto": 16.8,
+      "preco_grande": 16.8
+    },
+    {
+      "id": "087",
+      "nome": "Fanta Laranja 2L",
+      "categoria": "refrigerante",
+      "ingredientes": ["Água gaseificada", "Açúcar", "Suco e aroma de laranja", "Corante artificial", "Conservantes"],
+      "preco_broto": 15,
+      "preco_grande": 15
+    },
+    {
+      "id": "088",
+      "nome": "Guaraná Antarctica 2L",
+      "categoria": "refrigerante",
+      "ingredientes": ["Água gaseificada", "Açúcar", "Extrato de guaraná", "Aromas naturais", "Conservantes"],
+      "preco_broto": 14,
+      "preco_grande": 14
+    },
+    {
+      "id": "089",
+      "nome": "Guaraná Zero 2L",
+      "categoria": "refrigerante",
+      "ingredientes": ["Água gaseificada", "Adoçantes artificiais", "Extrato de guaraná", "Aromas naturais", "Conservantes"],
+      "preco_broto": 15,
+      "preco_grande": 15
+    },
+    {
+      "id": "090",
+      "nome": "Soda 2L",
+      "categoria": "refrigerante",
+      "ingredientes": ["Água gaseificada", "Açúcar", "Aromas cítricos", "Corante", "Conservantes"],
+      "preco_broto": 14.5,
+      "preco_grande": 14.5
+    },
+    {
+      "id": "091",
+      "nome": "Cabuçu Broto + Coca 600ml",
+      "categoria": "promocao",
+      "ingredientes": ["Pizza Cabuçu broto (bacon com mussarela ou catupiry)", "Refrigerante Coca-Cola 600ml"],
+      "preco_broto": 52,
+      "preco_grande": 52
+    },
+    {
+      "id": "092",
+      "nome": "2 Grandes Mucuripe + Musa + Coca 2L",
+      "categoria": "promocao",
+      "ingredientes": ["2 Pizzas grandes sabor Mucuripe (frango/queijo, criação da casa)", "1 Pizza broto Musa", "1 Coca-Cola 2L"],
+      "preco_broto": 130,
+      "preco_grande": 130
+    },
+    {
+      "id": "093",
+      "nome": "Narizinho + Mesclada + Coca 2L",
+      "categoria": "promocao",
+      "ingredientes": ["1 Pizza salgada Narizinho", "1 Pizza doce Mesclada", "1 Coca-Cola 2L"],
+      "preco_broto": 154.9,
+      "preco_grande": 154.9
+    },
+    {
+      "id": "094",
+      "nome": "Arraial D’Ajuda + Refri 2L",
+      "categoria": "promocao",
+      "ingredientes": ["1 Pizza especial Arraial D’Ajuda (sabores da casa)", "1 Refrigerante 2L (sabores variados)"],
+      "preco_broto": 89,
+      "preco_grande": 89
+    },
+    {
+      "id": "095",
+      "nome": "Canastra Catupiry + Guaraná 2L",
+      "categoria": "promocao",
+      "ingredientes": ["1 Pizza Canastra (Catupiry)", "1 Guaraná Antarctica 2L"],
+      "preco_broto": 79.9,
+      "preco_grande": 79.9
+    },
+    {
+      "id": "096",
+      "nome": "Cuca Caipira + Guaraná 2L",
+      "categoria": "promocao",
+      "ingredientes": ["1 Pizza Cuca Caipira (frango, catupiry e milho)", "1 Guaraná Antarctica 2L"],
+      "preco_broto": 80.9,
+      "preco_grande": 80.9
+    },
+    {
+      "id": "097",
+      "nome": "Combo Musa, Mucuripe e Marguerita + Guaraná 2L",
+      "categoria": "promocao",
+      "ingredientes": ["1 Pizza Musa", "1 Pizza Mucuripe", "1 Pizza Marguerita", "1 Guaraná Antarctica 2L"],
+      "preco_broto": 190.9,
+      "preco_grande": 190.9
+    },
+    {
+      "id": "098",
+      "nome": "Combo Diamantina, Mucuripe e Cuca Catupiry + Refri",
+      "categoria": "promocao",
+      "ingredientes": ["1 Pizza Diamantina", "1 Pizza Mucuripe", "1 Pizza Cuca Catupiry", "1 Refrigerante 2L (sabores variados)"],
+      "preco_broto": 206.9,
+      "preco_grande": 206.9
+    },
+
+    {
+      "id": "pizza-001",
+      "type": "pizza",
+      "name": "Sítio do Pica-Pau",
+      "categoria": "carne",
+      "description": "Frango, milho, ovos e mussarela",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-002",
+      "type": "pizza",
+      "name": "Cuca (Mussarela)",
+      "categoria": "carne",
+      "description": "Frango e mussarela",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-003",
+      "type": "pizza",
+      "name": "Cuca (Catupiry)",
+      "categoria": "carne",
+      "description": "Frango e catupiry",
+      "priceBroto": 54,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-004",
+      "type": "pizza",
+      "name": "Cuca Caipira",
+      "categoria": "carne",
+      "description": "Frango, catupiry e milho",
+      "priceBroto": 52,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-005",
+      "type": "pizza",
+      "name": "Saci",
+      "categoria": "carne",
+      "description": "Frango, queijo minas, brócolis no alho e tomate",
+      "priceBroto": 54,
+      "priceGrande": 75
+    },
+    {
+      "id": "pizza-006",
+      "type": "pizza",
+      "name": "Emília",
+      "categoria": "carne",
+      "description": "Frango, cheddar, catupiry e tomate",
+      "priceBroto": 52,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-007",
+      "type": "pizza",
+      "name": "Dona Benta",
+      "categoria": "carne",
+      "description": "Peito de peru, mussarela, tomate e ervilhas",
+      "priceBroto": 53,
+      "priceGrande": 75
+    },
+    {
+      "id": "pizza-008",
+      "type": "pizza",
+      "name": "Tia Nastácia",
+      "categoria": "carne",
+      "description": "Peito de peru, catupiry, provolone e escarola",
+      "priceBroto": 55,
+      "priceGrande": 79
+    },
+    {
+      "id": "pizza-009",
+      "type": "pizza",
+      "name": "Tio Barnabé",
+      "categoria": "carne",
+      "description": "Peito de peru, catupiry, cranberry e hortelã",
+      "priceBroto": 55,
+      "priceGrande": 79
+    },
+    {
+      "id": "pizza-010",
+      "type": "pizza",
+      "name": "Narizinho",
+      "categoria": "carne",
+      "description": "Queijo branco, presunto, palmito, catupiry e parmesão",
+      "priceBroto": 56,
+      "priceGrande": 73
+    },
+    {
+      "id": "pizza-011",
+      "type": "pizza",
+      "name": "Visconde de Sabugosa",
+      "categoria": "legumes",
+      "description": "Milho, brócolis, bacon e catupiry",
+      "priceBroto": 55,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-012",
+      "type": "pizza",
+      "name": "Monteiro Lobato",
+      "categoria": "legumes",
+      "description": "Milho, ervilha, brócolis, mussarela e tomate",
+      "priceBroto": 48,
+      "priceGrande": 68
+    },
+    {
+      "id": "pizza-013",
+      "type": "pizza",
+      "name": "Frango Especial",
+      "categoria": "carne",
+      "description": "Frango, mussarela e tomate picado",
+      "priceBroto": 49,
+      "priceGrande": 70
+    },
+    {
+      "id": "pizza-014",
+      "type": "pizza",
+      "name": "Terena",
+      "categoria": "legumes",
+      "description": "Berinjela no alho, mussarela e bacon",
+      "priceBroto": 48,
+      "priceGrande": 69
+    },
+    {
+      "id": "pizza-015",
+      "type": "pizza",
+      "name": "Xavante",
+      "categoria": "legumes",
+      "description": "Abobrinha, mussarela, gorgonzola e orégano",
+      "priceBroto": 52,
+      "priceGrande": 76
+    },
+    {
+      "id": "pizza-016",
+      "type": "pizza",
+      "name": "Guarani",
+      "categoria": "legumes",
+      "description": "Escarola no alho, bacon e mussarela",
+      "priceBroto": 48,
+      "priceGrande": 69
+    },
+    {
+      "id": "pizza-017",
+      "type": "pizza",
+      "name": "Pataxó",
+      "categoria": "legumes",
+      "description": "Mussarela de búfala, tomate seco, rúcula e shitake",
+      "priceBroto": 55,
+      "priceGrande": 80
+    },
+    {
+      "id": "pizza-018",
+      "type": "pizza",
+      "name": "Potiguara",
+      "categoria": "legumes",
+      "description": "Brócolis, mussarela, catupiry e alho",
+      "priceBroto": 53,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-019",
+      "type": "pizza",
+      "name": "Xingu",
+      "categoria": "legumes",
+      "description": "Brócolis, bacon, catupiry e alho-poró",
+      "priceBroto": 55,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-020",
+      "type": "pizza",
+      "name": "Kanindé",
+      "categoria": "legumes",
+      "description": "Escarola, frango, tomilho, parmesão e cream cheese",
+      "priceBroto": 54,
+      "priceGrande": 76
+    },
+    {
+      "id": "pizza-021",
+      "type": "pizza",
+      "name": "Musa",
+      "categoria": "queijo",
+      "description": "Mussarela e tomate",
+      "priceBroto": 42,
+      "priceGrande": 60
+    },
+    {
+      "id": "pizza-022",
+      "type": "pizza",
+      "name": "Namorados",
+      "categoria": "queijo",
+      "description": "Mussarela e catupiry",
+      "priceBroto": 48,
+      "priceGrande": 69
+    },
+    {
+      "id": "pizza-023",
+      "type": "pizza",
+      "name": "Três Corações",
+      "categoria": "queijo",
+      "description": "Mussarela de búfala, catupiry e provolone",
+      "priceBroto": 55,
+      "priceGrande": 76
+    },
+    {
+      "id": "pizza-024",
+      "type": "pizza",
+      "name": "Amor Perfeito",
+      "categoria": "queijo",
+      "description": "Mussarela, catupiry, gorgonzola e parmesão",
+      "priceBroto": 56,
+      "priceGrande": 80
+    },
+    {
+      "id": "pizza-025",
+      "type": "pizza",
+      "name": "Napolitana",
+      "categoria": "queijo",
+      "description": "Mussarela, tomate e parmesão",
+      "priceBroto": 46,
+      "priceGrande": 66
+    },
+    {
+      "id": "pizza-026",
+      "type": "pizza",
+      "name": "Musa Rebelde",
+      "categoria": "queijo",
+      "description": "Mussarela, tomate picado, salsa e pimenta dedo-de-moça",
+      "priceBroto": 45,
+      "priceGrande": 64
+    },
+    {
+      "id": "pizza-027",
+      "type": "pizza",
+      "name": "Marguerita",
+      "categoria": "queijo",
+      "description": "Mussarela, tomate, manjericão e parmesão",
+      "priceBroto": 48,
+      "priceGrande": 68
+    },
+    {
+      "id": "pizza-028",
+      "type": "pizza",
+      "name": "Anne & Tom",
+      "categoria": "queijo",
+      "description": "Provolone, cream cheese e pesto de manjericão",
+      "priceBroto": 55,
+      "priceGrande": 76
+    },
+    {
+      "id": "pizza-029",
+      "type": "pizza",
+      "name": "Vila Rica",
+      "categoria": "queijo",
+      "description": "Gorgonzola, catupiry, queijo branco, champignon e pesto de manjericão",
+      "priceBroto": 56,
+      "priceGrande": 80
+    },
+    {
+      "id": "pizza-030",
+      "type": "pizza",
+      "name": "Jataí",
+      "categoria": "queijo",
+      "description": "Catupiry, milho e alho-poró",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-031",
+      "type": "pizza",
+      "name": "Musa Perfeita",
+      "categoria": "queijo",
+      "description": "Mussarela com camada extra de molho",
+      "priceBroto": 43,
+      "priceGrande": 62
+    },
+    {
+      "id": "pizza-032",
+      "type": "pizza",
+      "name": "Ouro Preto",
+      "categoria": "carne",
+      "description": "Lombo, shimeji e catupiry",
+      "priceBroto": 52,
+      "priceGrande": 74
+    },
+    {
+      "id": "pizza-033",
+      "type": "pizza",
+      "name": "Monte Formoso",
+      "categoria": "carne",
+      "description": "Lombo, mussarela, palmito, parmesão e alho",
+      "priceBroto": 54,
+      "priceGrande": 78
+    },
+    {
+      "id": "pizza-034",
+      "type": "pizza",
+      "name": "Igarapé",
+      "categoria": "carne",
+      "description": "Lombo, mussarela, bacon e banana",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-035",
+      "type": "pizza",
+      "name": "Mirante",
+      "categoria": "carne",
+      "description": "Pepperoni, mussarela e tomate",
+      "priceBroto": 52,
+      "priceGrande": 74
+    },
+    {
+      "id": "pizza-036",
+      "type": "pizza",
+      "name": "Cabuçu (Mussarela)",
+      "categoria": "carne",
+      "description": "Bacon e mussarela",
+      "priceBroto": 48,
+      "priceGrande": 69
+    },
+    {
+      "id": "pizza-037",
+      "type": "pizza",
+      "name": "Cabuçu (Catupiry)",
+      "categoria": "carne",
+      "description": "Bacon e catupiry",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-038",
+      "type": "pizza",
+      "name": "Diamantina (Mussarela)",
+      "categoria": "carne",
+      "description": "Presunto, mussarela, ovos, ervilha e cebola",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-039",
+      "type": "pizza",
+      "name": "Diamantina (Catupiry)",
+      "categoria": "carne",
+      "description": "Presunto, catupiry, ovos, ervilha e cebola",
+      "priceBroto": 53,
+      "priceGrande": 74
+    },
+    {
+      "id": "pizza-040",
+      "type": "pizza",
+      "name": "Guimarães",
+      "categoria": "carne",
+      "description": "Presunto, catupiry, champignon e alcaparras",
+      "priceBroto": 59,
+      "priceGrande": 78
+    },
+    {
+      "id": "pizza-041",
+      "type": "pizza",
+      "name": "Platina",
+      "categoria": "carne",
+      "description": "Calabresa, cebola, ovos e mussarela",
+      "priceBroto": 49,
+      "priceGrande": 70
+    },
+    {
+      "id": "pizza-042",
+      "type": "pizza",
+      "name": "Platina (Pimenta)",
+      "categoria": "carne",
+      "description": "Calabresa, mussarela, ovos, cebola e pimenta",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-043",
+      "type": "pizza",
+      "name": "Juazeiro",
+      "categoria": "carne",
+      "description": "Carne seca, catupiry, cebola e pimentão",
+      "priceBroto": 60,
+      "priceGrande": 86
+    },
+    {
+      "id": "pizza-044",
+      "type": "pizza",
+      "name": "Caruaru",
+      "categoria": "carne",
+      "description": "Carne seca desfiada, macaxeira, salsa e catupiry",
+      "priceBroto": 59,
+      "priceGrande": 84
+    },
+    {
+      "id": "pizza-045",
+      "type": "pizza",
+      "name": "Abaeté",
+      "categoria": "carne",
+      "description": "Salame, mussarela, pimentão e cebola",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-046",
+      "type": "pizza",
+      "name": "Canastra (Mussarela)",
+      "categoria": "carne",
+      "description": "Calabresa moída, parmesão e mussarela",
+      "priceBroto": 48,
+      "priceGrande": 69
+    },
+    {
+      "id": "pizza-047",
+      "type": "pizza",
+      "name": "Canastra (Catupiry)",
+      "categoria": "carne",
+      "description": "Calabresa moída, parmesão e catupiry",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-048",
+      "type": "pizza",
+      "name": "Guaraú",
+      "categoria": "peixes",
+      "description": "Atum, mussarela e cebola",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-049",
+      "type": "pizza",
+      "name": "Guaraú 2",
+      "categoria": "peixes",
+      "description": "Atum e cebola",
+      "priceBroto": 53,
+      "priceGrande": 70
+    },
+    {
+      "id": "pizza-050",
+      "type": "pizza",
+      "name": "Paúba",
+      "categoria": "peixes",
+      "description": "Atum, catupiry e tomate",
+      "priceBroto": 50,
+      "priceGrande": 72
+    },
+    {
+      "id": "pizza-051",
+      "type": "pizza",
+      "name": "Maresias",
+      "categoria": "peixes",
+      "description": "Atum, catupiry e tomate seco",
+      "priceBroto": 53,
+      "priceGrande": 76
+    },
+    {
+      "id": "pizza-052",
+      "type": "pizza",
+      "name": "Jericoacoara",
+      "categoria": "peixes",
+      "description": "Atum, escarola, mussarela e tomate",
+      "priceBroto": 49,
+      "priceGrande": 70
+    },
+    {
+      "id": "pizza-053",
+      "type": "pizza",
+      "name": "Maragogi",
+      "categoria": "peixes",
+      "description": "Atum, mussarela, cebolas, alcaparras e parmesão",
+      "priceBroto": 52,
+      "priceGrande": 74
+    },
+    {
+      "id": "pizza-054",
+      "type": "pizza",
+      "name": "Iporanga",
+      "categoria": "peixes",
+      "description": "Atum, palmito, mussarela, gorgonzola e champignon",
+      "priceBroto": 53,
+      "priceGrande": 76
+    },
+    {
+      "id": "pizza-055",
+      "type": "pizza",
+      "name": "Frutas",
+      "categoria": "doces",
+      "description": "Banana, morango, abacaxi, chocolate branco e coco ralado",
+      "priceBroto": 52,
+      "priceGrande": 70
+    },
+    {
+      "id": "pizza-056",
+      "type": "pizza",
+      "name": "Mesclada",
+      "categoria": "doces",
+      "description": "Chocolate ao leite, chocolate branco e M&Ms",
+      "priceBroto": 46,
+      "priceGrande": 66
+    },
+    {
+      "id": "pizza-057",
+      "type": "pizza",
+      "name": "Banana Nevada",
+      "categoria": "doces",
+      "description": "Banana, chocolate branco e canela",
+      "priceBroto": 52,
+      "priceGrande": 68
+    },
+    {
+      "id": "pizza-058",
+      "type": "pizza",
+      "name": "Nuvens",
+      "categoria": "doces",
+      "description": "Creme de coco, abacaxi, chocolate branco e coco ralado",
+      "priceBroto": 46,
+      "priceGrande": 66
+    },
+    {
+      "id": "drink-001",
+      "type": "drink",
+      "name": "Coca-Cola Zero 2L",
+      "categoria": "refrigerante",
+      "description": "",
+      "price": 16.8
+    },
+    {
+      "id": "drink-002",
+      "type": "drink",
+      "name": "Fanta Laranja 2L",
+      "categoria": "refrigerante",
+      "description": "",
+      "price": 15
+    },
+    {
+      "id": "drink-003",
+      "type": "drink",
+      "name": "Guaraná Antarctica 2L",
+      "categoria": "refrigerante",
+      "description": "",
+      "price": 14
+    },
+    {
+      "id": "drink-004",
+      "type": "drink",
+      "name": "Guaraná Zero 2L",
+      "categoria": "refrigerante",
+      "description": "",
+      "price": 15
+    },
+    {
+      "id": "drink-005",
+      "type": "drink",
+      "name": "Soda 2L",
+      "categoria": "refrigerante",
+      "description": "",
+      "price": 14.5
+    },
+    {
+      "id": "extra-001",
+      "type": "extra",
+      "name": "Borda Catupiry",
+      "categoria": "borda",
+      "description": "",
+      "price": 18
+    },
+    {
+      "id": "extra-002",
+      "type": "extra",
+      "name": "Borda Dois Queijos",
+      "categoria": "borda",
+      "description": "",
+      "price": 20
+    },
+    {
+      "id": "extra-003",
+      "type": "extra",
+      "name": "Borda Frango c/ Catupiry",
+      "categoria": "borda",
+      "description": "",
+      "price": 22
+    },
+    {
+      "id": "extra-004",
+      "type": "extra",
+      "name": "Borda Pãozinho Dois Queijos",
+      "categoria": "borda",
+      "description": "",
+      "price": 26
+    },
+    {
+      "id": "extra-005",
+      "type": "extra",
+      "name": "Borda Pãozinho Frango Catupiry",
+      "categoria": "borda",
+      "description": "",
+      "price": 28
+    },
+    {
+      "id": "extra-006",
+      "type": "extra",
+      "name": "Borda Recheada Frango com Catupiry",
+      "categoria": "borda",
+      "description": "",
+      "price": 24
+    },
+    {
+      "id": "extra-007",
+      "type": "extra",
+      "name": "Borda Trançada Dois Queijos",
+      "categoria": "borda",
+      "description": "",
+      "price": 22
+    },
+    {
+      "id": 1764629523483,
+      "type": "pizza",
+      "name": "Teste",
+      "categoria": "teste",
+      "priceBroto": 1,
+      "priceGrande": 2,
+      "description": ""
+    }
+  ]
+}
