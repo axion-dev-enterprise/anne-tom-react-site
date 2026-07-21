@@ -44,6 +44,7 @@ describe("Matrix Route API Handler", () => {
 
   it("proxies route call to Axion Matrix service successfully", async () => {
     global.fetch.mockResolvedValueOnce({
+      ok: true,
       status: 200,
       json: async () => ({ distance_km: 5.9, duration_min: 11 }),
     });
@@ -51,9 +52,25 @@ describe("Matrix Route API Handler", () => {
     await matrixRouteHandler(req, res);
 
     expect(global.fetch).toHaveBeenCalledWith(
-      expect.stringContaining("https://matrix.axionenterprise.cloud/route?olat=-23.501&olon=-46.625&dlat=-23.547&dlon=-46.637")
+      expect.stringContaining("https://matrix.axionenterprise.cloud/route?olat=-23.501&olon=-46.625&dlat=-23.547&dlon=-46.637"),
+      expect.anything()
     );
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ distance_km: 5.9, duration_min: 11 });
   });
+
+  it("falls back to Haversine route calculation when upstream is unavailable or returns 404", async () => {
+    global.fetch.mockRejectedValueOnce(new Error("Network error"));
+
+    await matrixRouteHandler(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(
+      expect.objectContaining({
+        distance_km: expect.any(Number),
+        duration_min: expect.any(Number),
+      })
+    );
+  });
 });
+
