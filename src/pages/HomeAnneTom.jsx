@@ -22,29 +22,24 @@ const AVATAR_IMAGES = [
 
 const REAL_PIZZA_IMAGES = [
   {
-    src: "/pizzas-real/0a214305-5754-4173-ae6b-597bc6fe5261.jfif",
+    src: "/menu-images/musa.png",
     alt: "Pizza Musa - Mussarela, tomate fresco e manjericão",
     title: "Musa Artesanal",
   },
   {
-    src: "/pizzas-real/20de777a-f6ef-4a8b-9f85-83780e2d52c5.jfif",
+    src: "/menu-images/musa_rebelde.png",
     alt: "Pizza Musa Rebelde - Edição Especial da Casa",
     title: "Musa Rebelde",
   },
   {
-    src: "/pizzas-real/269ad3e9-b509-42b2-be96-ca457b9cc650.jfif",
+    src: "/menu-images/marguerita.png",
     alt: "Pizza Marguerita - Molho artesanal e manjericão fresco",
     title: "Marguerita Tradicional",
   },
   {
-    src: "/pizzas-real/320185f8-b723-4d8b-9689-35bdc224d484.jfif",
+    src: "/menu-images/anne_tom.png",
     alt: "Pizza Anne & Tom - Receita Autoral 48h",
     title: "Especial Anne & Tom",
-  },
-  {
-    src: "/pizzas-real/e85518df-282d-446b-8dd1-ee5716ff058c.jfif",
-    alt: "Pizza Forno de Pedra - Recheio Generoso",
-    title: "Forno de Pedra",
   },
 ];
 

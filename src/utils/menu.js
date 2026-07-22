@@ -71,10 +71,17 @@ const MANUAL_IMAGE_MAPPING = {
   "borda_catupiry": "/menu-images/canastra_catupiry.webp",
   "borda_dois_queijos": "/menu-images/canastra_mussarela.webp",
   "borda_frango_catupiry": "/menu-images/borda_paozinho_frango_catupiry.webp",
-  "borda_recheada_frango_catupiry": "/menu-images/borda_paozinho_frango_catupiry.webp",
-  "borda_trancada_dois_queijos": "/menu-images/borda_paozinho_dois_queijos.webp",
   "borda_vulcao_calabresa": "/menu-images/borda_paozinho_frango_catupiry.webp",
   "borda_vulcao_catupiry": "/menu-images/borda_paozinho_dois_queijos.webp",
+
+  // HD Gourmet Pizza Images (High Resolution)
+  "musa": "/menu-images/musa.png",
+  "musa_rebelde": "/menu-images/musa_rebelde.png",
+  "marguerita": "/menu-images/marguerita.png",
+  "anne_tom": "/menu-images/anne_tom.png",
+
+  // Bordas
+  "borda_recheada_catupiry": "/menu-images/borda_paozinho_dois_queijos.webp",
   "borda_vulcao_frango_catupiry": "/menu-images/borda_paozinho_frango_catupiry.webp",
   "borda_frango_c_catupiry": "/menu-images/borda_paozinho_frango_catupiry.webp",
   "borda_recheada_frango_com_catupiry": "/menu-images/borda_paozinho_frango_catupiry.webp",
