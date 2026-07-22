@@ -26,35 +26,10 @@ export const CustomerDashboardPage = () => {
     }
   };
 
-  // Histórico de pedidos do cliente (do estado global ou fallback enriquecido)
-  const ordersList = customer?.orders || [
-    {
-      id: "AT-9842",
-      date: "21/07/2026 20:15",
-      items: [
-        { name: "Pizza Musa (Grande)", qty: 1, price: 60.0 },
-        { name: "Coca-Cola 2L", qty: 1, price: 18.0 }
-      ],
-      total: 78.0,
-      status: "ENTREGUE",
-      pointsEarned: 78,
-      address: "Rua Voluntários da Pátria, 2400 - Santana, São Paulo - SP",
-    },
-    {
-      id: "AT-9104",
-      date: "14/07/2026 19:40",
-      items: [
-        { name: "Pizza Namorados (Grande)", qty: 1, price: 69.0 },
-        { name: "Borda Catupiry", qty: 1, price: 18.0 }
-      ],
-      total: 87.0,
-      status: "ENTREGUE",
-      pointsEarned: 87,
-      address: "Av. Braz Leme, 1200 - Santana, São Paulo - SP",
-    },
-  ];
+  // Histórico de pedidos do cliente (do estado global)
+  const ordersList = customer?.orders || [];
 
-  const totalPoints = ordersList.reduce((acc, o) => acc + (o.pointsEarned || 0), 0);
+  const totalPoints = customer?.points || ordersList.reduce((acc, o) => acc + (o.pointsEarned || 0), 0);
   const nextRewardThreshold = 100;
   const rewardProgress = Math.min(100, Math.round((totalPoints / nextRewardThreshold) * 100));
 
@@ -229,42 +204,55 @@ export const CustomerDashboardPage = () => {
               </button>
             </div>
 
-            <div className="grid gap-4">
-              {ordersList.map((order) => (
-                <div key={order.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-3">
-                      <span className="font-black text-sm text-slate-900">Pedido {order.id}</span>
-                      <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
-                        {order.status}
-                      </span>
-                      <span className="text-[11px] text-amber-700 font-bold">+{order.pointsEarned} pts</span>
+            {ordersList.length === 0 ? (
+              <div className="bg-white border border-slate-200 rounded-2xl p-8 text-center space-y-3">
+                <p className="text-4xl">🍕</p>
+                <h4 className="text-base font-bold text-slate-900">Nenhum pedido realizado ainda</h4>
+                <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                  Faça seu primeiro pedido no nosso cardápio para acumular pontos no programa de fidelidade!
+                </p>
+                <Link to="/cardapio" className="inline-block px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs transition">
+                  Ir para o Cardápio →
+                </Link>
+              </div>
+            ) : (
+              <div className="grid gap-4">
+                {ordersList.map((order) => (
+                  <div key={order.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-3">
+                        <span className="font-black text-sm text-slate-900">Pedido {order.id}</span>
+                        <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
+                          {order.status}
+                        </span>
+                        <span className="text-[11px] text-amber-700 font-bold">+{order.pointsEarned} pts</span>
+                      </div>
+                      <p className="text-xs text-slate-500">{order.date}</p>
+                      <p className="text-xs text-slate-800 font-semibold">
+                        {order.items.map((i) => (typeof i === "string" ? i : `${i.qty}x ${i.name}`)).join(" • ")}
+                      </p>
+                      {order.address && (
+                        <p className="text-[11px] text-slate-500">📍 {order.address}</p>
+                      )}
                     </div>
-                    <p className="text-xs text-slate-500">{order.date}</p>
-                    <p className="text-xs text-slate-800 font-semibold">
-                      {order.items.map((i) => (typeof i === "string" ? i : `${i.qty}x ${i.name}`)).join(" • ")}
-                    </p>
-                    {order.address && (
-                      <p className="text-[11px] text-slate-500">📍 {order.address}</p>
-                    )}
-                  </div>
 
-                  <div className="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 pt-3 sm:pt-0">
-                    <div className="text-right">
-                      <span className="text-xs text-slate-500 block font-medium">Total</span>
-                      <span className="text-base font-black text-slate-900">{formatCurrencyBRL(order.total)}</span>
+                    <div className="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 pt-3 sm:pt-0">
+                      <div className="text-right">
+                        <span className="text-xs text-slate-500 block font-medium">Total</span>
+                        <span className="text-base font-black text-slate-900">{formatCurrencyBRL(order.total)}</span>
+                      </div>
+                      <button
+                        onClick={() => handleRepeatOrder(order)}
+                        className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs transition shadow-md flex items-center gap-1.5"
+                      >
+                        <span>Repetir Pedido</span>
+                        <span>🍕</span>
+                      </button>
                     </div>
-                    <button
-                      onClick={() => handleRepeatOrder(order)}
-                      className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs transition shadow-md flex items-center gap-1.5"
-                    >
-                      <span>Repetir Pedido</span>
-                      <span>🍕</span>
-                    </button>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
