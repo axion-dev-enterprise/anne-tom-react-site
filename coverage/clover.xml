@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1784695599342" clover="3.2.0">
-  <project timestamp="1784695599342" name="All files">
+<coverage generated="1784696502375" clover="3.2.0">
+  <project timestamp="1784696502375" name="All files">
     <metrics statements="2774" coveredstatements="918" conditionals="3011" coveredconditionals="754" methods="675" coveredmethods="181" elements="6460" coveredelements="1853" complexity="0" loc="2774" ncloc="2774" packages="11" files="58" classes="58"/>
     <package name="src">
       <metrics statements="36" coveredstatements="0" conditionals="21" coveredconditionals="0" methods="23" coveredmethods="0"/>
@@ -2208,11 +2208,11 @@
         <line num="1345" count="1" type="stmt"/>
         <line num="1347" count="9" type="stmt"/>
         <line num="1371" count="1" type="stmt"/>
-        <line num="1373" count="3" type="stmt"/>
-        <line num="1434" count="1" type="stmt"/>
-        <line num="1436" count="1" type="stmt"/>
-        <line num="1437" count="3" type="stmt"/>
-        <line num="1500" count="1" type="stmt"/>
+        <line num="1372" count="3" type="stmt"/>
+        <line num="1404" count="1" type="stmt"/>
+        <line num="1406" count="1" type="stmt"/>
+        <line num="1407" count="3" type="stmt"/>
+        <line num="1470" count="1" type="stmt"/>
       </file>
       <file name="LoyaltyPage.jsx" path="D:\WORKSPACE\SANDBOX\apps\anne-tom-react-site\src\pages\LoyaltyPage.jsx">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>

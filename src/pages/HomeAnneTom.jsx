@@ -1369,63 +1369,33 @@ const Testimonial = ({ name, text }) => (
 /* CTA FINAL ---------------------------------------------------------- */
 
 const FinalCTA = () => (
-
-  <section className="home-cta" style={{background:'linear-gradient(180deg, transparent 0%, rgba(245,158,11,0.06) 50%, transparent 100%)'}}>
-
-    <div className="home-cta-inner max-w-6xl mx-auto px-4 lg:px-6 py-12 lg:py-16 text-center space-y-4" style={{color:'#f5f0eb'}}>
-
-      <h2 className="text-2xl lg:text-3xl font-black tracking-tight">
-
+  <section className="home-cta bg-slate-900 text-white my-8 rounded-3xl overflow-hidden max-w-6xl mx-auto border border-slate-800 shadow-2xl">
+    <div className="home-cta-inner px-6 py-14 lg:py-20 text-center space-y-6">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-amber-400 tracking-tight">
         Bora pedir uma Anne &amp; Tom hoje?
-
       </h2>
 
-
-
-      <p className="text-sm md:text-base text-slate-600 max-w-2xl mx-auto">
-
-        Monte seu pedido pelo cardápio interno, revise tudo no checkout e envie
-
-        em segundos para o WhatsApp. Noite de pizza resolvida.
-
+      <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-medium">
+        Monte seu pedido pelo cardápio, revise tudo no checkout e acompanhe a entrega em tempo real. Noite de pizza perfeita!
       </p>
 
-
-
-      <div className="flex flex-wrap justify-center gap-3 pt-2">
-
+      <div className="flex flex-wrap justify-center gap-4 pt-4">
         <Link
-
           to="/cardapio"
-
-          className="px-6 md:px-7 py-3 rounded-full bg-gradient-to-r from-amber-400 to-rose-500 text-sm md:text-base font-semibold shadow-sm hover:brightness-110 transition"
-
+          className="px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black text-base shadow-xl hover:scale-105 transition transform"
         >
-
           Montar meu pedido 🍕
-
         </Link>
-
-
 
         <Link
-
           to="/checkout"
-
-          className="px-5 md:px-6 py-3 rounded-full border border-slate-500 bg-slate-800 text-sm md:text-base text-slate-50 hover:bg-slate-700 transition"
-
+          className="px-7 py-4 rounded-full border-2 border-slate-700 bg-slate-800/90 text-white hover:bg-slate-700 font-bold text-base shadow-lg transition"
         >
-
           Ver resumo do carrinho 🧾
-
         </Link>
-
       </div>
-
     </div>
-
   </section>
-
 );
 
 
@@ -1622,14 +1592,16 @@ const styles = `
   }
 
   .home-cta-ghost {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: #f5f0eb;
-    backdrop-filter: blur(8px);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #0f172a;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   }
   .home-cta-ghost:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(245, 158, 11, 0.4);
+    background: #f8fafc;
+    border-color: #f59e0b;
+    color: #d97706;
     transform: translateY(-2px);
   }
 
@@ -1639,9 +1611,9 @@ const styles = `
     gap: 0.75rem;
     padding: 0.75rem 1rem;
     border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(8px);
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.06);
     width: fit-content;
   }
 
@@ -1651,7 +1623,7 @@ const styles = `
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 2px solid #1c1917;
+    border: 2px solid #ffffff;
     object-fit: cover;
     margin-left: -8px;
   }
@@ -1660,10 +1632,11 @@ const styles = `
 
   .home-hero-stats-strip {
     display: flex;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 1rem;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.03);
+    background: #ffffff;
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.06);
     width: fit-content;
   }
 
@@ -1673,7 +1646,7 @@ const styles = `
     align-items: center;
     padding: 0.6rem 1.2rem;
     gap: 0.15rem;
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
   }
 
   .home-hero-stat:last-child { border-right: none; }
@@ -1681,14 +1654,14 @@ const styles = `
   .home-hero-stat-val {
     font-size: 0.95rem;
     font-weight: 800;
-    color: #f59e0b;
+    color: #d97706;
     font-family: "Fraunces", serif;
   }
 
   .home-hero-stat-lbl {
     font-size: 0.6rem;
-    font-weight: 600;
-    color: #78716c;
+    font-weight: 700;
+    color: #475569;
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
