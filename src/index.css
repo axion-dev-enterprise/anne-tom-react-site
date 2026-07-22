@@ -437,3 +437,57 @@ body {
   transform: translateX(-50%);
   z-index: 10;
 }
+
+/* Otimizações Globais de Desempenho e Performance */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img, video {
+  content-visibility: auto;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Efeito Skeleton Shimmer para carregamento rápido */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(241, 245, 249, 0.6) 25%, rgba(226, 232, 240, 0.9) 50%, rgba(241, 245, 249, 0.6) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Micro-animações e Interações Mobile */
+.touch-press {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), filter 0.15s ease;
+}
+.touch-press:active {
+  transform: scale(0.96);
+  filter: brightness(0.95);
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

@@ -3,6 +3,7 @@ import React, { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./components/ui/ToastProvider";
 import { HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import LoadingSpinner from "./components/ui/LoadingSpinner";
@@ -83,7 +84,9 @@ const App = () => (
     <ErrorBoundary>
       <AuthProvider>
         <CartProvider>
-          <AppContent />
+          <ToastProvider>
+            <AppContent />
+          </ToastProvider>
         </CartProvider>
       </AuthProvider>
     </ErrorBoundary>

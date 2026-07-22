@@ -1,5 +1,6 @@
 // src/components/checkout/PagamentoStep.jsx
 import React, { useEffect, useState } from "react";
+import { useToast } from "../ui/ToastProvider";
 
 const PixIcon = ({ className }) => (
   <svg
@@ -113,6 +114,7 @@ const PagamentoStep = ({
   cardLoading,
   cardError,
 }) => {
+  const { addToast } = useToast();
   const [pixCopied, setPixCopied] = useState(false);
   const isRedirectPayment = pagamento === "pix" || pagamento === "cartao";
 
@@ -121,14 +123,24 @@ const PagamentoStep = ({
   const pixReady = Boolean(pixCode);
   const [pixCountdown, setPixCountdown] = useState("");
 
+  const handleManualCopyPix = async () => {
+    if (!pixCode) return;
+    try {
+      await navigator.clipboard.writeText(pixCode);
+      setPixCopied(true);
+      addToast("Código PIX copiado com sucesso! Cole no aplicativo do seu banco.", "success");
+      setTimeout(() => setPixCopied(false), 3000);
+    } catch {
+      addToast("Não foi possível copiar automaticamente. Selecione e copie o código.", "warning");
+    }
+  };
+
   const formatPixExpiresAt = (value) => {
     if (!value) return "";
     const parsed = new Date(value);
     if (Number.isNaN(parsed.getTime())) return value;
     return parsed.toLocaleString();
   };
-
-  const pixCopyLabel = pixCopied ? "Codigo copiado" : "Copiar codigo";
 
   const pixExpiresLabel = pixExpiresAt ? formatPixExpiresAt(pixExpiresAt) : "";
 
@@ -262,9 +274,17 @@ const PagamentoStep = ({
                   value={pixCode}
                 />
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="premium-button-ghost px-3 py-2 text-[12px] cursor-default select-none">
-                    {pixCopyLabel}
-                  </span>
+                  <button
+                    type="button"
+                    onClick={handleManualCopyPix}
+                    className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                      pixCopied
+                        ? "bg-emerald-600 text-white"
+                        : "bg-amber-500 hover:bg-amber-600 text-slate-900 shadow-sm"
+                    }`}
+                  >
+                    <span>{pixCopied ? "✓ Código Copiado!" : "📋 Copiar Código PIX"}</span>
+                  </button>
                   {pixExpiresLabel && (
                     <span className="text-[12px] text-slate-500 flex flex-wrap items-center gap-2">
                       <span>Valido ate: {pixExpiresLabel}</span>

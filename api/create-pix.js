@@ -2,8 +2,18 @@
 const MERCADOPAGO_API = "https://api.mercadopago.com/v1/payments";
 
 module.exports = async (req, res) => {
+  // Configuração CORS
+  const origin = req.headers.origin || "*";
+  res.setHeader("Access-Control-Allow-Origin", origin);
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Idempotency-Key, Authorization");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
+    res.setHeader("Allow", "POST, OPTIONS");
     return res.status(405).json({ error: "method_not_allowed" });
   }
 
@@ -15,8 +25,8 @@ module.exports = async (req, res) => {
 
   const { amount, description, payerEmail, payerName, externalReference } = req.body || {};
 
-  if (!amount || amount <= 0) {
-    return res.status(400).json({ error: "invalid_amount" });
+  if (typeof amount !== "number" || amount <= 0 || isNaN(amount)) {
+    return res.status(400).json({ error: "invalid_amount", message: "O valor deve ser um número positivo." });
   }
 
   try {

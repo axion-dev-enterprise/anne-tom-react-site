@@ -1,14 +1,23 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const CartContext = createContext(null);
-const STORAGE_KEY = "anne_tom_cart_v1";
+const STORAGE_KEY = "anne_tom_cart_v2";
+const CART_TTL_MS = 24 * 60 * 60 * 1000; // 24 horas de validade do carrinho armazenado
 
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState(() => {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
-      const parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed : [];
+      if (!raw) return [];
+      const data = JSON.parse(raw);
+      if (data && typeof data === "object" && Array.isArray(data.items)) {
+        if (Date.now() - (data.timestamp || 0) < CART_TTL_MS) {
+          return data.items;
+        }
+      }
+      // Se for formato antigo (array direto)
+      if (Array.isArray(data)) return data;
+      return [];
     } catch {
       return [];
     }
@@ -17,12 +26,17 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     try {
       if (items.length) {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        const payload = {
+          version: "v2",
+          timestamp: Date.now(),
+          items,
+        };
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
       } else {
         window.localStorage.removeItem(STORAGE_KEY);
       }
     } catch {
-      // ignore
+      // ignore storage errors
     }
   }, [items]);
 

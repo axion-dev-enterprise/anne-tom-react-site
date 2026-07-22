@@ -1,0 +1,80 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Anne & Tom Pizzaria Backend API",
+    "description": "Especificação técnica OpenAPI 3.0 das funções serverless e rotas de pagamento / gerenciamento de pedidos.",
+    "version": "0.1.1"
+  },
+  "servers": [
+    {
+      "url": "https://anne-tom-react-site.vercel.app/api",
+      "description": "Servidor Principal de Produção (Vercel Serverless)"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Healthcheck e diagnósticos do sistema",
+        "responses": {
+          "200": { "description": "Status operacional do sistema" }
+        }
+      }
+    },
+    "/create-pix": {
+      "post": {
+        "summary": "Cria transação de pagamento PIX no Mercado Pago",
+        "responses": {
+          "201": { "description": "Pagamento PIX criado com código Copia e Cola" }
+        }
+      }
+    },
+    "/create-card": {
+      "post": {
+        "summary": "Cria preferência de checkout de cartão de crédito",
+        "responses": {
+          "201": { "description": "URL de checkout gerada com sucesso" }
+        }
+      }
+    },
+    "/coupons": {
+      "post": {
+        "summary": "Valida cupons de desconto",
+        "responses": {
+          "200": { "description": "Cupom válido e valor de desconto calculado" }
+        }
+      }
+    },
+    "/business-hours": {
+      "get": {
+        "summary": "Consulta horários de funcionamento e status da loja",
+        "responses": {
+          "200": { "description": "Status de abertura/fechamento" }
+        }
+      }
+    },
+    "/whatsapp-notify": {
+      "post": {
+        "summary": "Envia notificações de status via WhatsApp",
+        "responses": {
+          "200": { "description": "Notificação enviada" }
+        }
+      }
+    },
+    "/print-ticket": {
+      "post": {
+        "summary": "Gera ticket de impressão térmica ESC/POS para a cozinha",
+        "responses": {
+          "200": { "description": "Comprovante formatado" }
+        }
+      }
+    },
+    "/cancel-order": {
+      "post": {
+        "summary": "Cancela um pedido e dispara estorno",
+        "responses": {
+          "200": { "description": "Pedido cancelado" }
+        }
+      }
+    }
+  }
+}

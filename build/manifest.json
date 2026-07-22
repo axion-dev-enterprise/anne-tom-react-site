@@ -1,49 +1,18 @@
 {
   "short_name": "Anne & Tom",
-  "name": "Pizzaria Anne & Tom - Pizzas Artesanais",
-  "description": "As melhores pizzas artesanais da Zona Norte de São Paulo",
+  "name": "Pizzaria Anne & Tom — Alto de Santana",
   "icons": [
     {
       "src": "logopizzaria.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "192x192 512x512",
+      "type": "image/png"
     }
   ],
   "start_url": "/",
-  "display": "standalone",
+  "background_color": "#0f172a",
   "theme_color": "#f59e0b",
-  "background_color": "#ffffff",
-  "orientation": "portrait-primary",
+  "display": "standalone",
+  "orientation": "portrait",
   "scope": "/",
-  "lang": "pt-BR",
-  "categories": ["food", "restaurant", "delivery"],
-  "shortcuts": [
-    {
-      "name": "Ver Cardápio",
-      "short_name": "Cardápio",
-      "description": "Ver nosso cardápio completo",
-      "url": "/cardapio",
-      "icons": [{ "src": "logopizzaria.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Fazer Pedido",
-      "short_name": "Pedir",
-      "description": "Fazer um pedido agora",
-      "url": "/cardapio",
-      "icons": [{ "src": "logopizzaria.png", "sizes": "192x192" }]
-    }
-  ]
+  "description": "Peça pizzas artesanais no forno a lenha da Pizzaria Anne & Tom com entrega rápida em Santana, SP."
 }

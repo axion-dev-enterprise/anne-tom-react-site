@@ -30,6 +30,8 @@ import { useMenuData } from "../hooks/useMenuData";
 import RetryBanner from "../components/ui/RetryBanner";
 import { useAppAccessInfo } from "../hooks/useAppAccess";
 import SEOHead from "../components/seo/SEOHead";
+import HalfPizzaBuilderModal from "../components/ui/HalfPizzaBuilderModal";
+import MobileCartDrawer from "../components/ui/MobileCartDrawer";
 
 // Horários oficiais (Tripadvisor):
 // Domingo: 19:00–23:00
@@ -387,6 +389,7 @@ const CardapioPage = () => {
   const [categoria, setCategoria] = useState("todas");
   const [badgeFilter, setBadgeFilter] = useState("all");
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isHalfModalOpen, setIsHalfModalOpen] = useState(false);
   // ---- Horario de funcionamento (PDV/API) ----
   const [businessHours, setBusinessHours] = useState(null);
   const [businessStatus, setBusinessStatus] = useState(null);
@@ -1455,6 +1458,13 @@ const CardapioPage = () => {
           </div>
         </div>
       )}
+      <MobileCartDrawer />
+      <HalfPizzaBuilderModal
+        isOpen={isHalfModalOpen}
+        onClose={() => setIsHalfModalOpen(false)}
+        pizzas={pizzas}
+        onAddToCart={addItem}
+      />
     </div>
   );
 };

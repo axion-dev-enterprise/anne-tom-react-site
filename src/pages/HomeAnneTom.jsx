@@ -132,7 +132,7 @@ const HomeAnneTom = () => {
 
 
 
-        <main className="pt-16 sm:pt-18">
+        <main className="pt-14 md:pt-16">
 
         <Hero imageLoaded={imageLoaded} setImageLoaded={setImageLoaded} />
 
@@ -675,7 +675,7 @@ const Hero = ({ imageLoaded, setImageLoaded }) => {
       <div className="home-hero-glow home-hero-glow--2" aria-hidden="true" />
       <div className="home-hero-grid" aria-hidden="true" />
 
-      <div className="home-hero-inner max-w-6xl mx-auto px-4 lg:px-6 py-14 lg:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="home-hero-inner max-w-6xl mx-auto px-4 lg:px-6 pt-3 pb-8 md:pt-5 md:pb-14 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
         {/* TEXTO */}
         <div className="space-y-6 lg:space-y-8 animate-fade-up">
