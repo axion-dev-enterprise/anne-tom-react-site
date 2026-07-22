@@ -294,32 +294,34 @@ const PagamentoStep = ({
       {pagamento === "cartao" && (
         <div className="premium-card bg-white border border-slate-200 rounded-2xl p-4 text-xs space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
+            <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold text-slate-800">
+                <p className="text-sm font-bold text-slate-900">
                   Cartão de Crédito
                 </p>
                 <span className="bg-slate-900 text-amber-400 text-[10px] font-black px-2.5 py-0.5 rounded-full border border-amber-500/30 shadow-sm">
                   Powered by AXIONPAY
                 </span>
               </div>
-              <p className="text-sm text-slate-500 mt-1">
+              <p className="text-xs text-slate-600 font-medium">
                 O link para pagamento é gerado automaticamente com criptografia ponta a ponta.
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">
-                Ao clicar em "Finalizar pedido", voce sera redirecionado para o checkout seguro AxionPAY.
+              <p className="text-xs text-slate-500">
+                Ao clicar em &quot;Finalizar pedido&quot;, você será redirecionado para o checkout seguro AxionPAY.
               </p>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-xs text-slate-500">
                 O envio de comprovante fica disponível após o pedido ser enviado.
               </p>
             </div>
           </div>
           {cardError && (
-            <p className="text-[11px] text-amber-700">{cardError}</p>
+            <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs font-semibold text-amber-800">
+              {cardError || "Não foi possível processar o cartão agora."}
+            </div>
           )}
           {cardLoading && (
-            <p className="text-[11px] text-slate-500">
-              Preparando checkout...
+            <p className="text-xs text-amber-600 font-medium animate-pulse">
+              Preparando checkout seguro AxionPAY...
             </p>
           )}
         </div>

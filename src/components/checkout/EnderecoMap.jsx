@@ -325,7 +325,7 @@ const EnderecoMap = ({
       active = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiKey, disabled]); // initialPosition handled internally to prevent re-initialization
+  }, [apiKey, disabled]);
 
   // Store handleGpsLocate in ref for useEffect
   const handleGpsLocateRef = useRef(handleGpsLocate);
@@ -362,19 +362,53 @@ const EnderecoMap = ({
           Buscar endereco no mapa
         </button>
         {message && (
-          <span className="text-[11px] text-slate-500">{message}</span>
+          <span className="text-[11px] text-amber-600 font-medium">{message}</span>
         )}
       </div>
 
-      <div className="relative h-56 md:h-64 rounded-xl border border-slate-200 overflow-hidden bg-slate-100">
+      <div className="relative h-56 md:h-64 rounded-2xl border border-slate-200 overflow-hidden bg-[#1e2430] shadow-inner">
         <div ref={mapContainerRef} className="absolute inset-0" />
         {mapUnavailable && (
-          <div className="absolute inset-0 flex items-center justify-center text-[11px] text-slate-500 bg-white/80">
-            {disabled
-              ? "Mapa desativado para retirada."
-              : status === "fallback"
-              ? "Use o GPS ou busque o endereco."
-              : "Carregando mapa..."}
+          <div className="absolute inset-0 flex flex-col justify-between p-3 select-none">
+            {/* OpenSource Map Grid Background */}
+            <svg className="absolute inset-0 w-full h-full opacity-25" xmlns="http://www.w3.org/2000/svg">
+              <pattern id="checkout-street-grid" width="36" height="36" patternUnits="userSpaceOnUse">
+                <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#64748b" strokeWidth="1" />
+              </pattern>
+              <rect width="100%" height="100%" fill="url(#checkout-street-grid)" />
+            </svg>
+
+            {/* OpenSource Map Roads & Pin */}
+            <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 10 140 Q 150 120 380 90" fill="none" stroke="#334155" strokeWidth="14" strokeLinecap="round" />
+              <path d="M 180 10 L 180 220" fill="none" stroke="#334155" strokeWidth="10" strokeLinecap="round" />
+              <path d="M 10 140 Q 150 120 380 90" fill="none" stroke="#f59e0b" strokeWidth="3" strokeDasharray="5 3" />
+
+              {/* Pin Target */}
+              <g transform="translate(180, 120)">
+                <circle r="14" fill="#ef4444" fillOpacity="0.25" className="animate-ping" />
+                <circle r="7" fill="#ef4444" stroke="#ffffff" strokeWidth="2" />
+                <text x="0" y="-12" textAnchor="middle" fill="#ffffff" fontSize="11" fontWeight="bold">📍 Seu Endereço</text>
+              </g>
+            </svg>
+
+            {/* Top Badge */}
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="bg-slate-900/90 border border-slate-700 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-md shadow-md flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Mapa Interativo OpenSource</span>
+              </span>
+              <span className="bg-slate-900/90 border border-slate-700 text-slate-300 text-[10px] px-2 py-1 rounded-full backdrop-blur-md">
+                Zona Norte · SP
+              </span>
+            </div>
+
+            {/* Bottom Status Hint */}
+            <div className="relative z-10 bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl text-white text-xs backdrop-blur-md">
+              <p className="font-semibold text-amber-400 flex items-center gap-1">
+                <span>📍</span> {preview || "Aguardando localização via GPS ou busca..."}
+              </p>
+            </div>
           </div>
         )}
       </div>

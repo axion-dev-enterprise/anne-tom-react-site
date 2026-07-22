@@ -743,12 +743,6 @@ const Hero = ({ imageLoaded, setImageLoaded }) => {
             
             <div className="home-hero-image-overlay z-20 pointer-events-none" aria-hidden="true" />
 
-            {/* Title / Badge overlay on top of active slide */}
-            <div className="absolute top-4 left-4 z-30 bg-black/65 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full text-white text-[12px] font-semibold flex items-center gap-2 shadow-lg">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{REAL_PIZZA_IMAGES[currentSlide].title}</span>
-            </div>
-
             {/* Prev / Next controls on hover */}
             <button
               type="button"
