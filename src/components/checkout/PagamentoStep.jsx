@@ -295,11 +295,16 @@ const PagamentoStep = ({
         <div className="premium-card bg-white border border-slate-200 rounded-2xl p-4 text-xs space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-slate-800">
-                Cartao de credito
-              </p>
-              <p className="text-sm text-slate-500">
-                O link para pagamento e gerado automaticamente.
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-semibold text-slate-800">
+                  Cartão de Crédito
+                </p>
+                <span className="bg-slate-900 text-amber-400 text-[10px] font-black px-2.5 py-0.5 rounded-full border border-amber-500/30 shadow-sm">
+                  Powered by AXIONPAY
+                </span>
+              </div>
+              <p className="text-sm text-slate-500 mt-1">
+                O link para pagamento é gerado automaticamente com criptografia ponta a ponta.
               </p>
               <p className="text-[11px] text-slate-500 mt-1">
                 Ao clicar em "Finalizar pedido", voce sera redirecionado para o checkout seguro AxionPAY.

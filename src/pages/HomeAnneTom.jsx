@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useMenuData } from "../hooks/useMenuData";
-import { formatCurrencyBRL } from "../utils/menu";
+import { formatCurrencyBRL, resolveProductImage } from "../utils/menu";
 import { HOME_MENU_OVERRIDES, matchOverrides } from "../data/menuOverrides";
 import SEOHead from "../components/seo/SEOHead";
 
@@ -19,12 +19,35 @@ const AVATAR_IMAGES = [
   "https://i.pravatar.cc/80?img=56",
 ];
 
-const PIZZA_IMAGES = [
-  "/menu_images/musa.webp",
-  "/menu_images/namorados.webp",
-  "/menu_images/tres_coracoes.webp",
-  "/menu_images/amor_perfeito.webp",
+const REAL_PIZZA_IMAGES = [
+  {
+    src: "/pizzas-real/0a214305-5754-4173-ae6b-597bc6fe5261.jfif",
+    alt: "Pizza Musa - Mussarela, tomate fresco e manjericão",
+    title: "Musa Artesanal",
+  },
+  {
+    src: "/pizzas-real/20de777a-f6ef-4a8b-9f85-83780e2d52c5.jfif",
+    alt: "Pizza Musa Rebelde - Edição Especial da Casa",
+    title: "Musa Rebelde",
+  },
+  {
+    src: "/pizzas-real/269ad3e9-b509-42b2-be96-ca457b9cc650.jfif",
+    alt: "Pizza Marguerita - Molho artesanal e manjericão fresco",
+    title: "Marguerita Tradicional",
+  },
+  {
+    src: "/pizzas-real/320185f8-b723-4d8b-9689-35bdc224d484.jfif",
+    alt: "Pizza Anne & Tom - Receita Autoral 48h",
+    title: "Especial Anne & Tom",
+  },
+  {
+    src: "/pizzas-real/e85518df-282d-446b-8dd1-ee5716ff058c.jfif",
+    alt: "Pizza Forno de Pedra - Recheio Generoso",
+    title: "Forno de Pedra",
+  },
 ];
+
+
 
 
 
@@ -596,124 +619,196 @@ const HERO_STATS = [
   { value: "2019", label: "Desde" },
 ];
 
-const Hero = ({ imageLoaded, setImageLoaded }) => (
+const Hero = ({ imageLoaded, setImageLoaded }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  <section className="home-hero">
-    <div className="home-hero-glow" aria-hidden="true" />
-    <div className="home-hero-glow home-hero-glow--2" aria-hidden="true" />
-    <div className="home-hero-grid" aria-hidden="true" />
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % REAL_PIZZA_IMAGES.length);
+    }, 3800);
+    return () => clearInterval(timer);
+  }, [isHovered]);
 
-    <div className="home-hero-inner max-w-6xl mx-auto px-4 lg:px-6 py-14 lg:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev - 1 + REAL_PIZZA_IMAGES.length) % REAL_PIZZA_IMAGES.length);
+  };
 
-      {/* TEXTO */}
-      <div className="space-y-6 lg:space-y-8 animate-fade-up">
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setCurrentSlide((prev) => (prev + 1) % REAL_PIZZA_IMAGES.length);
+  };
 
-        {/* Badge topo */}
-        <div className="home-hero-badge">
-          <span className="home-hero-badge-dot pulse-emerald-dot" />
-          <span>Zona Norte · São Paulo · Aberto agora</span>
-        </div>
+  return (
+    <section className="home-hero">
+      <div className="home-hero-glow" aria-hidden="true" />
+      <div className="home-hero-glow home-hero-glow--2" aria-hidden="true" />
+      <div className="home-hero-grid" aria-hidden="true" />
 
-        <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-black leading-[1.06] tracking-tight">
-          Pizza artesanal com{" "}
-          <span className="home-hero-gradient-text">massa leve</span>,{" "}
-          muito recheio e clima de bairro.
-        </h1>
+      <div className="home-hero-inner max-w-6xl mx-auto px-4 lg:px-6 py-14 lg:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-        <p className="text-base sm:text-lg max-w-xl leading-relaxed" style={{color:'#57524d'}}>
-          Forno bem quente, massa descansada por 48h e ingredientes frescos.
-          Você monta o pedido pelo cardápio e recebe em casa do jeitinho que combinou.
-        </p>
+        {/* TEXTO */}
+        <div className="space-y-6 lg:space-y-8 animate-fade-up">
 
-        {/* CTA Buttons */}
-        <div className="home-hero-actions flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap">
-          <Link
-            to="/cardapio"
-            className="home-cta-primary pulse-gold-glow inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-full text-sm md:text-base font-bold shadow-lg transition"
-          >
-            <span>Montar meu pedido</span>
-            <span aria-hidden="true">🍕</span>
-          </Link>
+          {/* Badge topo */}
+          <div className="home-hero-badge">
+            <span className="home-hero-badge-dot pulse-emerald-dot" />
+            <span>Zona Norte · São Paulo · Aberto agora</span>
+          </div>
 
-          <a
-            href="https://api.whatsapp.com/send?phone=5511932507007&text=Oi%20Anne%20%26%20Tom%2C%20quero%20fazer%20um%20pedido%20%F0%9F%8D%95"
-            target="_blank"
-            rel="noreferrer"
-            className="home-cta-ghost inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full text-sm md:text-base font-semibold transition"
-          >
-            <span>💬</span>
-            <span>WhatsApp</span>
-          </a>
-        </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-black leading-[1.06] tracking-tight">
+            Pizza artesanal com{" "}
+            <span className="home-hero-gradient-text">massa leve</span>,{" "}
+            muito recheio e clima de bairro.
+          </h1>
 
-        {/* PROVA SOCIAL */}
-        <div className="home-hero-social-proof">
-          <div className="home-hero-avatars">
-            {AVATAR_IMAGES.map((src, i) => (
-              <img key={i} src={src} alt="Cliente" className="home-hero-avatar" />
+          <p className="text-base sm:text-lg max-w-xl leading-relaxed" style={{color:'#57524d'}}>
+            Forno bem quente, massa descansada por 48h e ingredientes frescos.
+            Você monta o pedido pelo cardápio e recebe em casa do jeitinho que combinou.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="home-hero-actions flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap">
+            <Link
+              to="/cardapio"
+              className="home-cta-primary pulse-gold-glow inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-full text-sm md:text-base font-bold shadow-lg transition"
+            >
+              <span>Montar meu pedido</span>
+              <span aria-hidden="true">🍕</span>
+            </Link>
+
+            <a
+              href="https://api.whatsapp.com/send?phone=5511932507007&text=Oi%20Anne%20%26%20Tom%2C%20quero%20fazer%20um%20pedido%20%F0%9F%8D%95"
+              target="_blank"
+              rel="noreferrer"
+              className="home-cta-ghost inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full text-sm md:text-base font-semibold transition"
+            >
+              <span>💬</span>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+
+          {/* PROVA SOCIAL */}
+          <div className="home-hero-social-proof">
+            <div className="home-hero-avatars">
+              {AVATAR_IMAGES.map((src, i) => (
+                <img key={i} src={src} alt="Cliente" className="home-hero-avatar" />
+              ))}
+            </div>
+            <div>
+              <p className="text-[13px] font-bold" style={{color:'#1c1917'}}>+15.000 clientes satisfeitos</p>
+              <p className="text-[11px] font-medium mt-0.5" style={{color:'#d97706'}}>★★★★★ &nbsp;4.9 de avaliação média</p>
+            </div>
+          </div>
+
+          {/* Stats strip */}
+          <div className="home-hero-stats-strip">
+            {HERO_STATS.map((s) => (
+              <div key={s.label} className="home-hero-stat">
+                <span className="home-hero-stat-val">{s.value}</span>
+                <span className="home-hero-stat-lbl">{s.label}</span>
+              </div>
             ))}
           </div>
-          <div>
-            <p className="text-[13px] font-bold" style={{color:'#1c1917'}}>+15.000 clientes satisfeitos</p>
-            <p className="text-[11px] font-medium mt-0.5" style={{color:'#d97706'}}>★★★★★ &nbsp;4.9 de avaliação média</p>
-          </div>
         </div>
 
-        {/* Stats strip */}
-        <div className="home-hero-stats-strip">
-          {HERO_STATS.map((s) => (
-            <div key={s.label} className="home-hero-stat">
-              <span className="home-hero-stat-val">{s.value}</span>
-              <span className="home-hero-stat-lbl">{s.label}</span>
+        {/* IMAGEM ROTATIVA (CARD PRINCIPAL) */}
+        <div className="relative flex justify-center lg:justify-end">
+
+          {/* Ring orbital decoration */}
+          <div className="home-hero-ring" aria-hidden="true" />
+
+          <div
+            className="home-hero-image group relative w-full max-w-[420px] aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl animate-fade-in-image select-none cursor-pointer"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {REAL_PIZZA_IMAGES.map((imgItem, idx) => (
+              <img
+                key={imgItem.src}
+                src={imgItem.src}
+                alt={imgItem.alt}
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
+                  idx === currentSlide ? "opacity-100 z-10 scale-100" : "opacity-0 z-0 scale-105"
+                }`}
+                loading={idx === 0 ? "eager" : "lazy"}
+                decoding="async"
+                onLoad={() => {
+                  if (idx === 0) setImageLoaded(true);
+                }}
+              />
+            ))}
+            
+            <div className="home-hero-image-overlay z-20 pointer-events-none" aria-hidden="true" />
+
+            {/* Title / Badge overlay on top of active slide */}
+            <div className="absolute top-4 left-4 z-30 bg-black/65 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full text-white text-[12px] font-semibold flex items-center gap-2 shadow-lg">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{REAL_PIZZA_IMAGES[currentSlide].title}</span>
             </div>
-          ))}
+
+            {/* Prev / Next controls on hover */}
+            <button
+              type="button"
+              onClick={handlePrev}
+              aria-label="Imagem anterior"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm shadow-md"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              aria-label="Próxima imagem"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm shadow-md"
+            >
+              ›
+            </button>
+
+            {/* Slider Dots Indicator Bar */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 bg-black/55 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
+              {REAL_PIZZA_IMAGES.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentSlide(idx);
+                  }}
+                  aria-label={`Ir para a foto ${idx + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    idx === currentSlide ? "w-6 bg-amber-400" : "w-1.5 bg-white/40 hover:bg-white"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Floating badge — massa */}
+          <div className="home-hero-float-badge home-hero-float-badge--bl">
+            <span className="text-lg">🍞</span>
+            <div>
+              <p className="font-bold text-[12px]" style={{color:'#1c1917'}}>Massa 48h</p>
+              <p className="text-[11px]" style={{color:'#78716c'}}>Fermentação lenta</p>
+            </div>
+          </div>
+
+          {/* Floating badge — rating */}
+          <div className="home-hero-float-badge home-hero-float-badge--tr">
+            <span className="text-lg">⭐</span>
+            <div>
+              <p className="font-bold text-[12px]" style={{color:'#1c1917'}}>4.9 / 5.0</p>
+              <p className="text-[11px]" style={{color:'#78716c'}}>15k avaliações</p>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      {/* IMAGEM + DECORAÇÃO */}
-      <div className="relative flex justify-center lg:justify-end">
-
-        {/* Ring orbital decoration */}
-        <div className="home-hero-ring" aria-hidden="true" />
-
-        <div className="home-hero-image relative w-full max-w-[420px] aspect-[4/3] rounded-[2rem] overflow-hidden animate-fade-in-image">
-          {!imageLoaded && (
-            <div className="w-full h-full animate-pulse" style={{background:'#1c1917'}} />
-          )}
-          <img
-            src="/pizza.jpg"
-            alt="Pizza artesanal Anne & Tom"
-            className="w-full h-full object-cover"
-            loading="eager"
-            decoding="async"
-            onLoad={() => setImageLoaded(true)}
-          />
-          <div className="home-hero-image-overlay" aria-hidden="true" />
-        </div>
-
-        {/* Floating badge — massa */}
-        <div className="home-hero-float-badge home-hero-float-badge--bl">
-          <span className="text-lg">🍞</span>
-          <div>
-            <p className="font-bold text-[12px]" style={{color:'#1c1917'}}>Massa 48h</p>
-            <p className="text-[11px]" style={{color:'#78716c'}}>Fermentação lenta</p>
-          </div>
-        </div>
-
-        {/* Floating badge — rating */}
-        <div className="home-hero-float-badge home-hero-float-badge--tr">
-          <span className="text-lg">⭐</span>
-          <div>
-            <p className="font-bold text-[12px]" style={{color:'#1c1917'}}>4.9 / 5.0</p>
-            <p className="text-[11px]" style={{color:'#78716c'}}>15k avaliações</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-);
+    </section>
+  );
+};
 
 
 
@@ -827,39 +922,48 @@ const BestSellers = ({ items = [], loading = false, menuError = "" }) => {
   );
 };
 
-const BestSellerCard = ({ item, onSelect, index = 0 }) => (
-  <button
-    type="button"
-    onClick={() => onSelect?.(item)}
-    className="home-bestseller-card group"
-  >
-    {/* Pizza image */}
-    <div className="home-bestseller-img">
-      <img
-        src={item.imgUrl || PIZZA_IMAGES[index % PIZZA_IMAGES.length]}
-        alt={item.name}
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        loading="lazy"
-        onError={(e) => { e.target.style.display = 'none'; }}
-      />
-      <div className="home-bestseller-img-overlay" aria-hidden="true" />
-      <span className="home-bestseller-badge">{item.badge}</span>
-    </div>
-    {/* Info */}
-    <div className="p-4 flex flex-col gap-1.5 flex-1">
-      <p className="text-sm md:text-[15px] font-bold group-hover:transition-colors" style={{color:'#f5f0eb'}}>
-        {item.name}
-      </p>
-      <p className="text-xs leading-relaxed line-clamp-2 flex-1" style={{color:'#78716c'}}>
-        {item.desc}
-      </p>
-      <div className="flex items-center justify-between mt-2">
-        <p className="text-[12px] font-semibold" style={{color:'#f59e0b'}}>{item.priceLabel}</p>
-        <span className="text-[11px] font-medium group-hover:translate-x-1 transition-transform duration-200 inline-block" style={{color:'#f59e0b'}}>&rarr;</span>
+const BestSellerCard = ({ item, onSelect, index = 0 }) => {
+  const fallbackSrc = REAL_PIZZA_IMAGES[index % REAL_PIZZA_IMAGES.length].src;
+  const resolved = resolveProductImage(item);
+  const initialImage = item.imgUrl || (resolved && resolved !== "/pizza-placeholder.jpg" ? resolved : fallbackSrc);
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect?.(item)}
+      className="home-bestseller-card group"
+    >
+      {/* Pizza image */}
+      <div className="home-bestseller-img relative overflow-hidden">
+        <img
+          src={initialImage}
+          alt={item.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = fallbackSrc;
+          }}
+        />
+        <div className="home-bestseller-img-overlay" aria-hidden="true" />
+        <span className="home-bestseller-badge">{item.badge}</span>
       </div>
-    </div>
-  </button>
-);
+      {/* Info */}
+      <div className="p-4 flex flex-col gap-1.5 flex-1">
+        <p className="text-sm md:text-[15px] font-bold group-hover:transition-colors" style={{color:'#f5f0eb'}}>
+          {item.name}
+        </p>
+        <p className="text-xs leading-relaxed line-clamp-2 flex-1" style={{color:'#78716c'}}>
+          {item.desc}
+        </p>
+        <div className="flex items-center justify-between mt-2">
+          <p className="text-[12px] font-semibold" style={{color:'#f59e0b'}}>{item.priceLabel}</p>
+          <span className="text-[11px] font-medium group-hover:translate-x-1 transition-transform duration-200 inline-block" style={{color:'#f59e0b'}}>&rarr;</span>
+        </div>
+      </div>
+    </button>
+  );
+};
 
 /* PIZZAS VEGGIE ------------------------------------------------------ */
 

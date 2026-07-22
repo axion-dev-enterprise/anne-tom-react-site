@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import server from "../api/server";
 import { enviarParaDesktop } from "../hooks/useCheckout";
 import { formatCurrencyBRL } from "../utils/menu";
+import DeliveryRouteMap from "../components/ui/DeliveryRouteMap";
 
 // -----------------------------
 // Helpers de status / ETA
@@ -848,6 +849,27 @@ const OrderConfirmationPage = () => {
                       </div>
                     );
                   })}
+                </div>
+
+                {/* Delivery Map Vector Component */}
+                <div className="mt-5">
+                  <DeliveryRouteMap
+                    destinationAddress={resumo?.cliente?.bairro ? `${resumo.cliente.bairro}, São Paulo - SP` : "Zona Norte, São Paulo - SP"}
+                    distanceKm={3.8}
+                    etaMinutes={35}
+                    orderStatus={trackingStatus === "out_for_delivery" ? "EM_TRANSITO" : trackingStatus === "done" ? "ENTREGUE" : "PREPARANDO"}
+                  />
+                </div>
+
+                {/* Print Receipt / Automatic Dashboard Printing */}
+                <div className="mt-4 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => window.print()}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-bold shadow-md transition"
+                  >
+                    <span>🖨️</span> Imprimir Cupom do Pedido (Dashboard)
+                  </button>
                 </div>
               </div>
 

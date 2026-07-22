@@ -24,6 +24,7 @@ const AllergensPage = lazy(() => import("./pages/AllergensPage"));
 const LoyaltyPage = lazy(() => import("./pages/LoyaltyPage"));
 const CareersPage = lazy(() => import("./pages/CareersPage"));
 const GalleryPage = lazy(() => import("./pages/GalleryPage"));
+const CustomerDashboardPage = lazy(() => import("./pages/CustomerDashboardPage"));
 
 const AppContent = () => {
   const location = useLocation();
@@ -56,6 +57,8 @@ const AppContent = () => {
               <Route path="/cardapio" element={<CardapioPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/confirmacao" element={<OrderConfirmationPage />} />
+              <Route path="/minha-conta" element={<CustomerDashboardPage />} />
+              <Route path="/auth" element={<CustomerDashboardPage />} />
               <Route path="/sobre" element={<AboutPage />} />
               <Route path="/contato" element={<ContactPage />} />
               <Route path="/entrega" element={<DeliveryPage />} />
