@@ -7,13 +7,22 @@ const ResumoMobile = ({ items, totalFinal }) => {
 
   return (
     <>
-      <button
-        type="button"
-        className="premium-button lg:hidden fixed bottom-4 right-4 z-40 px-4 py-2 text-xs shadow-lg"
-        onClick={() => setAberto(true)}
-      >
-        Ver resumo (R$ {totalFinal.toFixed(2).replace(".", ",")})
-      </button>
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 shadow-2xl flex items-center justify-between gap-3">
+        <div>
+          <p className="text-[10px] uppercase font-black text-amber-400 tracking-wider">Total do Pedido</p>
+          <p className="text-base font-black text-white">
+            R$ {totalFinal.toFixed(2).replace(".", ",")}
+          </p>
+        </div>
+        <button
+          type="button"
+          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs shadow-lg flex items-center gap-2 transition active:scale-95"
+          onClick={() => setAberto(true)}
+        >
+          <span>Ver Resumo ({items.length})</span>
+          <span>🛒</span>
+        </button>
+      </div>
 
       {aberto && (
         <div className="lg:hidden fixed inset-0 z-40 bg-black/40 flex items-end">
