@@ -376,17 +376,17 @@ const Header = ({ scrolled }) => {
     >
       <div className="max-w-6xl mx-auto px-4 lg:px-6 py-2.5 flex items-center justify-between gap-4">
         {/* Logo + Local */}
-        <Link to="/" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-2.5 shrink-0">
           <img
             src="/logopizzaria.png"
             alt="Anne & Tom Pizzaria"
-            className="w-10 h-10 object-contain"
+            className="w-9 h-9 sm:w-10 sm:h-10 object-contain shrink-0"
           />
           <div className="leading-tight">
-            <p className="text-[13px] font-semibold tracking-tight">
-              Pizzaria Anne &amp; Tom
+            <p className="text-[12px] sm:text-[13px] font-bold tracking-tight text-slate-900 whitespace-nowrap">
+              Anne &amp; Tom
             </p>
-            <p className="text-[11px] text-slate-500 -mt-0.5">
+            <p className="hidden sm:block text-[11px] text-slate-500 -mt-0.5">
               Alto de Santana - Sao Paulo
             </p>
           </div>
@@ -498,7 +498,7 @@ const Header = ({ scrolled }) => {
             <button
               type="button"
               onClick={() => setIsAuthOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-amber-500/40 bg-amber-50 text-amber-900 text-[11px] font-extrabold hover:bg-amber-100 transition whitespace-nowrap"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-amber-500/40 bg-amber-50 text-amber-900 text-[11px] font-extrabold hover:bg-amber-100 transition whitespace-nowrap"
             >
               <span>🔐 Entrar (PIN)</span>
             </button>
@@ -732,11 +732,11 @@ const Hero = ({ imageLoaded, setImageLoaded }) => {
           </div>
 
           {/* Stats strip */}
-          <div className="home-hero-stats-strip">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3 border-t border-slate-200">
             {HERO_STATS.map((s) => (
-              <div key={s.label} className="home-hero-stat">
-                <span className="home-hero-stat-val">{s.value}</span>
-                <span className="home-hero-stat-lbl">{s.label}</span>
+              <div key={s.label} className="p-2.5 rounded-2xl bg-amber-50/70 border border-amber-200 text-center shadow-xs">
+                <span className="block text-base sm:text-lg font-black text-amber-700">{s.value}</span>
+                <span className="block text-[10px] uppercase font-extrabold text-slate-700 tracking-wider mt-0.5">{s.label}</span>
               </div>
             ))}
           </div>

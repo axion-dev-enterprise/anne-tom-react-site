@@ -131,34 +131,34 @@ export const CustomerDashboardPage = () => {
           </div>
         )}
 
-        {/* Profile & Loyalty Header Card */}
-        <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl grid md:grid-cols-3 gap-6 items-center border border-slate-800">
+        {/* Profile & Loyalty Header Card - THEMA WHITE CLEAN */}
+        <div className="bg-gradient-to-br from-amber-50 via-white to-amber-100/60 text-slate-900 rounded-3xl p-6 sm:p-8 shadow-md grid md:grid-cols-3 gap-6 items-center border-2 border-amber-300">
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
-              <span className="bg-amber-500 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="bg-amber-500 text-slate-950 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                 VIP Anne &amp; Tom
               </span>
-              <span className="text-xs text-slate-300">auth.annetom.com</span>
+              <span className="text-xs font-semibold text-slate-600">auth.annetom.com</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white">{customer.name || "Cliente Registrado"}</h2>
-            <div className="flex flex-wrap gap-4 text-xs text-slate-300">
-              <p>📱 WhatsApp: <strong className="text-white">{customer.phone || "Não informado"}</strong></p>
-              {customer.email && <p>✉️ E-mail: <strong className="text-white">{customer.email}</strong></p>}
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">{customer.name || "Cliente Registrado"}</h2>
+            <div className="flex flex-wrap gap-4 text-xs text-slate-700">
+              <p>📱 WhatsApp: <strong className="text-slate-950">{customer.phone || "Não informado"}</strong></p>
+              {customer.email && <p>✉️ E-mail: <strong className="text-slate-950">{customer.email}</strong></p>}
             </div>
           </div>
 
-          <div className="bg-slate-950/80 border border-amber-500/40 rounded-2xl p-5 text-center space-y-2">
+          <div className="bg-white border-2 border-amber-400 rounded-2xl p-5 text-center space-y-2 shadow-sm">
             <span className="text-3xl">⭐</span>
-            <p className="text-2xl font-black text-amber-400">{totalPoints} PONTOS</p>
+            <p className="text-2xl font-black text-amber-600">{totalPoints} PONTOS</p>
             
             {/* Progress bar */}
-            <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-700">
+            <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden border border-slate-200">
               <div
                 className="bg-gradient-to-r from-amber-400 to-amber-500 h-full rounded-full transition-all duration-500"
                 style={{ width: `${rewardProgress}%` }}
               />
             </div>
-            <p className="text-[11px] text-slate-300 font-medium">
+            <p className="text-[11px] text-slate-700 font-extrabold">
               {totalPoints >= nextRewardThreshold
                 ? "🎉 Você tem pontos para 1 Broto Grátis!"
                 : `Faltam ${nextRewardThreshold - totalPoints} pontos para 1 Broto Grátis`}
