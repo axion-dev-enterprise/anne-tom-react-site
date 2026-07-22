@@ -1,13 +1,13 @@
 ﻿# AXION Build & Production Release Report
 
-> **Project:** anne-tom | **Version:** v0.1.2 | **Environment:** Production
+> **Project:** anne-tom | **Version:** v0.1.3 | **Environment:** Production
 
 ---
 
 ## Summary Metadata
 
 - **Project Name:** $projName
-- **Release Version:** 0.1.2
+- **Release Version:** 0.1.3
 - **Git Commit:** $commitHash
 - **Build Date:** $((Get-Date).ToString("yyyy-MM-dd HH:mm:ss"))
 - **Live URL:** [https://annetom.com](https://annetom.com)
