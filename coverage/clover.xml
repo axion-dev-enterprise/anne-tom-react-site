@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1784696502375" clover="3.2.0">
-  <project timestamp="1784696502375" name="All files">
-    <metrics statements="2774" coveredstatements="918" conditionals="3011" coveredconditionals="754" methods="675" coveredmethods="181" elements="6460" coveredelements="1853" complexity="0" loc="2774" ncloc="2774" packages="11" files="58" classes="58"/>
+<coverage generated="1784696908259" clover="3.2.0">
+  <project timestamp="1784696908259" name="All files">
+    <metrics statements="2774" coveredstatements="918" conditionals="3013" coveredconditionals="756" methods="675" coveredmethods="181" elements="6462" coveredelements="1855" complexity="0" loc="2774" ncloc="2774" packages="11" files="58" classes="58"/>
     <package name="src">
       <metrics statements="36" coveredstatements="0" conditionals="21" coveredconditionals="0" methods="23" coveredmethods="0"/>
       <file name="App.jsx" path="D:\WORKSPACE\SANDBOX\apps\anne-tom-react-site\src\App.jsx">
@@ -1513,7 +1513,7 @@
       </file>
     </package>
     <package name="src.pages">
-      <metrics statements="1001" coveredstatements="520" conditionals="1174" coveredconditionals="488" methods="252" coveredmethods="109"/>
+      <metrics statements="1001" coveredstatements="520" conditionals="1176" coveredconditionals="490" methods="252" coveredmethods="109"/>
       <file name="AboutPage.jsx" path="D:\WORKSPACE\SANDBOX\apps\anne-tom-react-site\src\pages\AboutPage.jsx">
         <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="11" count="0" type="stmt"/>
@@ -2060,7 +2060,7 @@
         <line num="39" count="0" type="stmt"/>
       </file>
       <file name="HomeAnneTom.jsx" path="D:\WORKSPACE\SANDBOX\apps\anne-tom-react-site\src\pages\HomeAnneTom.jsx">
-        <metrics statements="152" coveredstatements="114" conditionals="113" coveredconditionals="62" methods="74" coveredmethods="50"/>
+        <metrics statements="152" coveredstatements="114" conditionals="115" coveredconditionals="64" methods="74" coveredmethods="50"/>
         <line num="16" count="1" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
         <line num="70" count="1" type="stmt"/>
@@ -2176,43 +2176,43 @@
         <line num="927" count="0" type="stmt"/>
         <line num="938" count="0" type="stmt"/>
         <line num="939" count="0" type="stmt"/>
-        <line num="964" count="1" type="cond" truecount="0" falsecount="3"/>
-        <line num="965" count="3" type="stmt"/>
-        <line num="967" count="3" type="stmt"/>
-        <line num="968" count="0" type="stmt"/>
-        <line num="969" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="970" count="0" type="stmt"/>
-        <line num="971" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="972" count="0" type="stmt"/>
-        <line num="974" count="0" type="stmt"/>
-        <line num="975" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="978" count="3" type="stmt"/>
-        <line num="999" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="1000" count="2" type="stmt"/>
-        <line num="1009" count="3" type="stmt"/>
-        <line num="1035" count="0" type="stmt"/>
-        <line num="1041" count="5" type="stmt"/>
-        <line num="1044" count="0" type="stmt"/>
-        <line num="1077" count="1" type="stmt"/>
-        <line num="1079" count="3" type="stmt"/>
-        <line num="1141" count="1" type="stmt"/>
-        <line num="1143" count="9" type="stmt"/>
-        <line num="1171" count="1" type="stmt"/>
-        <line num="1173" count="3" type="stmt"/>
-        <line num="1291" count="1" type="stmt"/>
-        <line num="1293" count="15" type="stmt"/>
-        <line num="1307" count="1" type="stmt"/>
-        <line num="1309" count="15" type="stmt"/>
-        <line num="1335" count="1" type="stmt"/>
-        <line num="1336" count="9" type="stmt"/>
-        <line num="1345" count="1" type="stmt"/>
-        <line num="1347" count="9" type="stmt"/>
-        <line num="1371" count="1" type="stmt"/>
-        <line num="1372" count="3" type="stmt"/>
-        <line num="1404" count="1" type="stmt"/>
-        <line num="1406" count="1" type="stmt"/>
-        <line num="1407" count="3" type="stmt"/>
-        <line num="1470" count="1" type="stmt"/>
+        <line num="969" count="1" type="cond" truecount="0" falsecount="3"/>
+        <line num="970" count="3" type="stmt"/>
+        <line num="972" count="3" type="stmt"/>
+        <line num="973" count="0" type="stmt"/>
+        <line num="974" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="975" count="0" type="stmt"/>
+        <line num="976" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="977" count="0" type="stmt"/>
+        <line num="979" count="0" type="stmt"/>
+        <line num="980" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="983" count="3" type="stmt"/>
+        <line num="1004" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="1005" count="2" type="stmt"/>
+        <line num="1014" count="3" type="stmt"/>
+        <line num="1040" count="0" type="stmt"/>
+        <line num="1046" count="5" type="stmt"/>
+        <line num="1049" count="0" type="stmt"/>
+        <line num="1082" count="1" type="stmt"/>
+        <line num="1084" count="3" type="stmt"/>
+        <line num="1146" count="1" type="stmt"/>
+        <line num="1148" count="9" type="stmt"/>
+        <line num="1176" count="1" type="stmt"/>
+        <line num="1178" count="3" type="stmt"/>
+        <line num="1296" count="1" type="stmt"/>
+        <line num="1298" count="15" type="stmt"/>
+        <line num="1312" count="1" type="stmt"/>
+        <line num="1313" count="15" type="stmt"/>
+        <line num="1328" count="1" type="stmt"/>
+        <line num="1329" count="9" type="stmt"/>
+        <line num="1340" count="1" type="stmt"/>
+        <line num="1342" count="9" type="stmt"/>
+        <line num="1366" count="1" type="stmt"/>
+        <line num="1367" count="3" type="stmt"/>
+        <line num="1399" count="1" type="stmt"/>
+        <line num="1401" count="1" type="stmt"/>
+        <line num="1402" count="3" type="stmt"/>
+        <line num="1465" count="1" type="stmt"/>
       </file>
       <file name="LoyaltyPage.jsx" path="D:\WORKSPACE\SANDBOX\apps\anne-tom-react-site\src\pages\LoyaltyPage.jsx">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>

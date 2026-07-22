@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.86% </span>
+                <span class="strong">55.65% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>62/113</span>
+                <span class='fraction'>64/115</span>
             </div>
         
             
@@ -2197,12 +2197,7 @@
 <a name='L2132'></a><a href='#L2132'>2132</a>
 <a name='L2133'></a><a href='#L2133'>2133</a>
 <a name='L2134'></a><a href='#L2134'>2134</a>
-<a name='L2135'></a><a href='#L2135'>2135</a>
-<a name='L2136'></a><a href='#L2136'>2136</a>
-<a name='L2137'></a><a href='#L2137'>2137</a>
-<a name='L2138'></a><a href='#L2138'>2138</a>
-<a name='L2139'></a><a href='#L2139'>2139</a>
-<a name='L2140'></a><a href='#L2140'>2140</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L2135'></a><a href='#L2135'>2135</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -3165,6 +3160,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -3509,19 +3509,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -3538,6 +3526,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -5250,7 +5240,7 @@ const BestSellers = ({ items = <span class="branch-0 cbranch-no" title="branch n
       &lt;div className="flex justify-center pt-6"&gt;
         &lt;Link
           to="/cardapio"
-          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm md:text-base transition" style={{background:'rgba(245,158,11,0.12)',border:'1px solid rgba(245,158,11,0.3)',color:'#f59e0b'}}
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-black text-sm md:text-base bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-md hover:shadow-lg transition"
         &gt;
           Ver cardápio completo →
         &lt;/Link&gt;
@@ -5268,10 +5258,10 @@ const BestSellerCard = ({ item, onSelect, index = <span class="branch-0 cbranch-
     &lt;button
       type="button"
       onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >onSelect?.(item)}</span>
-      className="home-bestseller-card group"
+      className="home-bestseller-card group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-left flex flex-col hover:border-amber-400 hover:shadow-lg transition duration-300"
     &gt;
       {/* Pizza image */}
-      &lt;div className="home-bestseller-img relative overflow-hidden"&gt;
+      &lt;div className="home-bestseller-img relative overflow-hidden h-44 w-full bg-slate-900"&gt;
         &lt;img
           src={initialImage}
           alt={item.name}
@@ -5283,19 +5273,24 @@ const BestSellerCard = ({ item, onSelect, index = <span class="branch-0 cbranch-
           }}
         /&gt;
         &lt;div className="home-bestseller-img-overlay" aria-hidden="true" /&gt;
-        &lt;span className="home-bestseller-badge"&gt;{item.badge}&lt;/span&gt;
+        &lt;span className="absolute top-3 left-3 bg-amber-500 text-slate-950 font-black text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md z-10"&gt;
+          {item.badge}
+        &lt;/span&gt;
       &lt;/div&gt;
+&nbsp;
       {/* Info */}
-      &lt;div className="p-4 flex flex-col gap-1.5 flex-1"&gt;
-        &lt;p className="text-sm md:text-[15px] font-bold group-hover:transition-colors" style={{color:'#f5f0eb'}}&gt;
+      &lt;div className="p-4 flex flex-col gap-2 flex-1 bg-white"&gt;
+        &lt;p className="text-base font-bold text-slate-900 group-hover:text-amber-600 transition-colors"&gt;
           {item.name}
         &lt;/p&gt;
-        &lt;p className="text-xs leading-relaxed line-clamp-2 flex-1" style={{color:'#78716c'}}&gt;
+        &lt;p className="text-xs text-slate-600 leading-relaxed line-clamp-2 flex-1 font-normal"&gt;
           {item.desc}
         &lt;/p&gt;
-        &lt;div className="flex items-center justify-between mt-2"&gt;
-          &lt;p className="text-[12px] font-semibold" style={{color:'#f59e0b'}}&gt;{item.priceLabel}&lt;/p&gt;
-          &lt;span className="text-[11px] font-medium group-hover:translate-x-1 transition-transform duration-200 inline-block" style={{color:'#f59e0b'}}&gt;&amp;rarr;&lt;/span&gt;
+        &lt;div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100"&gt;
+          &lt;p className="text-xs font-black text-amber-700"&gt;{item.priceLabel}&lt;/p&gt;
+          &lt;span className="w-7 h-7 rounded-full bg-amber-50 group-hover:bg-amber-500 text-amber-600 group-hover:text-white flex items-center justify-center text-xs font-bold transition-all duration-200 shadow-xs"&gt;
+            →
+          &lt;/span&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/button&gt;
@@ -5648,38 +5643,28 @@ const SectionWrapper = ({ children, id, bg, border }) =&gt; (
 &nbsp;
 &nbsp;
 const SectionTitle = ({ eyebrow, title, subtitle }) =&gt; (
-&nbsp;
-  &lt;div className="home-section-title text-center space-y-3 max-w-3xl mx-auto"&gt;
-&nbsp;
+  &lt;div className="home-section-title text-center space-y-2 max-w-3xl mx-auto"&gt;
     {eyebrow &amp;&amp; (
-&nbsp;
-      &lt;p className="home-eyebrow uppercase text-[11px] tracking-[0.2em] text-amber-600"&gt;
-&nbsp;
+      &lt;p className="uppercase text-[11px] font-black tracking-[0.25em] text-amber-600"&gt;
         {eyebrow}
-&nbsp;
       &lt;/p&gt;
-&nbsp;
     )}
-&nbsp;
-    &lt;h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900"&gt;
-&nbsp;
+    &lt;h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-slate-900"&gt;
       {title}
-&nbsp;
     &lt;/h2&gt;
-&nbsp;
-    &lt;p className="text-sm md:text-base text-slate-500"&gt;{subtitle}&lt;/p&gt;
-&nbsp;
+    {subtitle &amp;&amp; (
+      &lt;p className="text-sm md:text-base text-slate-600 font-medium"&gt;{subtitle}&lt;/p&gt;
+    )}
   &lt;/div&gt;
-&nbsp;
 );
 &nbsp;
-&nbsp;
-&nbsp;
 const FeatureCard = ({ icon, title, text }) =&gt; (
-  &lt;div className="home-feature-card"&gt;
-    &lt;div className="home-feature-icon"&gt;{icon}&lt;/div&gt;
-    &lt;p className="text-sm md:text-base font-bold mt-1" style={{color:'#f5f0eb'}}&gt;{title}&lt;/p&gt;
-    &lt;p className="text-xs md:text-sm leading-relaxed" style={{color:'#78716c'}}&gt;{text}&lt;/p&gt;
+  &lt;div className="home-feature-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-amber-400 transition text-center flex flex-col items-center gap-2"&gt;
+    &lt;div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-2xl mb-1"&gt;
+      {icon}
+    &lt;/div&gt;
+    &lt;p className="text-base font-bold text-slate-900"&gt;{title}&lt;/p&gt;
+    &lt;p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal"&gt;{text}&lt;/p&gt;
   &lt;/div&gt;
 );
 &nbsp;
@@ -6487,7 +6472,7 @@ export default HomeAnneTom;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-22T05:01:42.020Z
+                at 2026-07-22T05:08:27.618Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

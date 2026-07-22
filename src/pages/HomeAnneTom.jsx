@@ -907,7 +907,7 @@ const BestSellers = ({ items = [], loading = false, menuError = "" }) => {
       <div className="flex justify-center pt-6">
         <Link
           to="/cardapio"
-          className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-sm md:text-base transition" style={{background:'rgba(245,158,11,0.12)',border:'1px solid rgba(245,158,11,0.3)',color:'#f59e0b'}}
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-black text-sm md:text-base bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-md hover:shadow-lg transition"
         >
           Ver cardápio completo →
         </Link>
@@ -925,10 +925,10 @@ const BestSellerCard = ({ item, onSelect, index = 0 }) => {
     <button
       type="button"
       onClick={() => onSelect?.(item)}
-      className="home-bestseller-card group"
+      className="home-bestseller-card group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-left flex flex-col hover:border-amber-400 hover:shadow-lg transition duration-300"
     >
       {/* Pizza image */}
-      <div className="home-bestseller-img relative overflow-hidden">
+      <div className="home-bestseller-img relative overflow-hidden h-44 w-full bg-slate-900">
         <img
           src={initialImage}
           alt={item.name}
@@ -940,19 +940,24 @@ const BestSellerCard = ({ item, onSelect, index = 0 }) => {
           }}
         />
         <div className="home-bestseller-img-overlay" aria-hidden="true" />
-        <span className="home-bestseller-badge">{item.badge}</span>
+        <span className="absolute top-3 left-3 bg-amber-500 text-slate-950 font-black text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full shadow-md z-10">
+          {item.badge}
+        </span>
       </div>
+
       {/* Info */}
-      <div className="p-4 flex flex-col gap-1.5 flex-1">
-        <p className="text-sm md:text-[15px] font-bold group-hover:transition-colors" style={{color:'#f5f0eb'}}>
+      <div className="p-4 flex flex-col gap-2 flex-1 bg-white">
+        <p className="text-base font-bold text-slate-900 group-hover:text-amber-600 transition-colors">
           {item.name}
         </p>
-        <p className="text-xs leading-relaxed line-clamp-2 flex-1" style={{color:'#78716c'}}>
+        <p className="text-xs text-slate-600 leading-relaxed line-clamp-2 flex-1 font-normal">
           {item.desc}
         </p>
-        <div className="flex items-center justify-between mt-2">
-          <p className="text-[12px] font-semibold" style={{color:'#f59e0b'}}>{item.priceLabel}</p>
-          <span className="text-[11px] font-medium group-hover:translate-x-1 transition-transform duration-200 inline-block" style={{color:'#f59e0b'}}>&rarr;</span>
+        <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100">
+          <p className="text-xs font-black text-amber-700">{item.priceLabel}</p>
+          <span className="w-7 h-7 rounded-full bg-amber-50 group-hover:bg-amber-500 text-amber-600 group-hover:text-white flex items-center justify-center text-xs font-bold transition-all duration-200 shadow-xs">
+            →
+          </span>
         </div>
       </div>
     </button>
@@ -1305,38 +1310,28 @@ const SectionWrapper = ({ children, id, bg, border }) => (
 
 
 const SectionTitle = ({ eyebrow, title, subtitle }) => (
-
-  <div className="home-section-title text-center space-y-3 max-w-3xl mx-auto">
-
+  <div className="home-section-title text-center space-y-2 max-w-3xl mx-auto">
     {eyebrow && (
-
-      <p className="home-eyebrow uppercase text-[11px] tracking-[0.2em] text-amber-600">
-
+      <p className="uppercase text-[11px] font-black tracking-[0.25em] text-amber-600">
         {eyebrow}
-
       </p>
-
     )}
-
-    <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-
+    <h2 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-slate-900">
       {title}
-
     </h2>
-
-    <p className="text-sm md:text-base text-slate-500">{subtitle}</p>
-
+    {subtitle && (
+      <p className="text-sm md:text-base text-slate-600 font-medium">{subtitle}</p>
+    )}
   </div>
-
 );
 
-
-
 const FeatureCard = ({ icon, title, text }) => (
-  <div className="home-feature-card">
-    <div className="home-feature-icon">{icon}</div>
-    <p className="text-sm md:text-base font-bold mt-1" style={{color:'#f5f0eb'}}>{title}</p>
-    <p className="text-xs md:text-sm leading-relaxed" style={{color:'#78716c'}}>{text}</p>
+  <div className="home-feature-card bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-amber-400 transition text-center flex flex-col items-center gap-2">
+    <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-2xl mb-1">
+      {icon}
+    </div>
+    <p className="text-base font-bold text-slate-900">{title}</p>
+    <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-normal">{text}</p>
   </div>
 );
 
