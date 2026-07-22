@@ -1,63 +1,63 @@
 {
-  "name": "anne-tom",
-  "version": "0.1.1",
-  "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.13.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^7.9.6",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "dev": "react-scripts start",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
-    "build:clean": "node -e \"require('fs').rmSync('build',{ recursive: true, force: true })\"",
-    "lint": "eslint src --ext .js,.jsx",
-    "lint:fix": "eslint src --ext .js,.jsx --fix",
-    "test": "react-scripts test",
-    "test:ci": "react-scripts test --watchAll=false --coverage",
-    "test:coverage": "react-scripts test --coverage --watchAll=false",
-    "eject": "react-scripts eject",
-    "preview": "npm run build && npx serve -s build -l 3000"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^react-router-dom$": "<rootDir>/node_modules/react-router-dom/dist/index.js",
-      "^react-router$": "<rootDir>/node_modules/react-router/dist/development/index.js",
-      "^react-router/dom$": "<rootDir>/node_modules/react-router/dist/development/dom-export.js",
-      "^axios$": "<rootDir>/node_modules/axios/dist/node/axios.cjs"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.22",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.18"
-  }
+    "name":  "anne-tom",
+    "version":  "0.1.2",
+    "private":  true,
+    "dependencies":  {
+                         "@testing-library/dom":  "^10.4.1",
+                         "@testing-library/jest-dom":  "^6.9.1",
+                         "@testing-library/react":  "^16.3.0",
+                         "@testing-library/user-event":  "^13.5.0",
+                         "axios":  "^1.13.2",
+                         "react":  "^19.2.0",
+                         "react-dom":  "^19.2.0",
+                         "react-helmet-async":  "^2.0.5",
+                         "react-router-dom":  "^7.9.6",
+                         "react-scripts":  "5.0.1",
+                         "web-vitals":  "^2.1.4"
+                     },
+    "scripts":  {
+                    "dev":  "react-scripts start",
+                    "start":  "react-scripts start",
+                    "build":  "react-scripts build",
+                    "build:analyze":  "npm run build \u0026\u0026 npx webpack-bundle-analyzer build/static/js/*.js",
+                    "build:clean":  "node -e \"require(\u0027fs\u0027).rmSync(\u0027build\u0027,{ recursive: true, force: true })\"",
+                    "lint":  "eslint src --ext .js,.jsx",
+                    "lint:fix":  "eslint src --ext .js,.jsx --fix",
+                    "test":  "react-scripts test",
+                    "test:ci":  "react-scripts test --watchAll=false --coverage",
+                    "test:coverage":  "react-scripts test --coverage --watchAll=false",
+                    "eject":  "react-scripts eject",
+                    "preview":  "npm run build \u0026\u0026 npx serve -s build -l 3000"
+                },
+    "eslintConfig":  {
+                         "extends":  [
+                                         "react-app",
+                                         "react-app/jest"
+                                     ]
+                     },
+    "jest": {
+      "moduleNameMapper": {
+        "^react-router-dom$": "<rootDir>/node_modules/react-router-dom/dist/index.js",
+        "^react-router$": "<rootDir>/node_modules/react-router/dist/development/index.js",
+        "^react-router/dom$": "<rootDir>/node_modules/react-router/dist/development/dom-export.js",
+        "^axios$": "<rootDir>/node_modules/axios/dist/node/axios.cjs"
+      }
+    },
+    "browserslist":  {
+                         "production":  [
+                                            "\u003e0.2%",
+                                            "not dead",
+                                            "not op_mini all"
+                                        ],
+                         "development":  [
+                                             "last 1 chrome version",
+                                             "last 1 firefox version",
+                                             "last 1 safari version"
+                                         ]
+                     },
+    "devDependencies":  {
+                            "autoprefixer":  "^10.4.22",
+                            "postcss":  "^8.5.6",
+                            "tailwindcss":  "^3.4.18"
+                        }
 }

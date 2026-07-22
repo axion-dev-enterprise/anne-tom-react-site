@@ -32,6 +32,8 @@ import { useAppAccessInfo } from "../hooks/useAppAccess";
 import SEOHead from "../components/seo/SEOHead";
 import HalfPizzaBuilderModal from "../components/ui/HalfPizzaBuilderModal";
 import MobileCartDrawer from "../components/ui/MobileCartDrawer";
+import ProductCustomizerModal from "../components/ui/ProductCustomizerModal";
+import DynamicPromotionsBanner from "../components/checkout/DynamicPromotionsBanner";
 
 // Horários oficiais (Tripadvisor):
 // Domingo: 19:00–23:00
@@ -253,103 +255,9 @@ function isPizzariaOpen(now = new Date()) {
 }
 
 
-const toNumber = (value) => {
-  const numberValue = Number(value);
-  return Number.isFinite(numberValue) ? numberValue : null;
-};
 
-const resolveCents = (value) => {
-  const numberValue = Number(value);
-  return Number.isFinite(numberValue) ? numberValue / 100 : null;
-};
 
-const normalizeExtraItem = (item) => {
-  if (!item) return null;
-  if (typeof item === "string") {
-    const nome = item.trim();
-    if (!nome) return null;
-    return {
-      id: nome,
-      nome,
-      categoria: "",
-      descricao: "",
-      preco: null,
-      preco_broto: null,
-      preco_grande: null,
-    };
-  }
 
-  const nome =
-    item.nome ||
-    item.name ||
-    item.label ||
-    item.description ||
-    item.descricao ||
-    "";
-  const id =
-    item.id ||
-    item.code ||
-    item.codigo ||
-    item.slug ||
-    nome ||
-    "";
-  if (!id && !nome) return null;
-
-  return {
-    id: id ? String(id) : "",
-    nome,
-    categoria: item.categoria || item.category || "",
-    descricao: item.descricao || item.description || "",
-    preco: toNumber(
-      item.preco ??
-        item.price ??
-        item.valor ??
-        item.amount ??
-        resolveCents(
-          item.amount_cents ?? item.price_cents ?? item.preco_cents
-        )
-    ),
-    preco_broto: toNumber(item.preco_broto ?? item.priceBroto),
-    preco_grande: toNumber(item.preco_grande ?? item.priceGrande),
-  };
-};
-
-const resolveExtraId = (item) =>
-  item?.id ||
-  item?.code ||
-  item?.codigo ||
-  item?.slug ||
-  item?.nome ||
-  item?.name ||
-  "";
-
-const resolveExtraName = (item) =>
-  item?.nome ||
-  item?.name ||
-  item?.label ||
-  item?.description ||
-  item?.descricao ||
-  "Extra";
-
-const resolveExtraPrice = (item, tamanho) => {
-  if (!item) return 0;
-  const sizeValue =
-    tamanho === "broto"
-      ? toNumber(item.preco_broto ?? item.priceBroto)
-      : toNumber(item.preco_grande ?? item.priceGrande);
-  if (sizeValue != null) return sizeValue;
-
-  const baseValue = toNumber(
-    item.preco ?? item.price ?? item.valor ?? item.amount
-  );
-  if (baseValue != null) return baseValue;
-
-  return (
-    resolveCents(
-      item.amount_cents ?? item.price_cents ?? item.preco_cents
-    ) || 0
-  );
-};
 
 const isBordaExtra = (item) => {
   const categoria = String(item?.categoria || "").toLowerCase();
@@ -411,10 +319,6 @@ const CardapioPage = () => {
   const extrasFromApi = useMemo(
     () => normalizeExtrasFromJson(menuData),
     [menuData]
-  );
-  const bordasDisponiveis = useMemo(
-    () => extrasFromApi.filter((item) => isBordaExtra(item)),
-    [extrasFromApi]
   );
   const ingredientesExtrasApi = useMemo(
     () => extrasFromApi.filter((item) => !isBordaExtra(item)),
@@ -507,21 +411,9 @@ const CardapioPage = () => {
   const [selectedPizza, setSelectedPizza] = useState(null);
   const cardRefs = useRef({});
   const modalRef = useRef(null);
-  const [tamanho, setTamanho] = useState("grande");
-  const [quantidade, setQuantidade] = useState(1);
-  const [isMeioMeio, setIsMeioMeio] = useState(false);
-  const [meioId, setMeioId] = useState("");
-  const [extrasSelecionados, setExtrasSelecionados] = useState([]);
-  const [bordaSelecionada, setBordaSelecionada] = useState(null);
-  const [obsPizza, setObsPizza] = useState("");
-  const [focusExtras, setFocusExtras] = useState(false);
-  const [extrasOpen, setExtrasOpen] = useState(false);
-  const extrasRef = useRef(null);
-
   const [highlightedPizzaId, setHighlightedPizzaId] = useState(null);
 
   const openingLabel = buildBusinessHoursLabel(businessHours);
-  const closedReason = businessStatus?.reason || "";
   const apiOpen =
     typeof businessStatus?.isOpen === "boolean"
       ? businessStatus.isOpen
@@ -533,14 +425,7 @@ const CardapioPage = () => {
       ? isBusinessOpenNow(businessHours)
       : isPizzariaOpen();
 
-  // helper: impede adicionar se estiver fechado
-  const ensureOpenOrWarn = () => {
-    if (isOpenNow) return true;
-    alert(
-      `A Pizzaria Anne & Tom esta fechada agora.\n\nHorario de funcionamento: ${openingLabel}.${closedReason ? `\n\n${closedReason}` : ""}`
-    );
-    return false;
-  };
+
 
   // Categorias dinamicas
   const categorias = useMemo(() => {
@@ -583,72 +468,12 @@ const CardapioPage = () => {
     });
   }, [pizzas, categoria, search, badgeFilter]);
 
-  // Pizza do meio
-  const meioPizza = useMemo(() => {
-    if (!meioId) return null;
-    return pizzas.find((p) => p.id === meioId) || null;
-  }, [meioId, pizzas]);
-
-  // Preço base
-  const precoBase =
-    selectedPizza?.[
-      tamanho === "broto" ? "preco_broto" : "preco_grande"
-    ] || 0;
-
-  // Preço meio a meio
-  let precoUnitario = precoBase;
-  if (selectedPizza && isMeioMeio && meioPizza) {
-    const precoMeio =
-      tamanho === "broto"
-        ? meioPizza.preco_broto || 0
-        : meioPizza.preco_grande || 0;
-    precoUnitario = Math.max(precoBase, precoMeio);
-  }
-
-
-  const extrasDisponiveis = useMemo(() => {
-    if (!selectedPizza) return [];
-    if (Array.isArray(selectedPizza.extras) && selectedPizza.extras.length > 0) {
-      return selectedPizza.extras.map(normalizeExtraItem).filter(Boolean);
-    }
-    return ingredientesExtrasApi;
-  }, [selectedPizza, ingredientesExtrasApi]);
-
-  const extrasTotais = extrasDisponiveis
-    .filter((extra) =>
-      extrasSelecionados.includes(
-        resolveExtraId(extra) || resolveExtraName(extra)
-      )
-    )
-    .reduce(
-      (acc, extra) => acc + resolveExtraPrice(extra, tamanho),
-      0
-    );
-
-  const bordaPreco = bordaSelecionada
-    ? resolveExtraPrice(bordaSelecionada, tamanho)
-    : 0;
-
-  // Total
-  const precoTotal =
-    (precoUnitario + extrasTotais + bordaPreco) * quantidade;
-
   const abrirModal = (pizza, options = {}) => {
     if (options.highlight) {
       setHighlightedPizzaId(pizza.id);
       window.setTimeout(() => setHighlightedPizzaId(null), 2000);
     }
-    const wantsExtras = Boolean(options.focusExtras);
-    setFocusExtras(wantsExtras);
-    setExtrasOpen(wantsExtras);
     setSelectedPizza(pizza);
-    setQuantidade(1);
-    setTamanho("grande");
-    setIsMeioMeio(false);
-    setMeioId("");
-    setExtrasSelecionados([]);
-    setBordaSelecionada(null);
-    setObsPizza("");
   };
 
   useEffect(() => {
@@ -677,8 +502,6 @@ const CardapioPage = () => {
 
   const fecharModal = useCallback(() => {
     setSelectedPizza(null);
-    setFocusExtras(false);
-    setExtrasOpen(false);
 
     if (searchParams.has("pizzaId") || searchParams.has("pizza")) {
       const nextParams = new URLSearchParams(searchParams);
@@ -735,50 +558,6 @@ const CardapioPage = () => {
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [selectedPizza, fecharModal]);
-
-  useEffect(() => {
-    if (!selectedPizza || !focusExtras || !extrasOpen) return;
-    const node = extrasRef.current;
-    if (node && node.scrollIntoView) {
-      node.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [selectedPizza, focusExtras, extrasOpen]);
-
-  const handleAddToCart = () => {
-    if (!selectedPizza) return;
-    if (!ensureOpenOrWarn()) return;
-
-    let nomeFinal = selectedPizza.nome;
-    if (isMeioMeio && meioPizza)
-      nomeFinal = `${selectedPizza.nome} / ${meioPizza.nome}`;
-
-    const extrasNomes = extrasDisponiveis
-      .filter((extra) =>
-        extrasSelecionados.includes(
-          resolveExtraId(extra) || resolveExtraName(extra)
-        )
-      )
-      .map((extra) => resolveExtraName(extra));
-
-    const bordaNome = bordaSelecionada
-      ? resolveExtraName(bordaSelecionada)
-      : null;
-
-    addItem({
-      id: `pizza-${selectedPizza.id}-${Date.now()}`,
-      idPizza: selectedPizza.id,
-      nome: nomeFinal,
-      tamanho,
-      quantidade,
-      precoUnitario: precoUnitario + extrasTotais + bordaPreco,
-      meio: meioPizza?.nome || null,
-      extras: extrasNomes,
-      borda: bordaNome,
-      obsPizza: obsPizza.trim() || null,
-    });
-
-    fecharModal();
-  };
 
   // total de itens no carrinho (para barra flutuante)
   const totalItensCarrinho = items.reduce(
@@ -861,6 +640,9 @@ const CardapioPage = () => {
               </span>
             )}
           </div>
+
+          {/* BANNER DE PROMOÇÕES DINÂMICAS */}
+          <DynamicPromotionsBanner subtotal={total} items={items} />
 
           {/* BUSCA + CATEGORIA */}
           <div
@@ -1075,364 +857,15 @@ const CardapioPage = () => {
       )}
 
 
-      {/* MODAL */}
-      {selectedPizza && (
-        <div className="fixed inset-0 z-40 bg-black/40 flex items-center justify-center p-4 md:p-6">
-          <div className="w-full max-w-xl max-h-[90vh]">
-            <div
-              ref={modalRef}
-              role="dialog"
-              aria-modal="true"
-              tabIndex={-1}
-              className="premium-card bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-cardapio-modal"
-            >
-              {/* topo (imagem interativa) */}
-              <div className="h-56 bg-gradient-to-b from-stone-900 to-stone-950 flex items-center justify-center shrink-0 overflow-hidden relative border-b border-stone-800">
-                <div className="pizza-preview-container">
-                  {isMeioMeio && meioPizza ? (
-                    <>
-                      <div 
-                        className="pizza-half-left" 
-                        style={{ backgroundImage: `url(${selectedPizza.imagem})` }}
-                      />
-                      <div 
-                        className="pizza-half-right" 
-                        style={{ backgroundImage: `url(${meioPizza.imagem || selectedPizza.imagem})` }}
-                      />
-                      <div className="pizza-divider-line" />
-                    </>
-                  ) : (
-                    <div 
-                      className="w-full h-full" 
-                      style={{ 
-                        backgroundImage: `url(${selectedPizza.imagem})`, 
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center' 
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-
-              {/* conteúdo scrollável */}
-              <div className="p-6 space-y-5 overflow-y-auto">
-                <div>
-                  <h2 className="text-xl font-bold">
-                    {selectedPizza.nome}
-                  </h2>
-                  <p className="text-sm text-slate-500 mt-1">
-                    {selectedPizza.ingredientes?.join(", ")}
-                  </p>
-                </div>
-
-                {/* TAMANHO */}
-                <div className="space-y-2">
-                  <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-                    Tamanho
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedPizza.preco_broto != null && (
-                      <button
-                        onClick={() => setTamanho("broto")}
-                        className={`premium-pill text-sm ${
-                          tamanho === "broto" ? "premium-pill--active" : ""
-                        }`}
-                      >
-                        Broto ·{" "}
-                        {formatCurrencyBRL(selectedPizza.preco_broto)}
-                      </button>
-                    )}
-
-                    {selectedPizza.preco_grande != null && (
-                      <button
-                        onClick={() => setTamanho("grande")}
-                        className={`premium-pill text-sm ${
-                          tamanho === "grande" ? "premium-pill--active" : ""
-                        }`}
-                      >
-                        Grande ·{" "}
-                        {formatCurrencyBRL(selectedPizza.preco_grande)}
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                {/* MEIO A MEIO */}
-                <div className="space-y-2">
-                  <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-                    Pizza meio a meio
-                  </p>
-                  <label className="flex items-center justify-between px-4 py-3 bg-white border border-slate-300 rounded-xl text-sm">
-                    <span>
-                      {isMeioMeio
-                        ? "Meio a meio ativado"
-                        : "Ativar meio a meio"}
-                    </span>
-                    <input
-                      type="checkbox"
-                      checked={isMeioMeio}
-                      onChange={(e) => {
-                        setIsMeioMeio(e.target.checked);
-                        if (!e.target.checked) setMeioId("");
-                      }}
-                    />
-                  </label>
-
-                  {isMeioMeio && (
-                    <select
-                      className="premium-select w-full text-sm"
-                      value={meioId}
-                      onChange={(e) => setMeioId(e.target.value)}
-                    >
-                      <option value="">Selecione o segundo sabor</option>
-                      {pizzas
-                        .filter((p) => p.id !== selectedPizza.id)
-                        .map((p) => (
-                          <option key={p.id} value={p.id}>
-                            {p.nome}
-                          </option>
-                        ))}
-                    </select>
-                  )}
-                </div>
-
-                {/* BORDA */}
-                {bordasDisponiveis.length > 0 && (
-                  <div className="space-y-2">
-                    <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-                      Borda recheada
-                    </p>
-                    <div className="space-y-2">
-                      <label className="flex items-center justify-between px-3 py-2 border border-slate-300 bg-white rounded-xl text-sm">
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            name={`borda-${selectedPizza.id}`}
-                            checked={!bordaSelecionada}
-                            onChange={() => setBordaSelecionada(null)}
-                          />
-                          <span>Sem borda</span>
-                        </div>
-                        <span className="text-slate-500">R$ 0,00</span>
-                      </label>
-                      {bordasDisponiveis.map((borda) => {
-                        const bordaId =
-                          resolveExtraId(borda) || resolveExtraName(borda);
-                        const bordaNome = resolveExtraName(borda);
-                        const bordaPrecoAtual = resolveExtraPrice(
-                          borda,
-                          tamanho
-                        );
-                        const bordaSelecionadaId = resolveExtraId(
-                          bordaSelecionada
-                        );
-
-                        return (
-                          <label
-                            key={bordaId}
-                            className="flex items-center justify-between px-3 py-2 border border-slate-300 bg-white rounded-xl text-sm"
-                          >
-                            <div className="flex items-center gap-2">
-                              <input
-                                type="radio"
-                                name={`borda-${selectedPizza.id}`}
-                                checked={bordaSelecionadaId === bordaId}
-                                onChange={() => setBordaSelecionada(borda)}
-                              />
-                              <span>{bordaNome}</span>
-                            </div>
-                            <span>+ {formatCurrencyBRL(bordaPrecoAtual)}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* EXTRAS */}
-                {extrasDisponiveis.length > 0 && (
-                  <div className="space-y-2">
-                    <button
-                      type="button"
-                      aria-expanded={extrasOpen}
-                      onClick={() => {
-                        setExtrasOpen((prev) => !prev);
-                        setFocusExtras(true);
-                      }}
-                      className="text-xs font-medium text-slate-600 uppercase tracking-wide underline-offset-4 focus-visible:underline"
-                    >
-                      {extrasOpen ? "Ocultar adicionais" : "Mostrar adicionais"}
-                    </button>
-                    {extrasOpen && (
-                      <div ref={extrasRef} className="space-y-2">
-                        <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-                          Adicionais
-                        </p>
-
-                        {extrasDisponiveis.map((ext) => {
-                          const extraId =
-                            resolveExtraId(ext) || resolveExtraName(ext);
-                          const extraNome = resolveExtraName(ext);
-                          const extraPreco = resolveExtraPrice(ext, tamanho);
-
-                          return (
-                            <label
-                              key={extraId}
-                              className="flex items-center justify-between px-3 py-2 border border-slate-300 bg-white rounded-xl text-sm"
-                            >
-                              <div className="flex items-center gap-2">
-                                <input
-                                  type="checkbox"
-                                  checked={extrasSelecionados.includes(extraId)}
-                                  onChange={() => {
-                                    setExtrasSelecionados((prev) =>
-                                      prev.includes(extraId)
-                                        ? prev.filter((x) => x !== extraId)
-                                        : [...prev, extraId]
-                                    );
-                                  }}
-                                />
-                                <span>{extraNome}</span>
-                              </div>
-                              <span>+ {formatCurrencyBRL(extraPreco)}</span>
-                            </label>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* QUANTIDADE + TOTAL */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <button
-                      className="premium-button-ghost w-9 h-9 text-lg"
-                      onClick={() =>
-                        setQuantidade((q) => Math.max(1, q - 1))
-                      }
-                    >
-                      -
-                    </button>
-                    <span className="w-8 text-center font-semibold text-base">
-                      {quantidade}
-                    </span>
-                    <button
-                      className="premium-button-ghost w-9 h-9 text-lg"
-                      onClick={() => setQuantidade((q) => q + 1)}
-                    >
-                      +
-                    </button>
-                  </div>
-
-                  <div className="text-right">
-                    <p className="text-xs text-slate-500 uppercase tracking-wide">
-                      Total
-                    </p>
-                    <p className="text-lg font-semibold">
-                      {formatCurrencyBRL(precoTotal)}
-                    </p>
-                  </div>
-                </div>
-
-                {/* OBS */}
-                <textarea
-                  className="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm"
-                  placeholder="Observações (sem cebola, ponto da borda...)"
-                  value={obsPizza}
-                  onChange={(e) => setObsPizza(e.target.value)}
-                />
-
-                {/* SUGESTÕES */}
-                {selectedPizza.sugestoes?.length > 0 && (
-                  <div className="space-y-2 pt-2">
-                    <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-                      Sugestão para acompanhar
-                    </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {selectedPizza.sugestoes.map((s) => {
-                        const precoSugestao = Number(
-                          s.preco ??
-                            s.price ??
-                            s.valor ??
-                            s.preco_grande ??
-                            s.preco_broto ??
-                            0
-                        );
-                        const idBase =
-                          s.id ??
-                          s.codigo ??
-                          s.code ??
-                          s.slug ??
-                          s.nome ??
-                          s.name ??
-                          "item";
-
-                        return (
-                          <button
-                            key={idBase}
-                            className="px-3 py-2 border border-slate-200 bg-slate-50 rounded-xl flex justify-between items-center text-sm hover:bg-slate-100"
-                            onClick={() => {
-                              if (!ensureOpenOrWarn()) return;
-                              addItem({
-                                id: `sugestao-${idBase}-${Date.now()}`,
-                                nome: s.nome || s.name || "Item",
-                                tamanho: "unico",
-                                quantidade: 1,
-                                precoUnitario: precoSugestao,
-                              });
-                            }}
-                          >
-                            <span className="truncate max-w-[160px]">
-                              {s.nome || s.name}
-                            </span>
-                            <span className="font-semibold">
-                              {formatCurrencyBRL(precoSugestao)}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {/* BOTÕES */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <button
-                    className="premium-button flex-1 px-6 py-3 text-sm md:text-base disabled:opacity-60 disabled:cursor-not-allowed"
-                    onClick={handleAddToCart}
-                    disabled={!isOpenNow}
-                  >
-                    {isOpenNow
-                      ? `Adicionar ao carrinho · ${formatCurrencyBRL(
-                          precoTotal
-                        )}`
-                      : "Pizzaria fechada no momento"}
-                  </button>
-
-                  <button
-                    onClick={fecharModal}
-                    className="premium-button-ghost px-4 py-2 text-xs md:text-sm"
-                  >
-                    Cancelar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* ANIMAÇÃO */}
-          <style>{`
-            .animate-cardapio-modal {
-              animation: modal 0.25s ease-out;
-            }
-            @keyframes modal {
-              from { opacity: 0; transform: translateY(20px) scale(.96); }
-              to { opacity: 1; transform: translateY(0) scale(1); }
-            }
-          `}</style>
-        </div>
-      )}
+      {/* MODAL DE PERSONALIZAÇÃO COMPLETO */}
+      <ProductCustomizerModal
+        isOpen={Boolean(selectedPizza)}
+        onClose={() => setSelectedPizza(null)}
+        pizza={selectedPizza}
+        allPizzas={pizzas}
+        onAddToCart={addItem}
+        isOpenNow={isOpenNow}
+      />
 
       {/* BARRA FLUTUANTE DO CARRINHO */}
       {items.length > 0 && (

@@ -108,8 +108,8 @@ describe("CardapioPage", () => {
     fireEvent.click(musaButton);
 
     // Verify modal elements
-    expect(screen.getByText("Tamanho")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /^Grande/ })).toBeInTheDocument();
+    expect(screen.getByText(/Escolha o Tamanho/i)).toBeInTheDocument();
+    expect(screen.getByText(/Grande \(8 fatias\)/i)).toBeInTheDocument();
 
     // Click add to cart
     const addToCartButton = screen.getByText(/Adicionar ao carrinho/i);

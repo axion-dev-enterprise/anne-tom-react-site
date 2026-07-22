@@ -1,6 +1,6 @@
-// src/components/checkout/CarrinhoStep.jsx
 import React from "react";
 import { Link } from "react-router-dom";
+import DynamicPromotionsBanner from "./DynamicPromotionsBanner";
 
 const CarrinhoStep = ({ items, updateQuantity, removeItem }) => {
   const flavorPalette = [
@@ -19,9 +19,18 @@ const CarrinhoStep = ({ items, updateQuantity, removeItem }) => {
     );
   }
 
+  const subtotal = items.reduce(
+    (acc, i) => acc + i.precoUnitario * i.quantidade,
+    0
+  );
+
   return (
     <div className="space-y-4">
+      {/* BANNER DE PROMOÇÕES DINÂMICAS POR DIA DA SEMANA */}
+      <DynamicPromotionsBanner subtotal={subtotal} items={items} />
+
       {items.map((item) => {
+
         const flavorList = Array.isArray(item.sabores)
           ? item.sabores
           : item?.nome?.includes(" / ")
