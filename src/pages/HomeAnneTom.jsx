@@ -1366,7 +1366,7 @@ const Testimonial = ({ name, text }) => (
 const FinalCTA = () => (
   <section className="home-cta bg-slate-900 text-white my-8 rounded-3xl overflow-hidden max-w-6xl mx-auto border border-slate-800 shadow-2xl">
     <div className="home-cta-inner px-6 py-14 lg:py-20 text-center space-y-6">
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-amber-400 tracking-tight">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight" style={{ color: '#fef3c7' }}>
         Bora pedir uma Anne &amp; Tom hoje?
       </h2>
 
@@ -1485,7 +1485,12 @@ const styles = `
   .home-anne-tom h3 {
     font-family: "Fraunces", serif;
     letter-spacing: -0.025em;
-    color: #1c1917;
+    color: inherit;
+  }
+
+  .home-cta h2,
+  .home-cta-inner h2 {
+    color: #fef3c7 !important;
   }
 
 
