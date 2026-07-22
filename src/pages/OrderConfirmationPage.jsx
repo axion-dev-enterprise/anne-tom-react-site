@@ -566,7 +566,7 @@ const OrderConfirmationPage = () => {
     };
 
     fetchStatus();
-    intervalId = window.setInterval(fetchStatus, 10000);
+    intervalId = window.setInterval(fetchStatus, 5000);
 
     return () => {
       cancelled = true;
