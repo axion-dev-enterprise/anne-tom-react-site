@@ -174,18 +174,18 @@ const ProductCustomizerModal = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-2 sm:p-4 animate-fade-in">
-      <div className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-3xl max-w-lg w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-2 sm:p-4 animate-fade-in">
+      <div className="bg-white text-slate-900 rounded-3xl max-w-lg w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden relative">
 
-        {/* HEADER MODAL COM FOTO */}
-        <div className="relative h-40 bg-slate-950 flex items-center justify-center shrink-0 border-b border-slate-800">
+        {/* HEADER MODAL CLEAN WHITE */}
+        <div className="relative h-40 bg-amber-50 flex items-center justify-center shrink-0 border-b border-amber-100">
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black transition-all"
+            className="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-white text-slate-900 border border-slate-200 flex items-center justify-center hover:bg-slate-100 transition-all font-bold text-sm shadow-sm"
           >
             ✕
           </button>
-          <div className="w-32 h-32 rounded-full border-4 border-amber-500 overflow-hidden shadow-2xl relative">
+          <div className="w-32 h-32 rounded-full border-4 border-amber-500 overflow-hidden shadow-xl relative bg-white">
             {numSabores === 1 && (
               <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${activeSabor1?.imagem || "/pizza-placeholder.jpg"})` }} />
             )}
@@ -205,12 +205,12 @@ const ProductCustomizerModal = ({
           </div>
         </div>
 
-        {/* CONTEÚDO ENXUTO E COMPACTO */}
+        {/* CONTEÚDO ENXUTO E COMPACTO - TEMA WHITE */}
         <div className="p-4 overflow-y-auto space-y-5 pb-28 text-xs">
 
           {/* Nome principal */}
           <div>
-            <h2 className="text-lg font-black">{activeSabor1.nome}</h2>
+            <h2 className="text-lg font-black text-slate-900">{activeSabor1.nome}</h2>
             <p className="text-slate-500 mt-0.5">{activeSabor1.ingredientes?.join(", ")}</p>
           </div>
 
@@ -223,7 +223,7 @@ const ProductCustomizerModal = ({
                   type="button"
                   onClick={() => setTamanho("broto")}
                   className={`p-2.5 rounded-xl border text-left flex justify-between items-center transition-all ${
-                    tamanho === "broto" ? "bg-amber-500/15 border-amber-500 font-black text-amber-600" : "bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700"
+                    tamanho === "broto" ? "bg-amber-500/15 border-amber-500 font-black text-amber-700" : "bg-slate-50 border-slate-200 text-slate-800"
                   }`}
                 >
                   <span>Broto (4 fatias)</span>
@@ -235,7 +235,7 @@ const ProductCustomizerModal = ({
                   type="button"
                   onClick={() => setTamanho("grande")}
                   className={`p-2.5 rounded-xl border text-left flex justify-between items-center transition-all ${
-                    tamanho === "grande" ? "bg-amber-500/15 border-amber-500 font-black text-amber-600" : "bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700"
+                    tamanho === "grande" ? "bg-amber-500/15 border-amber-500 font-black text-amber-700" : "bg-slate-50 border-slate-200 text-slate-800"
                   }`}
                 >
                   <span>Grande (8 fatias)</span>
@@ -249,7 +249,7 @@ const ProductCustomizerModal = ({
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="font-extrabold uppercase text-slate-500 tracking-wider">2. Sabores</span>
-              {tamanho === "broto" && <span className="text-[10px] text-amber-600">Broto apenas 1 sabor</span>}
+              {tamanho === "broto" && <span className="text-[10px] text-amber-700 font-bold">Broto apenas 1 sabor</span>}
             </div>
 
             {tamanho !== "broto" && (
@@ -265,8 +265,8 @@ const ProductCustomizerModal = ({
                     onClick={() => setNumSabores(s.num)}
                     className={`py-2 rounded-xl text-xs font-bold border transition-all ${
                       numSabores === s.num
-                        ? "bg-slate-900 text-white dark:bg-amber-500 dark:text-slate-950 border-slate-900"
-                        : "bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300"
+                        ? "bg-amber-500 text-slate-950 border-amber-500 shadow"
+                        : "bg-slate-100 border-slate-200 text-slate-800"
                     }`}
                   >
                     {s.label}
@@ -279,7 +279,7 @@ const ProductCustomizerModal = ({
             {numSabores >= 2 && (
               <div className="space-y-2 pt-1">
                 {/* 1º Sabor (Fixo) */}
-                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex justify-between items-center">
+                <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center text-slate-900">
                   <span className="font-bold">1º Sabor (50%): {activeSabor1.nome}</span>
                   <span className="text-[10px] text-slate-400">Principal</span>
                 </div>
@@ -289,11 +289,11 @@ const ProductCustomizerModal = ({
                   type="button"
                   onClick={() => setSelectingSlot(2)}
                   className={`w-full p-2.5 rounded-xl border text-left flex justify-between items-center transition-all ${
-                    sabor2 ? "bg-amber-500/10 border-amber-500 font-bold" : "bg-white dark:bg-slate-900 border-dashed border-amber-500 text-amber-600"
+                    sabor2 ? "bg-amber-50 border-amber-500 font-bold text-slate-900" : "bg-white border-dashed border-amber-500 text-amber-700"
                   }`}
                 >
                   <span>2º Sabor: {sabor2 ? sabor2.nome : "Clique para escolher o 2º sabor 🔍"}</span>
-                  <span className="font-extrabold text-amber-500">Trocar</span>
+                  <span className="font-extrabold text-amber-600">Trocar</span>
                 </button>
 
                 {/* 3º Sabor (se 3 sabores) */}
@@ -302,11 +302,11 @@ const ProductCustomizerModal = ({
                     type="button"
                     onClick={() => setSelectingSlot(3)}
                     className={`w-full p-2.5 rounded-xl border text-left flex justify-between items-center transition-all ${
-                      sabor3 ? "bg-amber-500/10 border-amber-500 font-bold" : "bg-white dark:bg-slate-900 border-dashed border-amber-500 text-amber-600"
+                      sabor3 ? "bg-amber-50 border-amber-500 font-bold text-slate-900" : "bg-white border-dashed border-amber-500 text-amber-700"
                     }`}
                   >
                     <span>3º Sabor: {sabor3 ? sabor3.nome : "Clique para escolher o 3º sabor 🔍"}</span>
-                    <span className="font-extrabold text-amber-500">Trocar</span>
+                    <span className="font-extrabold text-amber-600">Trocar</span>
                   </button>
                 )}
               </div>
@@ -320,7 +320,7 @@ const ProductCustomizerModal = ({
               <select
                 value={bordaId}
                 onChange={(e) => setBordaId(e.target.value)}
-                className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs font-bold"
+                className="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 text-xs font-bold"
               >
                 {DEFAULT_BORDAS.map((b) => (
                   <option key={b.id} value={b.id}>
@@ -329,7 +329,7 @@ const ProductCustomizerModal = ({
                 ))}
               </select>
             ) : (
-              <p className="text-slate-400 italic text-[11px]">Borda recheada indisponível para Broto.</p>
+              <p className="text-slate-500 italic text-[11px]">Borda recheada indisponível para Broto.</p>
             )}
           </div>
 
@@ -344,8 +344,8 @@ const ProductCustomizerModal = ({
               const activeExtras = extrasPorSabor[slot] || [];
 
               return (
-                <div key={slot} className="p-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1.5">
-                  <div className="font-bold text-amber-600 text-[11px]">➕ Extras em {slotPizza.nome}:</div>
+                <div key={slot} className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                  <div className="font-bold text-amber-700 text-[11px]">➕ Extras em {slotPizza.nome}:</div>
                   <div className="flex flex-wrap gap-1.5">
                     {DEFAULT_EXTRAS.map((e) => {
                       const isSel = activeExtras.includes(e.id);
@@ -355,7 +355,7 @@ const ProductCustomizerModal = ({
                           type="button"
                           onClick={() => toggleExtra(slot, e.id)}
                           className={`px-2 py-1 rounded-lg border text-[11px] font-semibold transition-all ${
-                            isSel ? "bg-amber-500 text-slate-950 font-bold border-amber-500" : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300"
+                            isSel ? "bg-amber-500 text-slate-950 font-bold border-amber-500" : "bg-white border-slate-200 text-slate-800"
                           }`}
                         >
                           {e.nome} (+{formatCurrencyBRL(e.preco)})
@@ -375,24 +375,24 @@ const ProductCustomizerModal = ({
               placeholder="Observações do pedido (ex: sem cebola)..."
               value={obsPizza}
               onChange={(e) => setObsPizza(e.target.value)}
-              className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-xs"
+              className="w-full p-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 text-xs"
             />
           </div>
         </div>
 
-        {/* MODAL INTERNO DE BUSCA DE SABORES (ENXUTO E RÁPIDO) */}
+        {/* MODAL INTERNO DE BUSCA DE SABORES (TEMA WHITE CLEAN) */}
         {selectingSlot !== null && (
-          <div className="absolute inset-0 z-40 bg-slate-950/90 p-4 flex flex-col animate-fade-in">
-            <div className="flex justify-between items-center pb-3 border-b border-slate-800">
-              <span className="font-bold text-sm text-white">Escolha o {selectingSlot}º Sabor</span>
-              <button onClick={() => setSelectingSlot(null)} className="text-white font-bold text-lg">✕</button>
+          <div className="absolute inset-0 z-40 bg-white p-4 flex flex-col animate-fade-in">
+            <div className="flex justify-between items-center pb-3 border-b border-slate-200">
+              <span className="font-black text-sm text-slate-900">Escolha o {selectingSlot}º Sabor</span>
+              <button onClick={() => setSelectingSlot(null)} className="text-slate-700 font-bold text-lg hover:text-black">✕</button>
             </div>
             <input
               type="text"
               placeholder="Buscar sabor ou ingrediente..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="my-3 p-3 rounded-xl bg-slate-900 text-white text-xs border border-slate-700 focus:outline-none focus:border-amber-500"
+              className="my-3 p-3 rounded-xl bg-slate-50 text-slate-900 text-xs border border-slate-300 focus:outline-none focus:border-amber-500"
               autoFocus
             />
             <div className="flex-1 overflow-y-auto space-y-1.5 pr-1">
@@ -401,13 +401,13 @@ const ProductCustomizerModal = ({
                   key={p.id}
                   type="button"
                   onClick={() => handlePickFlavor(p)}
-                  className="w-full p-3 rounded-xl bg-slate-900 hover:bg-amber-500/20 text-left text-xs flex justify-between items-center border border-slate-800 transition-all text-white"
+                  className="w-full p-3 rounded-xl bg-slate-50 hover:bg-amber-50 text-left text-xs flex justify-between items-center border border-slate-200 transition-all text-slate-900"
                 >
                   <div>
-                    <div className="font-bold">{p.nome}</div>
-                    <div className="text-[10px] text-slate-400 truncate max-w-[200px]">{p.ingredientes?.join(", ")}</div>
+                    <div className="font-bold text-slate-900">{p.nome}</div>
+                    <div className="text-[10px] text-slate-500 truncate max-w-[200px]">{p.ingredientes?.join(", ")}</div>
                   </div>
-                  <span className="font-bold text-amber-400">
+                  <span className="font-bold text-amber-700">
                     {formatCurrencyBRL(tamanho === "broto" ? p.preco_broto : p.preco_grande)}
                   </span>
                 </button>
@@ -416,12 +416,12 @@ const ProductCustomizerModal = ({
           </div>
         )}
 
-        {/* BOTÃO FIXO NO RODAPÉ */}
-        <div className="absolute bottom-0 inset-x-0 bg-white/95 dark:bg-slate-900/95 p-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 z-30">
-          <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
-            <button type="button" onClick={() => setQuantidade((q) => Math.max(1, q - 1))} className="w-7 h-7 rounded-lg bg-white dark:bg-slate-700 font-bold text-xs shadow">-</button>
-            <span className="w-5 text-center font-bold text-xs">{quantidade}</span>
-            <button type="button" onClick={() => setQuantidade((q) => q + 1)} className="w-7 h-7 rounded-lg bg-white dark:bg-slate-700 font-bold text-xs shadow">+</button>
+        {/* BOTÃO FIXO NO RODAPÉ CLEAN */}
+        <div className="absolute bottom-0 inset-x-0 bg-white/95 p-3 border-t border-slate-200 flex items-center justify-between gap-3 z-30">
+          <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
+            <button type="button" onClick={() => setQuantidade((q) => Math.max(1, q - 1))} className="w-7 h-7 rounded-lg bg-white font-bold text-xs shadow border border-slate-200 text-slate-900">-</button>
+            <span className="w-5 text-center font-bold text-xs text-slate-900">{quantidade}</span>
+            <button type="button" onClick={() => setQuantidade((q) => q + 1)} className="w-7 h-7 rounded-lg bg-white font-bold text-xs shadow border border-slate-200 text-slate-900">+</button>
           </div>
           <button
             type="button"
