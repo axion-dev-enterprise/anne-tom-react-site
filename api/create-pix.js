@@ -42,9 +42,9 @@ module.exports = async (req, res) => {
     const mpData = await mpResponse.json();
 
     if (!mpResponse.ok) {
-      console.error("[create-pix] MP error:", mpData);
+      console.error("[create-pix] MP error:", mpResponse.status, mpData);
       return res.status(mpResponse.status).json({
-        error: mpData.message || "mercadopago_error",
+        error: mpData?.message || mpData?.error || "mercadopago_error",
         details: mpData,
       });
     }
