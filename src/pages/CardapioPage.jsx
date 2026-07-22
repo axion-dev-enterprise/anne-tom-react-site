@@ -694,7 +694,7 @@ const CardapioPage = () => {
         </section>
 
         {/* LISTA */}
-        <section className="space-y-4 pb-16">
+        <section className="space-y-4 pb-36">
           <h2 className="text-xs uppercase font-semibold text-slate-500 tracking-wide">
             Sabores disponíveis
           </h2>
@@ -867,24 +867,24 @@ const CardapioPage = () => {
         isOpenNow={isOpenNow}
       />
 
-      {/* BARRA FLUTUANTE DO CARRINHO */}
+      {/* BARRA FLUTUANTE DO CARRINHO (RESUMO CHECKOUT) */}
       {items.length > 0 && (
-        <div className="fixed inset-x-0 bottom-3 z-30 flex justify-center pointer-events-none">
-          <div className="pointer-events-auto max-w-6xl w-full px-4">
+        <div className="fixed inset-x-0 bottom-6 z-40 flex justify-center pointer-events-none px-3 sm:px-6 pb-[env(safe-area-inset-bottom,0px)]">
+          <div className="pointer-events-auto max-w-4xl w-full">
             <button
               onClick={() => navigate("/checkout")}
-              className="premium-button w-full flex items-center justify-between gap-3 py-3 px-5 shadow-xl text-sm md:text-base"
+              className="w-full flex items-center justify-between gap-3 py-3.5 px-5 sm:px-7 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black shadow-2xl border-2 border-amber-300 text-xs sm:text-base active:scale-[0.98] transition-all cursor-pointer"
             >
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-black/10 text-xs">
+              <div className="flex items-center gap-2.5">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-950/20 text-slate-950 text-xs font-black shadow-xs">
                   {totalItensCarrinho}
                 </span>
-                <span>Ver carrinho e finalizar pedido</span>
+                <span>Ver Resumo do Pedido</span>
               </div>
-              <div className="flex items-center gap-2 font-semibold">
-                <span>{formatCurrencyBRL(total)}</span>
-                <span className="text-xs md:text-sm opacity-80">
-                  Ir para checkout →
+              <div className="flex items-center gap-2">
+                <span className="bg-slate-950/15 px-2.5 py-1 rounded-xl text-xs sm:text-sm font-extrabold">{formatCurrencyBRL(total)}</span>
+                <span className="text-xs sm:text-sm opacity-90">
+                  Avançar →
                 </span>
               </div>
             </button>

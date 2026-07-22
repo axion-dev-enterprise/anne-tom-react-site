@@ -327,13 +327,11 @@ const Header = ({ scrolled }) => {
   const navigate = useNavigate();
   const { customer, isAuthenticated } = useAuth();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const moreRef = useRef(null);
 
   useEffect(() => {
     setIsMoreOpen(false);
-    setIsMobileOpen(false);
   }, [location.pathname, location.hash]);
 
   useEffect(() => {
@@ -518,119 +516,11 @@ const Header = ({ scrolled }) => {
             Fazer Pedido
           </Link>
 
-          <button
-            type="button"
-            onClick={() => setIsMobileOpen(true)}
-            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-full border border-slate-200 text-[11px]"
-            aria-label="Abrir menu"
-          >
-            Menu
-          </button>
-
           <QuickAuthModal
             isOpen={isAuthOpen}
             onClose={() => setIsAuthOpen(false)}
             onSuccess={() => navigate("/me")}
           />
-        </div>
-      </div>
-
-      {/* Mobile drawer */}
-      <div
-        className={`fixed inset-0 z-40 md:hidden transition ${
-          isMobileOpen ? "pointer-events-auto" : "pointer-events-none"
-        }`}
-        aria-hidden={!isMobileOpen}
-      >
-        <button
-          type="button"
-          className={`absolute inset-0 bg-slate-900/40 transition-opacity ${
-            isMobileOpen ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setIsMobileOpen(false)}
-          aria-label="Fechar menu"
-        />
-        <div
-          className={`absolute right-0 top-0 h-full w-72 bg-white shadow-xl p-5 flex flex-col gap-4 transition-transform duration-200 ${
-            isMobileOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold">Menu</p>
-            <button
-              type="button"
-              onClick={() => setIsMobileOpen(false)}
-              className="text-xs text-slate-500"
-            >
-              Fechar
-            </button>
-          </div>
-
-          <div className="space-y-2 text-sm">
-            <a href="#destaques" className={pillClass(isHashActive("#destaques"))}>
-              Destaques
-            </a>
-            <a
-              href="#mais-pedidas"
-              className={pillClass(isHashActive("#mais-pedidas"))}
-            >
-              Mais vendidas
-            </a>
-            <a href="#veggie" className={pillClass(isHashActive("#veggie"))}>
-              Pizzas veggie
-            </a>
-            <a
-              href="#como-funciona"
-              className={pillClass(isHashActive("#como-funciona"))}
-            >
-              Como funciona
-            </a>
-            <a
-              href="#avaliacoes"
-              className={pillClass(isHashActive("#avaliacoes"))}
-            >
-              Avaliacoes
-            </a>
-          </div>
-
-          <div className="border-t border-slate-200 pt-3 space-y-2 text-sm">
-            <NavLink
-              to="/sobre"
-              className={({ isActive }) => dropdownItemClass(isActive)}
-            >
-              Sobre
-            </NavLink>
-            <NavLink
-              to="/entrega"
-              className={({ isActive }) => dropdownItemClass(isActive)}
-            >
-              Entrega
-            </NavLink>
-            <NavLink
-              to="/promocoes"
-              className={({ isActive }) => dropdownItemClass(isActive)}
-            >
-              Promocoes
-            </NavLink>
-            <NavLink
-              to="/faq"
-              className={({ isActive }) => dropdownItemClass(isActive)}
-            >
-              FAQ
-            </NavLink>
-            <NavLink
-              to="/contato"
-              className={({ isActive }) => dropdownItemClass(isActive)}
-            >
-              Contato
-            </NavLink>
-            <NavLink
-              to="/cardapio"
-              className={({ isActive }) => dropdownItemClass(isActive)}
-            >
-              Cardapio
-            </NavLink>
-          </div>
         </div>
       </div>
     </header>

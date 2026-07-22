@@ -5,6 +5,7 @@ import server from "../api/server";
 import { enviarParaDesktop } from "../hooks/useCheckout";
 import { formatCurrencyBRL } from "../utils/menu";
 import DeliveryRouteMap from "../components/ui/DeliveryRouteMap";
+import { useAuth } from "../context/AuthContext";
 
 // -----------------------------
 // Helpers de status / ETA
@@ -95,6 +96,15 @@ const isPaymentApproved = (value) => {
 const OrderConfirmationPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  let recordOrder = null;
+  try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const authCtx = useAuth();
+    recordOrder = authCtx?.recordOrder;
+  } catch {
+    // AuthProvider não fornecido no contexto de teste unitário
+  }
 
   const [resumo, setResumo] = useState(null);
 
@@ -189,7 +199,20 @@ const OrderConfirmationPage = () => {
       fromSummary,
       resolved,
     });
-  }, [location.state]);
+
+    if (fromSummary && recordOrder) {
+      recordOrder({
+        id: resolved || `ord-${Date.now()}`,
+        total: fromSummary.total,
+        items: (fromSummary.items || []).map((i) => ({
+          qty: i.quantidade || i.qty || 1,
+          name: i.nome || i.name || "Pizza",
+          price: i.precoUnitario || i.price || 0,
+        })),
+        address: fromSummary.cliente?.bairro ? `${fromSummary.cliente.rua || ""}, ${fromSummary.cliente.bairro}` : "Zona Norte, São Paulo - SP",
+      });
+    }
+  }, [location.state, recordOrder]);
 
   // -------------------------------------------------------------------
   // 1.5) Status de pagamento vindo do retorno do gateway

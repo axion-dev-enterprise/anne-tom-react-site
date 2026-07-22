@@ -258,19 +258,37 @@ export const CustomerDashboardPage = () => {
 
         {activeTab === "enderecos" && (
           <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
-            <h3 className="text-lg font-bold text-slate-900">Endereço Principal Salvo</h3>
-            <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-bold text-slate-900">Rua Voluntários da Pátria, 2400</p>
-                <p className="text-xs text-slate-600">Santana — São Paulo / SP — CEP 02010-000</p>
-                <span className="inline-block mt-2 text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full">
-                  Entrega Padrão (Zona Norte)
-                </span>
+            <h3 className="text-lg font-bold text-slate-900">Endereços Salvos de Entrega</h3>
+            {Array.isArray(customer?.addresses) && customer.addresses.length > 0 ? (
+              <div className="space-y-3">
+                {customer.addresses.map((addr, idx) => (
+                  <div key={idx} className="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-bold text-slate-900">{addr}</p>
+                      <span className="inline-block mt-1.5 text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                        {idx === 0 ? "Endereço Principal (Último Pedido)" : "Endereço Cadastrado"}
+                      </span>
+                    </div>
+                    <Link to="/checkout" className="text-xs font-bold text-amber-600 hover:underline shrink-0">
+                      Usar no Checkout →
+                    </Link>
+                  </div>
+                ))}
               </div>
-              <Link to="/checkout" className="text-xs font-bold text-amber-600 hover:underline">
-                Editar no Checkout →
-              </Link>
-            </div>
+            ) : (
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm font-bold text-slate-900">Rua Voluntários da Pátria, 2400</p>
+                  <p className="text-xs text-slate-600">Santana — São Paulo / SP — CEP 02010-000</p>
+                  <span className="inline-block mt-2 text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full">
+                    Entrega Padrão (Zona Norte)
+                  </span>
+                </div>
+                <Link to="/checkout" className="text-xs font-bold text-amber-600 hover:underline">
+                  Editar no Checkout →
+                </Link>
+              </div>
+            )}
           </div>
         )}
 

@@ -59,6 +59,8 @@ export const AuthProvider = ({ children }) => {
           ...existingCustomer,
           pin: cleanedPin,
           points: existingCustomer.points ?? 120,
+          orders: existingCustomer.orders || [],
+          addresses: existingCustomer.addresses || [],
         };
         setCustomer(updatedCustomer);
         return { ok: true, customer: updatedCustomer, isNew: false };
@@ -69,11 +71,13 @@ export const AuthProvider = ({ children }) => {
         phone: cleanedPhone,
         pin: cleanedPin,
         points: 50,
+        orders: [],
+        addresses: [],
         created_at: new Date().toISOString(),
       };
 
       const created = await server.salvarCliente(payload);
-      const newCustomer = created?.ok && created.data ? { ...created.data, pin: cleanedPin, points: 50 } : payload;
+      const newCustomer = created?.ok && created.data ? { ...created.data, pin: cleanedPin, points: 50, orders: [], addresses: [] } : payload;
 
       setCustomer(newCustomer);
       return { ok: true, customer: newCustomer, isNew: true };
@@ -84,12 +88,45 @@ export const AuthProvider = ({ children }) => {
         phone: cleanedPhone,
         pin: cleanedPin,
         points: 120,
+        orders: [],
+        addresses: [],
       };
       setCustomer(fallbackCustomer);
       return { ok: true, customer: fallbackCustomer, isNew: false };
     } finally {
       setLoading(false);
     }
+  };
+
+  const recordOrder = (orderData) => {
+    if (!customer) return;
+
+    const pointsEarned = Math.floor(Number(orderData.total) || 0);
+    const newOrder = {
+      id: orderData.id || `order-${Date.now()}`,
+      date: new Date().toLocaleDateString("pt-BR") + " " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
+      items: orderData.items || [],
+      total: Number(orderData.total) || 0,
+      status: "Em Produção",
+      address: orderData.address || "Zona Norte, São Paulo - SP",
+      pointsEarned,
+    };
+
+    const updatedOrders = [newOrder, ...(customer.orders || [])];
+    const existingAddresses = customer.addresses || [];
+    const newAddress = orderData.address;
+    const updatedAddresses = newAddress && !existingAddresses.includes(newAddress)
+      ? [newAddress, ...existingAddresses]
+      : existingAddresses;
+
+    const updatedCustomer = {
+      ...customer,
+      points: (customer.points || 0) + pointsEarned,
+      orders: updatedOrders,
+      addresses: updatedAddresses,
+    };
+
+    setCustomer(updatedCustomer);
   };
 
   const redeemPoints = (pointsToRedeem) => {
@@ -116,6 +153,7 @@ export const AuthProvider = ({ children }) => {
       loginOrRegister,
       logout,
       redeemPoints,
+      recordOrder,
       isAuthenticated: !!customer,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
