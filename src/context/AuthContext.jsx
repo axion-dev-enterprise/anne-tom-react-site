@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import server from "../api/server";
 
 const STORAGE_KEY = "at_customer";
@@ -9,7 +9,28 @@ export const AuthProvider = ({ children }) => {
   const [customer, setCustomer] = useState(() => {
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : null;
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (parsed && Array.isArray(parsed.orders)) {
+        // Sanitize and deduplicate orders from local storage
+        const uniqueMap = new Map();
+        parsed.orders.forEach((ord) => {
+          if (ord && ord.id) {
+            const key = String(ord.id);
+            const existing = uniqueMap.get(key);
+            // Prefer order entry with valid total > 0
+            if (!existing || (Number(ord.total) > 0 && Number(existing.total) === 0)) {
+              uniqueMap.set(key, {
+                ...ord,
+                total: Number(ord.total) || 0,
+                pointsEarned: ord.pointsEarned ?? Math.floor(Number(ord.total) || 0),
+              });
+            }
+          }
+        });
+        parsed.orders = Array.from(uniqueMap.values());
+      }
+      return parsed;
     } catch {
       return null;
     }
@@ -98,36 +119,48 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const recordOrder = (orderData) => {
-    if (!customer) return;
+  const recordOrder = useCallback((orderData) => {
+    if (!orderData) return;
 
-    const pointsEarned = Math.floor(Number(orderData.total) || 0);
-    const newOrder = {
-      id: orderData.id || `order-${Date.now()}`,
-      date: new Date().toLocaleDateString("pt-BR") + " " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }),
-      items: orderData.items || [],
-      total: Number(orderData.total) || 0,
-      status: "Em Produção",
-      address: orderData.address || "Zona Norte, São Paulo - SP",
-      pointsEarned,
-    };
+    const orderId = String(orderData.id || `ord-${Date.now()}`);
+    const totalAmount = Number(orderData.totalFinal || orderData.total || orderData.total_final) || 0;
+    const pointsEarned = orderData.pointsEarned ?? Math.floor(totalAmount);
 
-    const updatedOrders = [newOrder, ...(customer.orders || [])];
-    const existingAddresses = customer.addresses || [];
-    const newAddress = orderData.address;
-    const updatedAddresses = newAddress && !existingAddresses.includes(newAddress)
-      ? [newAddress, ...existingAddresses]
-      : existingAddresses;
+    setCustomer((prevCustomer) => {
+      if (!prevCustomer) return prevCustomer;
 
-    const updatedCustomer = {
-      ...customer,
-      points: (customer.points || 0) + pointsEarned,
-      orders: updatedOrders,
-      addresses: updatedAddresses,
-    };
+      const existingOrders = Array.isArray(prevCustomer.orders) ? prevCustomer.orders : [];
 
-    setCustomer(updatedCustomer);
-  };
+      // Avoid duplicating order if already recorded
+      if (existingOrders.some((o) => String(o.id) === orderId)) {
+        return prevCustomer;
+      }
+
+      const newOrder = {
+        id: orderId,
+        date: orderData.date || (new Date().toLocaleDateString("pt-BR") + " " + new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })),
+        items: orderData.items || [],
+        total: totalAmount,
+        status: orderData.status || "Em Produção",
+        address: orderData.address || "Zona Norte, São Paulo - SP",
+        pointsEarned,
+      };
+
+      const updatedOrders = [newOrder, ...existingOrders];
+      const existingAddresses = prevCustomer.addresses || [];
+      const newAddress = orderData.address;
+      const updatedAddresses = newAddress && !existingAddresses.includes(newAddress)
+        ? [newAddress, ...existingAddresses]
+        : existingAddresses;
+
+      return {
+        ...prevCustomer,
+        points: (prevCustomer.points || 0) + pointsEarned,
+        orders: updatedOrders,
+        addresses: updatedAddresses,
+      };
+    });
+  }, []);
 
   const redeemPoints = (pointsToRedeem) => {
     if (!customer) return false;
@@ -157,7 +190,7 @@ export const AuthProvider = ({ children }) => {
       isAuthenticated: !!customer,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [customer, loading]
+    [customer, loading, recordOrder]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

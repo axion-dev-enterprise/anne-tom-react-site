@@ -1,6 +1,6 @@
 {
     "name":  "anne-tom",
-    "version":  "0.1.6",
+    "version":  "0.1.7",
     "private":  true,
     "dependencies":  {
                          "@testing-library/dom":  "^10.4.1",
@@ -35,14 +35,14 @@
                                          "react-app/jest"
                                      ]
                      },
-    "jest": {
-      "moduleNameMapper": {
-        "^react-router-dom$": "<rootDir>/node_modules/react-router-dom/dist/index.js",
-        "^react-router$": "<rootDir>/node_modules/react-router/dist/development/index.js",
-        "^react-router/dom$": "<rootDir>/node_modules/react-router/dist/development/dom-export.js",
-        "^axios$": "<rootDir>/node_modules/axios/dist/node/axios.cjs"
-      }
-    },
+    "jest":  {
+                 "moduleNameMapper":  {
+                                          "^react-router-dom$":  "\u003crootDir\u003e/node_modules/react-router-dom/dist/index.js",
+                                          "^react-router$":  "\u003crootDir\u003e/node_modules/react-router/dist/development/index.js",
+                                          "^react-router/dom$":  "\u003crootDir\u003e/node_modules/react-router/dist/development/dom-export.js",
+                                          "^axios$":  "\u003crootDir\u003e/node_modules/axios/dist/node/axios.cjs"
+                                      }
+             },
     "browserslist":  {
                          "production":  [
                                             "\u003e0.2%",

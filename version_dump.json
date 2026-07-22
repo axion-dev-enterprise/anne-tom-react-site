@@ -1,9 +1,9 @@
 ﻿{
     "projectName":  "anne-tom",
-    "version":  "0.1.6",
+    "version":  "0.1.7",
     "liveUrl":  "https://annetom.com",
     "environment":  "production",
-    "commitHash":  "d3c852f",
-    "buildTimestamp":  "2026-07-22T09:10:54Z",
+    "commitHash":  "99b9760",
+    "buildTimestamp":  "2026-07-22T09:26:44Z",
     "status":  "SUCCESS"
 }

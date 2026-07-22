@@ -176,14 +176,14 @@ const OrderConfirmationPage = () => {
       null;
 
     // e) ID vindo de dentro do resumo
-    const fromSummary =
+    const orderIdFromSummary =
       summary?.backendOrderId ||
       summary?.trackingId ||
       summary?.orderIdApi ||
       summary?.order?.id ||
       null;
 
-    const resolved = fromUrl || fromStateTracking || fromSummary || null;
+    const resolved = fromUrl || fromStateTracking || orderIdFromSummary || null;
 
     setTrackingId(resolved);
     setDeliveryConfirmed(
@@ -196,20 +196,22 @@ const OrderConfirmationPage = () => {
     console.log("[OrderConfirmation] trackingId resolvido:", {
       fromUrl,
       fromStateTracking,
-      fromSummary,
+      fromSummary: orderIdFromSummary,
       resolved,
     });
 
-    if (fromSummary && recordOrder) {
+    if (summary && recordOrder) {
+      const computedTotal = Number(summary.totalFinal || summary.total || summary.total_final) || 0;
       recordOrder({
         id: resolved || `ord-${Date.now()}`,
-        total: fromSummary.total,
-        items: (fromSummary.items || []).map((i) => ({
+        total: computedTotal,
+        totalFinal: computedTotal,
+        items: (summary.items || []).map((i) => ({
           qty: i.quantidade || i.qty || 1,
           name: i.nome || i.name || "Pizza",
           price: i.precoUnitario || i.price || 0,
         })),
-        address: fromSummary.cliente?.bairro ? `${fromSummary.cliente.rua || ""}, ${fromSummary.cliente.bairro}` : "Zona Norte, São Paulo - SP",
+        address: summary.dados?.bairro ? `${summary.dados.endereco || summary.dados.rua || ""}, ${summary.dados.bairro}` : (summary.cliente?.bairro ? `${summary.cliente.rua || ""}, ${summary.cliente.bairro}` : "Zona Norte, São Paulo - SP"),
       });
     }
   }, [location.state, recordOrder]);

@@ -26,25 +26,57 @@ export const CustomerDashboardPage = () => {
     }
   };
 
-  // Histórico de pedidos do cliente (do estado global)
-  const ordersList = customer?.orders || [];
+  // Helper: formata ID para exibição amigável (ex: #62235)
+  const formatDisplayOrderId = (rawId) => {
+    if (!rawId) return "#0000";
+    const str = String(rawId);
+    if (str.includes("-")) {
+      const parts = str.split("-");
+      const last = parts[parts.length - 1];
+      if (last.length >= 3) return `#${last}`;
+    }
+    return str.startsWith("#") ? str : `#${str}`;
+  };
 
-  const totalPoints = customer?.points || ordersList.reduce((acc, o) => acc + (o.pointsEarned || 0), 0);
+  // Histórico de pedidos do cliente (deduplicado e sanitizado)
+  const ordersList = React.useMemo(() => {
+    const raw = customer?.orders || [];
+    const map = new Map();
+    raw.forEach((o) => {
+      if (o && o.id) {
+        const key = String(o.id);
+        const existing = map.get(key);
+        // Prefer object with non-zero total
+        if (!existing || (Number(o.total) > 0 && Number(existing.total) === 0)) {
+          map.set(key, o);
+        }
+      }
+    });
+    return Array.from(map.values());
+  }, [customer?.orders]);
+
+  const totalPoints = customer?.points || ordersList.reduce((acc, o) => acc + (o.pointsEarned ?? Math.floor(Number(o.total) || 0)), 0);
   const nextRewardThreshold = 100;
   const rewardProgress = Math.min(100, Math.round((totalPoints / nextRewardThreshold) * 100));
 
   const handleRepeatOrder = (order) => {
-    order.items.forEach((it) => {
-      addItem({
-        id: it.name.toLowerCase().replace(/\s+/g, "-"),
-        nome: it.name,
-        name: it.name,
-        preco_grande: it.price,
-        price: it.price,
-        quantidade: it.qty,
+    if (Array.isArray(order.items)) {
+      order.items.forEach((it) => {
+        const itemName = typeof it === "string" ? it : (it.name || it.nome || "Pizza");
+        const itemPrice = typeof it === "string" ? 45 : (it.price || it.precoUnitario || 0);
+        const itemQty = typeof it === "string" ? 1 : (it.qty || it.quantidade || 1);
+
+        addItem({
+          id: itemName.toLowerCase().replace(/\s+/g, "-"),
+          nome: itemName,
+          name: itemName,
+          preco_grande: itemPrice,
+          price: itemPrice,
+          quantidade: itemQty,
+        });
       });
-    });
-    setRepeatSuccess(`Pedido ${order.id} re-adicionado ao seu carrinho! Redirecionando...`);
+    }
+    setRepeatSuccess(`Pedido ${formatDisplayOrderId(order.id)} re-adicionado ao seu carrinho! Redirecionando...`);
     setTimeout(() => {
       navigate("/checkout");
     }, 1200);
@@ -221,15 +253,19 @@ export const CustomerDashboardPage = () => {
                   <div key={order.id} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-3">
-                        <span className="font-black text-sm text-slate-900">Pedido {order.id}</span>
+                        <span className="font-black text-sm text-slate-900">Pedido {formatDisplayOrderId(order.id)}</span>
                         <span className="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">
-                          {order.status}
+                          {order.status || "Em Produção"}
                         </span>
-                        <span className="text-[11px] text-amber-700 font-bold">+{order.pointsEarned} pts</span>
+                        <span className="text-[11px] text-amber-700 font-bold">
+                          +{order.pointsEarned ?? Math.floor(Number(order.total) || 0)} pts
+                        </span>
                       </div>
                       <p className="text-xs text-slate-500">{order.date}</p>
                       <p className="text-xs text-slate-800 font-semibold">
-                        {order.items.map((i) => (typeof i === "string" ? i : `${i.qty}x ${i.name}`)).join(" • ")}
+                        {Array.isArray(order.items) && order.items.length > 0
+                          ? order.items.map((i) => (typeof i === "string" ? i : `${i.qty || i.quantidade || 1}x ${i.name || i.nome || "Pizza"}`)).join(" • ")
+                          : "Combo Pizzaria Anne & Tom"}
                       </p>
                       {order.address && (
                         <p className="text-[11px] text-slate-500">📍 {order.address}</p>
