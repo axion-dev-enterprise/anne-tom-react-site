@@ -10,8 +10,9 @@ import SEOHead from "../components/seo/SEOHead";
 
 import { useAppAccessInfo } from "../hooks/useAppAccess";
 import RetryBanner from "../components/ui/RetryBanner";
-
 import SiteFooter from "../components/layout/SiteFooter";
+import { useAuth } from "../context/AuthContext";
+import QuickAuthModal from "../components/auth/QuickAuthModal";
 
 const AVATAR_IMAGES = [
   "https://i.pravatar.cc/80?img=32",
@@ -323,8 +324,11 @@ const HomeAnneTom = () => {
 
 const Header = ({ scrolled }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { customer, isAuthenticated } = useAuth();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const moreRef = useRef(null);
 
   useEffect(() => {
@@ -482,6 +486,24 @@ const Header = ({ scrolled }) => {
 
         {/* Botoes */}
         <div className="flex items-center gap-2 pt-1 shrink-0">
+          {isAuthenticated ? (
+            <Link
+              to="/me"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900 text-white text-[11px] font-bold shadow-xs hover:bg-slate-800 transition"
+            >
+              <span>👤 {customer.name?.split(" ")[0]}</span>
+              <span className="text-amber-400">⭐ {customer.points ?? 0}</span>
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsAuthOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-amber-500/40 bg-amber-50 text-amber-900 text-[11px] font-extrabold hover:bg-amber-100 transition whitespace-nowrap"
+            >
+              <span>🔐 Entrar (PIN)</span>
+            </button>
+          )}
+
           <Link
             to="/checkout"
             className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 text-[11px] font-medium hover:bg-slate-50 transition whitespace-nowrap"
@@ -504,6 +526,12 @@ const Header = ({ scrolled }) => {
           >
             Menu
           </button>
+
+          <QuickAuthModal
+            isOpen={isAuthOpen}
+            onClose={() => setIsAuthOpen(false)}
+            onSuccess={() => navigate("/me")}
+          />
         </div>
       </div>
 

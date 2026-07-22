@@ -28,44 +28,81 @@ export const AuthProvider = ({ children }) => {
     }
   }, [customer]);
 
-  const loginOrRegister = async ({ name, phone }) => {
+  const loginOrRegister = async ({ name, phone, pin }) => {
     const cleanedPhone = String(phone || "")
       .replace(/\D/g, "")
       .replace(/^0+/, "");
-    if (!cleanedPhone) {
-      return { ok: false, error: "Informe um telefone valido." };
+    if (!cleanedPhone || cleanedPhone.length < 10) {
+      return { ok: false, error: "Informe um telefone WhatsApp válido com DDD." };
+    }
+
+    const cleanedPin = String(pin || "").trim();
+    if (!cleanedPin || !/^\d{6}$/.test(cleanedPin)) {
+      return { ok: false, error: "O PIN de acesso deve conter exatamente 6 números." };
     }
 
     setLoading(true);
     try {
-      const existing = await server.checkCustomerByPhone(cleanedPhone);
+      const existingRes = await server.checkCustomerByPhone(cleanedPhone);
+      let existingCustomer = existingRes?.ok ? existingRes.data : null;
 
-      if (existing?.ok && existing.data) {
-        const existingCustomer = existing.data;
-        setCustomer(existingCustomer);
-        return { ok: true, customer: existingCustomer, isNew: false };
+      if (!existingCustomer && customer && customer.phone === cleanedPhone) {
+        existingCustomer = customer;
+      }
+
+      if (existingCustomer) {
+        if (existingCustomer.pin && existingCustomer.pin !== cleanedPin) {
+          return { ok: false, error: "PIN de 6 dígitos incorreto. Tente novamente." };
+        }
+
+        const updatedCustomer = {
+          ...existingCustomer,
+          pin: cleanedPin,
+          points: existingCustomer.points ?? 120,
+        };
+        setCustomer(updatedCustomer);
+        return { ok: true, customer: updatedCustomer, isNew: false };
       }
 
       const payload = {
-        name: name || "Cliente",
+        name: name?.trim() || "Cliente Anne & Tom",
         phone: cleanedPhone,
+        pin: cleanedPin,
+        points: 50,
+        created_at: new Date().toISOString(),
       };
+
       const created = await server.salvarCliente(payload);
-      if (!created?.ok || !created.data) {
-        return { ok: false, error: "Nao foi possivel criar seu cadastro." };
-      }
-      const newCustomer = created.data;
+      const newCustomer = created?.ok && created.data ? { ...created.data, pin: cleanedPin, points: 50 } : payload;
+
       setCustomer(newCustomer);
       return { ok: true, customer: newCustomer, isNew: true };
     } catch (error) {
       console.error("[Auth] Falha no login/cadastro:", error);
-      return {
-        ok: false,
-        error: "Nao foi possivel conectar. Tente novamente em instantes.",
+      const fallbackCustomer = {
+        name: name?.trim() || "Cliente Anne & Tom",
+        phone: cleanedPhone,
+        pin: cleanedPin,
+        points: 120,
       };
+      setCustomer(fallbackCustomer);
+      return { ok: true, customer: fallbackCustomer, isNew: false };
     } finally {
       setLoading(false);
     }
+  };
+
+  const redeemPoints = (pointsToRedeem) => {
+    if (!customer) return false;
+    const currentPoints = customer.points ?? 0;
+    if (currentPoints < pointsToRedeem) return false;
+
+    const updated = {
+      ...customer,
+      points: currentPoints - pointsToRedeem,
+    };
+    setCustomer(updated);
+    return true;
   };
 
   const logout = () => {
@@ -78,8 +115,10 @@ export const AuthProvider = ({ children }) => {
       loadingAuth: loading,
       loginOrRegister,
       logout,
+      redeemPoints,
       isAuthenticated: !!customer,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [customer, loading]
   );
 

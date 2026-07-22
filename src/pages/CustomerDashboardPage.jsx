@@ -11,7 +11,7 @@ export const CustomerDashboardPage = () => {
   const { addItem } = useCart();
   const [phoneInput, setPhoneInput] = useState("");
   const [nameInput, setNameInput] = useState("");
-  const [emailInput, setEmailInput] = useState("");
+  const [pinInput, setPinInput] = useState("");
   const [authError, setAuthError] = useState("");
   const [activeTab, setActiveTab] = useState("historico"); // historico | enderecos | fidelidade
   const [repeatSuccess, setRepeatSuccess] = useState("");
@@ -20,7 +20,7 @@ export const CustomerDashboardPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setAuthError("");
-    const res = await loginOrRegister({ name: nameInput, phone: phoneInput, email: emailInput });
+    const res = await loginOrRegister({ name: nameInput, phone: phoneInput, pin: pinInput });
     if (!res.ok) {
       setAuthError(res.error || "Falha na autenticação via auth.annetom.com.");
     }
@@ -120,13 +120,15 @@ export const CustomerDashboardPage = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">E-mail (opcional)</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1">PIN de Acesso (6 dígitos)</label>
               <input
-                type="email"
-                placeholder="seuemail@exemplo.com"
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                type="password"
+                maxLength={6}
+                placeholder="******"
+                value={pinInput}
+                onChange={(e) => setPinInput(e.target.value)}
+                required
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm tracking-widest font-mono text-center focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
             <button

@@ -8,6 +8,15 @@ import { useAppAccessInfo } from "../../hooks/useAppAccess";
 
 jest.mock("../../hooks/useMenuData");
 jest.mock("../../hooks/useAppAccess");
+jest.mock("../../context/AuthContext", () => ({
+  useAuth: () => ({
+    customer: null,
+    isAuthenticated: false,
+    loadingAuth: false,
+    loginOrRegister: jest.fn(),
+    logout: jest.fn(),
+  }),
+}));
 
 describe("HomeAnneTom Page", () => {
   beforeEach(() => {

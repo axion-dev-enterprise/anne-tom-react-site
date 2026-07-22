@@ -1,6 +1,7 @@
 // src/components/checkout/DadosStep.jsx
-import React from "react";
+import React, { useState } from "react";
 import EnderecoMap from "./EnderecoMap";
+import { useAuth } from "../../context/AuthContext";
 
 const MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
 
@@ -26,6 +27,22 @@ const DadosStep = ({
   deliveryFeeLabel,
   desconto,
 }) => {
+  const { customer, isAuthenticated, redeemPoints } = useAuth();
+  const [fidelidadeRedeemed, setFidelidadeRedeemed] = useState(false);
+
+  const handleRedeemLoyalty = () => {
+    if (customer?.points >= 100) {
+      const ok = redeemPoints(100);
+      if (ok) {
+        setDados((prev) => ({
+          ...prev,
+          desconto: (prev.desconto || 0) + 15.0,
+        }));
+        setFidelidadeRedeemed(true);
+      }
+    }
+  };
+
   const showDistancePending =
     !dados.retirada &&
     distanceFee == null &&
@@ -148,6 +165,42 @@ const DadosStep = ({
   return (
     <div className="space-y-6">
       <h2 className="font-semibold text-lg">Dados e entrega</h2>
+
+      {isAuthenticated && (
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-amber-950 text-white space-y-3 border border-amber-500/30 shadow-lg">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="bg-amber-500 text-slate-950 font-black text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                VIP AUTENTICADO
+              </span>
+              <span className="text-xs text-white font-bold">{customer.name}</span>
+            </div>
+            <span className="text-xs text-amber-400 font-bold">📱 {customer.phone}</span>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-700/60">
+            <div>
+              <p className="text-xs font-black text-amber-400">⭐ {customer.points ?? 120} PONTOS DE FIDELIDADE</p>
+              <p className="text-[11px] text-slate-300">100 pontos = R$ 15,00 de desconto instantâneo no pedido</p>
+            </div>
+
+            {!fidelidadeRedeemed ? (
+              <button
+                type="button"
+                onClick={handleRedeemLoyalty}
+                disabled={(customer.points ?? 0) < 100}
+                className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 disabled:opacity-40 text-slate-950 font-black text-xs transition shadow-md"
+              >
+                {(customer.points ?? 0) >= 100 ? "🎁 Resgatar R$ 15 Desconto" : "Acumule 100 pts"}
+              </button>
+            ) : (
+              <span className="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-3 py-1.5 rounded-xl border border-emerald-500/40">
+                ✓ R$ 15,00 Desconto Aplicado!
+              </span>
+            )}
+          </div>
+        </div>
+      )}
 
       <section className="premium-card p-5 rounded-2xl bg-white border border-slate-200 text-xs space-y-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
