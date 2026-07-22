@@ -13,6 +13,7 @@ import RetryBanner from "../components/ui/RetryBanner";
 import SiteFooter from "../components/layout/SiteFooter";
 import { useAuth } from "../context/AuthContext";
 import QuickAuthModal from "../components/auth/QuickAuthModal";
+import PizzaClubSection from "../components/club/PizzaClubSection";
 
 const AVATAR_IMAGES = [
   "https://i.pravatar.cc/80?img=32",
@@ -132,6 +133,8 @@ const HomeAnneTom = () => {
         <Hero imageLoaded={imageLoaded} setImageLoaded={setImageLoaded} />
 
         {menuError && <RetryBanner message={menuError} onRetry={retry} />}
+
+        <PizzaClubSection />
 
         {showDownloadAppSection && <DownloadAppSection />}
 

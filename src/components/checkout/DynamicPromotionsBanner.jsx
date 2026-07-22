@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { formatCurrencyBRL } from "../../utils/menu";
 
 const DRAFT_SODAS = [
   "Guaraná Antarctica 2L",
@@ -22,13 +21,19 @@ const DynamicPromotionsBanner = ({ subtotal = 0, items = [], onSelectFreeDrink }
 
   const isTercaQuarta = dayOfWeek === 2 || dayOfWeek === 3;
   const isQuinta = dayOfWeek === 4;
-  const isFimDeSemana = dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0;
+  const isSextaSabado = dayOfWeek === 5 || dayOfWeek === 6;
+  const isDomingo = dayOfWeek === 0;
 
-  // Condições de brinde atingido
-  const brindeRefriAtingido = isTercaQuarta && pizzasGrandes >= 1;
-  const brindeBordaAtingido = isQuinta && pizzasGrandes >= 1;
-  const brindeEsfihaAtingido = isFimDeSemana && subtotal >= 100;
-  const freteGratisAtingido = isFimDeSemana && subtotal >= 120;
+  // Conta refrigerante no carrinho
+  const temRefrigerante = items.some(
+    (i) => (i.nome || i.name || "").toLowerCase().includes("refrigerante") || (i.nome || i.name || "").toLowerCase().includes("coca") || (i.nome || i.name || "").toLowerCase().includes("guaran")
+  );
+
+  // Condições de brinde atingido conforme diretriz 02_promocoes_semanais
+  const brindeEsfirraTercaQuartaAtingido = isTercaQuarta && pizzasGrandes >= 1 && temRefrigerante;
+  const brindeBordaQuintaAtingido = isQuinta && pizzasGrandes >= 1;
+  const brindeRefriSextaSabadoAtingido = isSextaSabado && pizzasGrandes >= 2;
+  const brindeDomingoAtingido = isDomingo && pizzasGrandes >= 1;
 
   const handleDrinkChange = (drink) => {
     setSelectedFreeDrink(drink);
@@ -39,29 +44,74 @@ const DynamicPromotionsBanner = ({ subtotal = 0, items = [], onSelectFreeDrink }
 
   return (
     <div className="space-y-3 my-3">
-      {/* Banner de Terça e Quarta */}
+      {/* Banner de Terça e Quarta: Big Esfirra Prestígio Grátis */}
       {isTercaQuarta && (
         <div className={`p-4 rounded-2xl border-2 transition-all shadow-sm ${
-          brindeRefriAtingido
+          brindeEsfirraTercaQuartaAtingido
+            ? "bg-amber-50 border-amber-500 text-slate-900"
+            : "bg-slate-50 border-slate-200 text-slate-700"
+        }`}>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2 font-black text-sm text-slate-900">
+              <span className="text-lg">🍫</span>
+              <span>Promoção Terça & Quarta:</span>
+            </div>
+            <span className={`px-3 py-1 rounded-xl text-xs font-black ${
+              brindeEsfirraTercaQuartaAtingido
+                ? "bg-amber-500 text-slate-950 shadow"
+                : "bg-slate-200 text-slate-700"
+            }`}>
+              {brindeEsfirraTercaQuartaAtingido ? "BIG ESFIRRA PRESTÍGIO GRÁTIS!" : "1 Pizza Grande + 1 Refrigerante"}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Banner de Quinta: Borda de Requeijão Grátis */}
+      {isQuinta && (
+        <div className={`p-4 rounded-2xl border-2 transition-all shadow-sm ${
+          brindeBordaQuintaAtingido
+            ? "bg-emerald-50 border-emerald-500 text-slate-900"
+            : "bg-slate-50 border-slate-200 text-slate-700"
+        }`}>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2 font-black text-sm text-slate-900">
+              <span className="text-lg">🧀</span>
+              <span>Quinta da Borda Grátis:</span>
+            </div>
+            <span className={`px-3 py-1 rounded-xl text-xs font-black ${
+              brindeBordaQuintaAtingido
+                ? "bg-emerald-500 text-slate-950 shadow"
+                : "bg-slate-200 text-slate-700"
+            }`}>
+              {brindeBordaQuintaAtingido ? "BORDA DE REQUEIJÃO GRÁTIS!" : "Adicione 1 Pizza Grande"}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Banner de Sexta e Sábado: Refrigerante 2L Grátis */}
+      {isSextaSabado && (
+        <div className={`p-4 rounded-2xl border-2 transition-all shadow-sm ${
+          brindeRefriSextaSabadoAtingido
             ? "bg-amber-50 border-amber-500 text-slate-900"
             : "bg-slate-50 border-slate-200 text-slate-700"
         }`}>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2 font-black text-sm text-slate-900">
               <span className="text-lg">🥤</span>
-              <span>Promoção Terça & Quarta:</span>
+              <span>Sexta & Sábado em Família:</span>
             </div>
             <span className={`px-3 py-1 rounded-xl text-xs font-black ${
-              brindeRefriAtingido
+              brindeRefriSextaSabadoAtingido
                 ? "bg-amber-500 text-slate-950 shadow"
                 : "bg-slate-200 text-slate-700"
             }`}>
-              {brindeRefriAtingido ? "REFRIGERANTE 2L GRÁTIS!" : "Adicione 1 Pizza Grande"}
+              {brindeRefriSextaSabadoAtingido ? "REFRIGERANTE 2L GRÁTIS!" : "Adicione 2 Pizzas Grandes"}
             </span>
           </div>
 
-          {/* Seleção do sabor do Refrigerante Grátis */}
-          {brindeRefriAtingido && (
+          {brindeRefriSextaSabadoAtingido && (
             <div className="mt-3 pt-3 border-t border-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
               <span className="text-xs font-black text-slate-900">
                 🎁 Escolha o sabor do seu Refrigerante 2L:
@@ -82,64 +132,25 @@ const DynamicPromotionsBanner = ({ subtotal = 0, items = [], onSelectFreeDrink }
         </div>
       )}
 
-      {/* Banner de Quinta */}
-      {isQuinta && (
+      {/* Banner de Domingo: Escolha o Brinde */}
+      {isDomingo && (
         <div className={`p-4 rounded-2xl border-2 transition-all shadow-sm ${
-          brindeBordaAtingido
-            ? "bg-emerald-50 border-emerald-500 text-slate-900"
+          brindeDomingoAtingido
+            ? "bg-purple-50 border-purple-500 text-slate-900"
             : "bg-slate-50 border-slate-200 text-slate-700"
         }`}>
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2 font-black text-sm text-slate-900">
-              <span className="text-lg">🧀</span>
-              <span>Quinta da Borda Grátis:</span>
+              <span className="text-lg">⭐</span>
+              <span>Domingo Especial (Sua Escolha):</span>
             </div>
             <span className={`px-3 py-1 rounded-xl text-xs font-black ${
-              brindeBordaAtingido
-                ? "bg-emerald-500 text-slate-950 shadow"
+              brindeDomingoAtingido
+                ? "bg-purple-600 text-white shadow"
                 : "bg-slate-200 text-slate-700"
             }`}>
-              {brindeBordaAtingido ? "BORDA RECHEADA GRÁTIS!" : "Adicione 1 Pizza Grande"}
+              {brindeDomingoAtingido ? "BRINDE ESPECIAL ATIVADO!" : "Adicione 1 Pizza Grande"}
             </span>
-          </div>
-        </div>
-      )}
-
-      {/* Banner de Fim de Semana */}
-      {isFimDeSemana && (
-        <div className="space-y-2">
-          <div className={`p-4 rounded-2xl border-2 transition-all shadow-sm ${
-            brindeEsfihaAtingido
-              ? "bg-amber-50 border-amber-500 text-slate-900"
-              : "bg-slate-50 border-slate-200 text-slate-700"
-          }`}>
-            <div className="flex flex-wrap items-center justify-between gap-2 text-sm font-black text-slate-900">
-              <span>🍩 Brinde Fim de Semana (Esfiha Doce):</span>
-              <span className={`px-3 py-1 rounded-xl text-xs font-black ${
-                brindeEsfihaAtingido
-                  ? "bg-amber-500 text-slate-950 shadow"
-                  : "bg-slate-200 text-slate-700"
-              }`}>
-                {brindeEsfihaAtingido ? "ESFIHA DOCE GRÁTIS!" : `Faltam ${formatCurrencyBRL(Math.max(0, 100 - subtotal))}`}
-              </span>
-            </div>
-          </div>
-
-          <div className={`p-4 rounded-2xl border-2 transition-all shadow-sm ${
-            freteGratisAtingido
-              ? "bg-emerald-50 border-emerald-500 text-slate-900"
-              : "bg-slate-50 border-slate-200 text-slate-700"
-          }`}>
-            <div className="flex flex-wrap items-center justify-between gap-2 text-sm font-black text-slate-900">
-              <span>🚚 Frete Grátis Fim de Semana:</span>
-              <span className={`px-3 py-1 rounded-xl text-xs font-black ${
-                freteGratisAtingido
-                  ? "bg-emerald-500 text-slate-950 shadow"
-                  : "bg-slate-200 text-slate-700"
-              }`}>
-                {freteGratisAtingido ? "FRETE GRÁTIS ATIVADO!" : `Faltam ${formatCurrencyBRL(Math.max(0, 120 - subtotal))}`}
-              </span>
-            </div>
           </div>
         </div>
       )}
