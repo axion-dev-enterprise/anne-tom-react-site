@@ -1,39 +1,8 @@
 // src/components/checkout/EnderecoMap.jsx
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { loadGoogleMaps } from "../../utils/googleMaps";
+import { loadLeaflet } from "../../utils/leafletMap";
 
-const DEFAULT_CENTER = { lat: -23.4983, lng: -46.6361 };
-
-const extractComponent = (components, type) => {
-  if (!Array.isArray(components)) return "";
-  const found = components.find((item) => item.types?.includes(type));
-  return found?.long_name || found?.short_name || "";
-};
-
-const buildAddressFromResult = (result) => {
-  const components = result?.address_components || [];
-  const street = extractComponent(components, "route");
-  const number = extractComponent(components, "street_number");
-  const neighborhood =
-    extractComponent(components, "sublocality_level_1") ||
-    extractComponent(components, "sublocality") ||
-    extractComponent(components, "neighborhood");
-  const city =
-    extractComponent(components, "administrative_area_level_2") ||
-    extractComponent(components, "locality");
-  const state = extractComponent(components, "administrative_area_level_1");
-  const postalCode = extractComponent(components, "postal_code");
-
-  return {
-    street,
-    number,
-    neighborhood,
-    city,
-    state,
-    postalCode,
-    formatted: result?.formatted_address || "",
-  };
-};
+const DEFAULT_CENTER = { lat: -23.4983, lng: -46.6361 }; // Santana / Imirim - SP
 
 const formatPreview = (address) => {
   if (!address) return "";
@@ -51,31 +20,18 @@ const formatPreview = (address) => {
 const buildAddressFromNominatim = (result) => {
   const address = result?.address || {};
   return {
-    street: address.road || address.pedestrian || address.residential || "",
+    street: address.road || address.pedestrian || address.residential || address.suburb || "",
     number: address.house_number || "",
     neighborhood:
       address.neighbourhood || address.suburb || address.city_district || "",
-    city: address.city || address.town || address.village || address.municipality || "",
-    state: address.state || "",
+    city: address.city || address.town || address.village || address.municipality || "São Paulo",
+    state: address.state || "SP",
     postalCode: address.postcode || "",
     formatted: result?.display_name || "",
   };
 };
 
-const geocodeWithFallback = async ({ address, lat, lng }) => {
-  const params = new URLSearchParams();
-  if (address) params.set("address", address);
-  if (lat != null && lng != null) {
-    params.set("lat", String(lat));
-    params.set("lng", String(lng));
-  }
-  const response = await fetch(`/api/geocode?${params.toString()}`);
-  if (!response.ok) throw new Error("Address geocoding failed");
-  return response.json();
-};
-
 const EnderecoMap = ({
-  apiKey,
   disabled = false,
   autoLocate = false,
   addressQuery = "",
@@ -83,345 +39,266 @@ const EnderecoMap = ({
   onAddressChange,
   onPositionChange,
 }) => {
-  const mapRef = useRef(null);
-  const markerRef = useRef(null);
-  const geocoderRef = useRef(null);
   const mapContainerRef = useRef(null);
-  const pendingGeocodeRef = useRef(0);
+  const leafletMapRef = useRef(null);
+  const markerRef = useRef(null);
   const autoLocateRef = useRef(false);
-  
-  // Use refs for functions to avoid dependency issues
-  const reverseGeocodeRef = useRef();
-  const setMarkerPositionRef = useRef();
-  const notifyPositionRef = useRef();
 
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("loading"); // loading, ready, error
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [preview, setPreview] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const applyFallbackResult = useCallback(
-    (result, source) => {
-      const lat = Number(result?.lat);
-      const lng = Number(result?.lon);
-      const address = buildAddressFromNominatim(result);
-      if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
-        throw new Error("Invalid geocoding response");
-      }
-      setPreview(formatPreview(address) || address.formatted || "");
-      setMessage(
-        source === "gps"
-          ? "Localizacao atualizada pelo GPS."
-          : "Endereco localizado."
-      );
+  const reverseGeocodeCoords = useCallback(async (lat, lng, source = "map") => {
+    try {
+      setBusy(true);
+      setMessage(source === "gps" ? "Obtendo endereço pelo GPS..." : "Identificando rua no mapa...");
+
+      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`);
+      if (!res.ok) throw new Error("Falha ao consultar Nominatim");
+
+      const data = await res.json();
+      const address = buildAddressFromNominatim(data);
+      setPreview(formatPreview(address) || data.display_name || "Endereço localizado");
+      setMessage(source === "gps" ? "📍 Localização atualizada pelo GPS!" : "📍 Marcador atualizado!");
       setError("");
+
       onPositionChange?.({ lat, lng });
       onAddressChange?.(address);
-    },
-    [onAddressChange, onPositionChange]
-  );
-
-  const notifyPosition = useCallback(
-    (position, address) => {
-      if (position && onPositionChange) {
-        onPositionChange({
-          lat: position.lat(),
-          lng: position.lng(),
-        });
-      }
-      if (address && onAddressChange) {
-        onAddressChange(address);
-      }
-    },
-    [onAddressChange, onPositionChange]
-  );
-
-  // Store the latest notifyPosition in ref
-  notifyPositionRef.current = notifyPosition;
-
-  const reverseGeocode = useCallback(
-    (google, latLng, source) => {
-      if (!google || !latLng) return;
-      const requestId = ++pendingGeocodeRef.current;
-      const geocoder = geocoderRef.current;
-      if (!geocoder) return;
-
-      geocoder.geocode({ location: latLng }, (results, geocodeStatus) => {
-        if (requestId !== pendingGeocodeRef.current) return;
-
-        if (geocodeStatus !== "OK" || !results?.length) {
-          setError("Nao foi possivel identificar a rua e numero.");
-          setPreview("");
-          return;
-        }
-
-        const best = results[0];
-        const address = buildAddressFromResult(best);
-        setPreview(formatPreview(address) || address.formatted || "");
-        setMessage(
-          source === "gps"
-            ? "Localizacao atualizada pelo GPS."
-            : "Endereco atualizado pelo mapa."
-        );
-        setError("");
-        // Use ref to avoid dependency issues
-        notifyPositionRef.current?.(latLng, address);
-      });
-    },
-    [] // No dependencies needed
-  );
-
-  // Store reverseGeocode in ref
-  reverseGeocodeRef.current = reverseGeocode;
-
-  const setMarkerPosition = useCallback((google, latLng) => {
-    if (!mapRef.current || !markerRef.current) return;
-    markerRef.current.setPosition(latLng);
-    mapRef.current.panTo(latLng);
-    if (google?.maps?.event) {
-      google.maps.event.trigger(mapRef.current, "resize");
+    } catch (_err) {
+      setPreview(`Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`);
+      setMessage("Marcador posicionado no mapa.");
+      onPositionChange?.({ lat, lng });
+    } finally {
+      setBusy(false);
     }
-  }, []); // No dependencies needed
+  }, [onAddressChange, onPositionChange]);
 
-  // Store setMarkerPosition in ref
-  setMarkerPositionRef.current = setMarkerPosition;
-
+  // Handle GPS location
   const handleGpsLocate = useCallback(() => {
     if (disabled) return;
     if (!navigator?.geolocation) {
-      setError("GPS indisponivel neste dispositivo.");
+      setError("GPS não suportado neste navegador.");
       return;
     }
     setBusy(true);
-    setMessage("Buscando sua localizacao atual...");
+    setMessage("Solicitando GPS...");
     setError("");
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const { latitude, longitude } = position.coords || {};
-        if (latitude == null || longitude == null) {
-          setError("Nao foi possivel obter sua localizacao.");
-          setBusy(false);
-          return;
+        const { latitude: lat, longitude: lng } = position.coords;
+        if (leafletMapRef.current && markerRef.current) {
+          leafletMapRef.current.setView([lat, lng], 16);
+          markerRef.current.setLatLng([lat, lng]);
         }
-        const google = window.google;
-        if (google?.maps && status === "ready") {
-          const latLng = new google.maps.LatLng(latitude, longitude);
-          setMarkerPositionRef.current?.(google, latLng);
-          reverseGeocodeRef.current?.(google, latLng, "gps");
-          setBusy(false);
-          return;
-        }
-
-        geocodeWithFallback({ lat: latitude, lng: longitude })
-          .then((result) => applyFallbackResult(result, "gps"))
-          .catch(() => setError("Nao foi possivel identificar seu endereco pelo GPS."))
-          .finally(() => setBusy(false));
+        reverseGeocodeCoords(lat, lng, "gps");
       },
-      () => {
-        setError("Nao foi possivel acessar sua localizacao.");
-        setMessage("");
+      (err) => {
         setBusy(false);
+        setError("Não foi possível obter sua localização atual via GPS.");
+        console.warn("GPS error:", err);
       },
-      { enableHighAccuracy: true, timeout: 12000 }
+      { enableHighAccuracy: true, timeout: 10000 }
     );
-  }, [applyFallbackResult, disabled, status]);
+  }, [disabled, reverseGeocodeCoords]);
 
-  const handleAddressLocate = useCallback(() => {
+  // Handle address query search
+  const handleAddressLocate = useCallback(async () => {
     if (disabled) return;
-    if (!addressQuery || addressQuery.trim().length < 5) {
-      setError("Informe um endereco para localizar no mapa.");
+    const query = addressQuery || preview;
+    if (!query || query.trim().length < 4) {
+      setError("Digite um endereço ou CEP válido para buscar no mapa.");
       return;
     }
-    const google = window.google;
-    if (!google?.maps || status !== "ready") {
+    try {
       setBusy(true);
-      setMessage("Localizando endereco...");
+      setMessage("Buscando endereço em São Paulo...");
       setError("");
-      geocodeWithFallback({ address: addressQuery })
-        .then((result) => applyFallbackResult(result, "address"))
-        .catch(() => setError("Nao foi possivel localizar esse endereco."))
-        .finally(() => setBusy(false));
-      return;
-    }
-    setBusy(true);
-    setMessage("Localizando endereco no mapa...");
-    setError("");
 
-    geocoderRef.current.geocode(
-      { address: addressQuery },
-      (results, geocodeStatus) => {
+      const fullQuery = query.toLowerCase().includes("são paulo")
+        ? query
+        : `${query}, Zona Norte, São Paulo - SP, Brasil`;
+
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fullQuery)}&limit=1`);
+      const data = await res.json();
+
+      if (!data || data.length === 0) {
+        setError("Endereço não encontrado no mapa. Tente incluir número e bairro.");
         setBusy(false);
-        if (geocodeStatus !== "OK" || !results?.length) {
-          setError("Nao foi possivel localizar esse endereco.");
-          return;
-        }
-        const best = results[0];
-        const latLng = best.geometry?.location;
-        const address = buildAddressFromResult(best);
-        setMarkerPositionRef.current?.(google, latLng);
-        setPreview(formatPreview(address) || address.formatted || "");
-        setMessage("Endereco sincronizado com o mapa.");
-        setError("");
-        notifyPositionRef.current?.(latLng, address);
+        return;
       }
-    );
-  }, [addressQuery, applyFallbackResult, disabled, status]);
 
-  useEffect(() => {
-    if (disabled) return;
-    if (!apiKey) {
-      setStatus("fallback");
+      const best = data[0];
+      const lat = parseFloat(best.lat);
+      const lng = parseFloat(best.lon);
+
+      if (leafletMapRef.current && markerRef.current) {
+        leafletMapRef.current.setView([lat, lng], 16);
+        markerRef.current.setLatLng([lat, lng]);
+      }
+
+      const address = buildAddressFromNominatim(best);
+      setPreview(formatPreview(address) || best.display_name);
+      setMessage("📍 Endereço localizado no mapa!");
       setError("");
-      return;
+
+      onPositionChange?.({ lat, lng });
+      onAddressChange?.(address);
+    } catch (_err) {
+      setError("Não foi possível localizar este endereço no momento.");
+    } finally {
+      setBusy(false);
     }
+  }, [addressQuery, disabled, onAddressChange, onPositionChange, preview]);
 
+  // Initialize Leaflet Map
+  useEffect(() => {
     let active = true;
-    setStatus("loading");
-    loadGoogleMaps(apiKey)
-      .then((google) => {
+
+    loadLeaflet()
+      .then((L) => {
         if (!active || !mapContainerRef.current) return;
-        const center = initialPosition
-          ? new google.maps.LatLng(
-              initialPosition.lat,
-              initialPosition.lng
-            )
-          : new google.maps.LatLng(DEFAULT_CENTER.lat, DEFAULT_CENTER.lng);
 
-        mapRef.current = new google.maps.Map(mapContainerRef.current, {
-          center,
-          zoom: initialPosition ? 17 : 14,
-          disableDefaultUI: true,
-          zoomControl: true,
-          gestureHandling: "greedy",
-        });
-
-        markerRef.current = new google.maps.Marker({
-          position: center,
-          map: mapRef.current,
-          draggable: true,
-        });
-
-        geocoderRef.current = new google.maps.Geocoder();
-
-        markerRef.current.addListener("dragend", () => {
-          const newPos = markerRef.current.getPosition();
-          reverseGeocodeRef.current?.(google, newPos, "drag");
-        });
-
-        setStatus("ready");
-        if (initialPosition) {
-          reverseGeocodeRef.current?.(google, center, "init");
+        // Prevent double init
+        if (leafletMapRef.current) {
+          leafletMapRef.current.remove();
+          leafletMapRef.current = null;
         }
+
+        const startLat = initialPosition?.lat || DEFAULT_CENTER.lat;
+        const startLng = initialPosition?.lng || DEFAULT_CENTER.lng;
+
+        const map = L.map(mapContainerRef.current, {
+          center: [startLat, startLng],
+          zoom: 15,
+          zoomControl: true,
+          scrollWheelZoom: true,
+        });
+
+        // OpenStreetMap / CartoDB Voyager Streets Tile Layer
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+          maxZoom: 19,
+          subdomains: "abcd",
+        }).addTo(map);
+
+        // Custom Leaflet Marker Icon
+        const redIcon = L.divIcon({
+          className: "custom-leaflet-marker",
+          html: `<div style="position:relative;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">
+                  <div style="position:absolute;width:24px;height:24px;border-radius:50%;background:rgba(239,68,68,0.3);animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;"></div>
+                  <div style="width:28px;height:28px;border-radius:50%;background:#ef4444;border:3px solid #ffffff;box-shadow:0 4px 10px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:14px;">📍</div>
+                 </div>`,
+          iconSize: [32, 32],
+          iconAnchor: [16, 16],
+        });
+
+        const marker = L.marker([startLat, startLng], {
+          draggable: !disabled,
+          icon: redIcon,
+        }).addTo(map);
+
+        marker.bindPopup("<b>📍 Seu Local de Entrega</b><br/>Arraste a marcação para ajustar").openPopup();
+
+        // Marker Drag Event
+        marker.on("dragend", () => {
+          const { lat, lng } = marker.getLatLng();
+          reverseGeocodeCoords(lat, lng, "drag");
+        });
+
+        // Map Click Event
+        map.on("click", (e) => {
+          if (disabled) return;
+          const { lat, lng } = e.latlng;
+          marker.setLatLng([lat, lng]);
+          reverseGeocodeCoords(lat, lng, "click");
+        });
+
+        leafletMapRef.current = map;
+        markerRef.current = marker;
+        setStatus("ready");
       })
-      .catch(() => {
-        if (!active) return;
-        setStatus("error");
-        setError("Nao foi possivel carregar o mapa.");
+      .catch((err) => {
+        console.error("Leaflet init error:", err);
+        if (active) setStatus("error");
       });
 
     return () => {
       active = false;
+      if (leafletMapRef.current) {
+        leafletMapRef.current.remove();
+        leafletMapRef.current = null;
+      }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiKey, disabled]);
+  }, [disabled, initialPosition, reverseGeocodeCoords]);
 
-  // Store handleGpsLocate in ref for useEffect
-  const handleGpsLocateRef = useRef(handleGpsLocate);
-  handleGpsLocateRef.current = handleGpsLocate;
-
+  // Auto locate trigger
   useEffect(() => {
-    if (disabled || (status !== "ready" && status !== "fallback")) return;
-    if (!autoLocate || autoLocateRef.current) return;
-    if (initialPosition) return;
+    if (disabled || status !== "ready" || autoLocateRef.current || !autoLocate) return;
     autoLocateRef.current = true;
-    handleGpsLocateRef.current?.();
-  }, [autoLocate, disabled, status, initialPosition]); // Added initialPosition back
-
-  const mapUnavailable =
-    status !== "ready" || disabled || !apiKey || !mapContainerRef.current;
+    handleGpsLocate();
+  }, [autoLocate, disabled, handleGpsLocate, status]);
 
   return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-2 text-[11px]">
-        <button
-          type="button"
-          onClick={handleGpsLocate}
-          disabled={busy || disabled}
-          className="premium-button-ghost px-3 py-1.5 text-[11px] disabled:opacity-60"
-        >
-          Usar minha localizacao
-        </button>
-        <button
-          type="button"
-          onClick={handleAddressLocate}
-          disabled={busy || disabled}
-          className="premium-button-ghost px-3 py-1.5 text-[11px] disabled:opacity-60"
-        >
-          Buscar endereco no mapa
-        </button>
+    <div className="space-y-3 select-none">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleGpsLocate}
+            disabled={busy || disabled}
+            className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-sm transition disabled:opacity-50 flex items-center gap-1.5"
+          >
+            <span>🎯</span> Usar minha localização (GPS)
+          </button>
+          <button
+            type="button"
+            onClick={handleAddressLocate}
+            disabled={busy || disabled}
+            className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold shadow-sm transition disabled:opacity-50 flex items-center gap-1.5"
+          >
+            <span>🔍</span> Buscar endereço no mapa
+          </button>
+        </div>
+
         {message && (
-          <span className="text-[11px] text-amber-600 font-medium">{message}</span>
+          <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 shadow-xs">
+            {message}
+          </span>
         )}
       </div>
 
-      <div className="relative h-56 md:h-64 rounded-2xl border border-slate-200 overflow-hidden bg-[#1e2430] shadow-inner">
-        <div ref={mapContainerRef} className="absolute inset-0" />
-        {mapUnavailable && (
-          <div className="absolute inset-0 flex flex-col justify-between p-3 select-none">
-            {/* OpenSource Map Grid Background */}
-            <svg className="absolute inset-0 w-full h-full opacity-25" xmlns="http://www.w3.org/2000/svg">
-              <pattern id="checkout-street-grid" width="36" height="36" patternUnits="userSpaceOnUse">
-                <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#64748b" strokeWidth="1" />
-              </pattern>
-              <rect width="100%" height="100%" fill="url(#checkout-street-grid)" />
-            </svg>
+      {/* Leaflet Interactive Map Container */}
+      <div className="relative h-60 md:h-72 rounded-2xl border-2 border-slate-200 overflow-hidden bg-slate-100 shadow-md">
+        <div ref={mapContainerRef} className="absolute inset-0 z-0" />
+        
+        {status === "loading" && (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 text-white text-xs font-semibold z-10 backdrop-blur-xs">
+            <span className="animate-spin mr-2 text-amber-400">🌀</span> Carregando mapa interativo OpenStreetMap...
+          </div>
+        )}
 
-            {/* OpenSource Map Roads & Pin */}
-            <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 10 140 Q 150 120 380 90" fill="none" stroke="#334155" strokeWidth="14" strokeLinecap="round" />
-              <path d="M 180 10 L 180 220" fill="none" stroke="#334155" strokeWidth="10" strokeLinecap="round" />
-              <path d="M 10 140 Q 150 120 380 90" fill="none" stroke="#f59e0b" strokeWidth="3" strokeDasharray="5 3" />
-
-              {/* Pin Target */}
-              <g transform="translate(180, 120)">
-                <circle r="14" fill="#ef4444" fillOpacity="0.25" className="animate-ping" />
-                <circle r="7" fill="#ef4444" stroke="#ffffff" strokeWidth="2" />
-                <text x="0" y="-12" textAnchor="middle" fill="#ffffff" fontSize="11" fontWeight="bold">📍 Seu Endereço</text>
-              </g>
-            </svg>
-
-            {/* Top Badge */}
-            <div className="relative z-10 flex items-center justify-between">
-              <span className="bg-slate-900/90 border border-slate-700 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-full backdrop-blur-md shadow-md flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Mapa Interativo OpenSource</span>
-              </span>
-              <span className="bg-slate-900/90 border border-slate-700 text-slate-300 text-[10px] px-2 py-1 rounded-full backdrop-blur-md">
-                Zona Norte · SP
-              </span>
-            </div>
-
-            {/* Bottom Status Hint */}
-            <div className="relative z-10 bg-slate-900/90 border border-slate-800 p-2.5 rounded-xl text-white text-xs backdrop-blur-md">
-              <p className="font-semibold text-amber-400 flex items-center gap-1">
-                <span>📍</span> {preview || "Aguardando localização via GPS ou busca..."}
-              </p>
-            </div>
+        {status === "error" && (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/90 text-amber-300 text-xs font-semibold p-4 text-center z-10">
+            ⚠️ Não foi possível carregar o mapa. Digite o endereço nos campos abaixo.
           </div>
         )}
       </div>
 
-      <div className="text-[11px] text-slate-600">
-        <span className="font-semibold text-slate-700">
-          Rua/numero detectados:
-        </span>{" "}
-        {preview || "Aguardando localizacao."}
+      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 flex items-center gap-2">
+        <span className="text-base">📌</span>
+        <div>
+          <span className="font-bold text-slate-900">Rua/Número detectados:</span>{" "}
+          <span className="text-amber-700 font-medium">{preview || "Clique no mapa ou use o GPS para marcar."}</span>
+        </div>
       </div>
 
       {error && (
-        <p className="text-[11px] text-amber-600">{error}</p>
+        <p className="text-xs font-semibold text-amber-600 bg-amber-50 p-2 rounded-lg border border-amber-200">
+          ⚠️ {error}
+        </p>
       )}
     </div>
   );

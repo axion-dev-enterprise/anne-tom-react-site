@@ -860,17 +860,6 @@ const OrderConfirmationPage = () => {
                     orderStatus={trackingStatus === "out_for_delivery" ? "EM_TRANSITO" : trackingStatus === "done" ? "ENTREGUE" : "PREPARANDO"}
                   />
                 </div>
-
-                {/* Print Receipt / Automatic Dashboard Printing */}
-                <div className="mt-4 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={() => window.print()}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-bold shadow-md transition"
-                  >
-                    <span>🖨️</span> Imprimir Cupom do Pedido (Dashboard)
-                  </button>
-                </div>
               </div>
 
               {trackingId &&

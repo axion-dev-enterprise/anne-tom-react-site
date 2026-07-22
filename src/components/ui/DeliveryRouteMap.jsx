@@ -1,117 +1,219 @@
 // src/components/ui/DeliveryRouteMap.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { loadLeaflet } from "../../utils/leafletMap";
 
-export const DeliveryRouteMap = ({
-  destinationAddress = "Santana, São Paulo - SP",
+// Store / Pizzeria coordinates (Pizzaria Anne & Tom - Santana, SP)
+const ANNE_TOM_STORE = { lat: -23.4983, lng: -46.6361 };
+// Default destination coords (Imirim / Zona Norte, SP)
+const DEFAULT_DESTINATION = { lat: -23.4795, lng: -46.6450 };
+
+const DeliveryRouteMap = ({
+  destinationAddress = "Zona Norte, São Paulo - SP",
   distanceKm = 3.8,
-  etaMinutes = 28,
-  orderStatus = "EM_TRANSITO", // PREPARANDO | EM_TRANSITO | ENTREGUE
+  etaMinutes = 35,
+  orderStatus = "EM_TRANSITO", // PREPARANDO, EM_TRANSITO, ENTREGUE
 }) => {
-  const [progress, setProgress] = useState(0.45); // 0 to 1 along route
+  const mapContainerRef = useRef(null);
+  const mapRef = useRef(null);
+  const motoboyMarkerRef = useRef(null);
 
+  const [mapLoaded, setMapLoaded] = useState(false);
+  const [destCoords, setDestCoords] = useState(DEFAULT_DESTINATION);
+
+  // Geocode destination address if possible
   useEffect(() => {
-    if (orderStatus === "EM_TRANSITO") {
-      const interval = setInterval(() => {
-        setProgress((prev) => (prev >= 0.95 ? 0.2 : prev + 0.05));
-      }, 2500);
-      return () => clearInterval(interval);
-    } else if (orderStatus === "ENTREGUE") {
-      setProgress(1.0);
-    } else {
-      setProgress(0.1);
-    }
-  }, [orderStatus]);
+    let active = true;
+    if (!destinationAddress) return;
 
-  // Calculate Motoboy position on curved path
-  const motoboyX = 60 + progress * 260;
-  const motoboyY = 160 - Math.sin(progress * Math.PI) * 40 - progress * 80;
+    const query = destinationAddress.toLowerCase().includes("são paulo")
+      ? destinationAddress
+      : `${destinationAddress}, São Paulo - SP`;
+
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=1`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!active || !data || data.length === 0) return;
+        const lat = parseFloat(data[0].lat);
+        const lng = parseFloat(data[0].lon);
+        if (Number.isFinite(lat) && Number.isFinite(lng)) {
+          setDestCoords({ lat, lng });
+        }
+      })
+      .catch(() => {
+        // Fallback to default destCoords
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [destinationAddress]);
+
+  // Render Leaflet Route Map
+  useEffect(() => {
+    let active = true;
+
+    loadLeaflet()
+      .then((L) => {
+        if (!active || !mapContainerRef.current) return;
+
+        if (mapRef.current) {
+          mapRef.current.remove();
+          mapRef.current = null;
+        }
+
+        const origin = [ANNE_TOM_STORE.lat, ANNE_TOM_STORE.lng];
+        const dest = [destCoords.lat, destCoords.lng];
+
+        // Midpoint for centering
+        const midLat = (ANNE_TOM_STORE.lat + destCoords.lat) / 2;
+        const midLng = (ANNE_TOM_STORE.lng + destCoords.lng) / 2;
+
+        const map = L.map(mapContainerRef.current, {
+          center: [midLat, midLng],
+          zoom: 14,
+          zoomControl: true,
+          scrollWheelZoom: true,
+        });
+
+        // CartoDB Voyager Streets Tile Layer (Crisp Vector Style OpenStreetMap)
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+          maxZoom: 19,
+          subdomains: "abcd",
+        }).addTo(map);
+
+        // Pizzeria Store Icon
+        const storeIcon = L.divIcon({
+          className: "custom-store-marker",
+          html: `<div style="width:34px;height:34px;border-radius:50%;background:#1e293b;border:3px solid #f59e0b;box-shadow:0 4px 12px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-size:16px;">🍕</div>`,
+          iconSize: [34, 34],
+          iconAnchor: [17, 17],
+        });
+
+        // Destination Customer Icon
+        const destIcon = L.divIcon({
+          className: "custom-dest-marker",
+          html: `<div style="width:34px;height:34px;border-radius:50%;background:#ef4444;border:3px solid #ffffff;box-shadow:0 4px 12px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;">🏠</div>`,
+          iconSize: [34, 34],
+          iconAnchor: [17, 17],
+        });
+
+        // Motoboy Animated Icon
+        const motoboyIcon = L.divIcon({
+          className: "custom-motoboy-marker",
+          html: `<div style="position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;">
+                  <div style="position:absolute;width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,0.4);animation:ping 1.2s cubic-bezier(0,0,0.2,1) infinite;"></div>
+                  <div style="width:34px;height:34px;border-radius:50%;background:#f59e0b;border:3px solid #ffffff;box-shadow:0 4px 12px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-size:18px;">🛵</div>
+                 </div>`,
+          iconSize: [38, 38],
+          iconAnchor: [19, 19],
+        });
+
+        // Add Origin & Dest Markers
+        L.marker(origin, { icon: storeIcon })
+          .addTo(map)
+          .bindPopup("<b>🍕 Pizzaria Anne & Tom</b><br/>Alto de Santana - SP");
+
+        L.marker(dest, { icon: destIcon })
+          .addTo(map)
+          .bindPopup(`<b>🏠 Local de Entrega</b><br/>${destinationAddress}`);
+
+        // Route Polyline Points
+        const waypoints = [
+          origin,
+          [origin[0] + 0.005, origin[1] - 0.003],
+          [dest[0] - 0.004, dest[1] + 0.002],
+          dest,
+        ];
+
+        // Draw Polyline Route
+        L.polyline(waypoints, {
+          color: "#f59e0b",
+          weight: 5,
+          opacity: 0.85,
+          dashArray: "10, 8",
+        }).addTo(map);
+
+        // Motoboy Marker at current status progress position
+        let motoboyPos = waypoints[1];
+        if (orderStatus === "EM_TRANSITO") {
+          motoboyPos = waypoints[2];
+        } else if (orderStatus === "ENTREGUE") {
+          motoboyPos = dest;
+        }
+
+        const motoboyMarker = L.marker(motoboyPos, { icon: motoboyIcon })
+          .addTo(map)
+          .bindPopup("<b>🛵 Entrega em Andamento</b><br/>Motoboy Anne & Tom a caminho!");
+
+        motoboyMarkerRef.current = motoboyMarker;
+
+        // Fit map bounds to show route
+        const bounds = L.latLngBounds([origin, dest]);
+        map.fitBounds(bounds, { padding: [40, 40] });
+
+        mapRef.current = map;
+        setMapLoaded(true);
+      })
+      .catch((err) => {
+        console.error("DeliveryRouteMap Leaflet error:", err);
+      });
+
+    return () => {
+      active = false;
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
+  }, [destCoords, destinationAddress, orderStatus]);
 
   return (
-    <div className="delivery-route-map bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl text-white relative">
-      {/* Map Header Overlay */}
-      <div className="p-4 bg-slate-950/80 backdrop-blur-md border-b border-slate-800 flex items-center justify-between z-20 relative">
-        <div className="flex items-center gap-2.5">
-          <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping" />
-          <div>
-            <p className="text-xs font-bold text-slate-200">Rota de Entrega OpenSource</p>
-            <p className="text-[11px] text-slate-400 truncate max-w-[200px] sm:max-w-xs">{destinationAddress}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="text-right">
-            <span className="text-xs font-black text-amber-400 block">{distanceKm} km</span>
-            <span className="text-[10px] text-slate-400">Distância</span>
-          </div>
-          <div className="text-right bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-xl">
-            <span className="text-xs font-black text-amber-400 block">~{etaMinutes} min</span>
-            <span className="text-[10px] text-amber-300/80">Previsão ETA</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Stylized OpenStreetMap Canvas Vector View */}
-      <div className="relative w-full h-56 sm:h-64 bg-[#1e2430] overflow-hidden select-none">
-        {/* Grid lines simulating map streets */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
-          <pattern id="street-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#475569" strokeWidth="1" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#street-grid)" />
-        </svg>
-
-        {/* Map Decorative Road Lines */}
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          {/* Main Avenue background */}
-          <path d="M 40 170 Q 180 140 340 70" fill="none" stroke="#334155" strokeWidth="16" strokeLinecap="round" />
-          {/* Active Route Glow */}
-          <path d="M 50 160 Q 180 130 320 80" fill="none" stroke="#f59e0b" strokeWidth="6" strokeLinecap="round" opacity="0.4" />
-          {/* Active Route Path */}
-          <path d="M 50 160 Q 180 130 320 80" fill="none" stroke="#fbbf24" strokeWidth="3" strokeDasharray="6 4" />
-
-          {/* Origin Marker (Pizzaria) */}
-          <g transform="translate(45, 160)">
-            <circle r="14" fill="#10b981" fillOpacity="0.2" className="animate-pulse" />
-            <circle r="8" fill="#10b981" />
-            <text x="0" y="4" textAnchor="middle" fill="#ffffff" fontSize="10" fontWeight="bold">🍕</text>
-          </g>
-
-          {/* Destination Marker (Client Address) */}
-          <g transform="translate(320, 80)">
-            <circle r="14" fill="#ef4444" fillOpacity="0.2" className="animate-pulse" />
-            <circle r="8" fill="#ef4444" />
-            <text x="0" y="4" textAnchor="middle" fill="#ffffff" fontSize="10" fontWeight="bold">🏠</text>
-          </g>
-
-          {/* Motoboy Animated Marker */}
-          <g transform={`translate(${motoboyX}, ${motoboyY})`} className="transition-all duration-700 ease-out">
-            <circle r="16" fill="#f59e0b" fillOpacity="0.3" className="animate-ping" />
-            <circle r="12" fill="#f59e0b" stroke="#ffffff" strokeWidth="2" />
-            <text x="0" y="4" textAnchor="middle" fill="#ffffff" fontSize="12">🛵</text>
-          </g>
-        </svg>
-
-        {/* Origin Label Tag */}
-        <div className="absolute left-3 bottom-3 bg-slate-950/90 border border-slate-800 px-3 py-1.5 rounded-xl text-[11px] font-semibold text-emerald-400 flex items-center gap-1.5 shadow-lg">
-          <span>🍕</span> Anne & Tom (Alto de Santana)
-        </div>
-
-        {/* Destination Label Tag */}
-        <div className="absolute right-3 top-14 bg-slate-950/90 border border-slate-800 px-3 py-1.5 rounded-xl text-[11px] font-semibold text-rose-400 flex items-center gap-1.5 shadow-lg">
-          <span>🏠</span> Destino de Entrega
-        </div>
-      </div>
-
-      {/* Footer Status Bar */}
-      <div className="p-3 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs text-slate-300">
+    <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-lg select-none">
+      {/* Header Banner */}
+      <div className="bg-slate-900 text-white px-4 py-3 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span>Status: <strong className="text-amber-400">
-            {orderStatus === "PREPARANDO" && "Em Preparação no Forno"}
-            {orderStatus === "EM_TRANSITO" && "Motoboy a Caminho"}
-            {orderStatus === "ENTREGUE" && "Pedido Entregue"}
-          </strong></span>
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="font-bold text-sm tracking-wide text-amber-400">
+            🛵 Rota de Entrega em Tempo Real (OpenStreetMap)
+          </span>
         </div>
-        <span className="text-[10px] text-slate-400">OpenSource Maps Engine v2.0</span>
+        <div className="flex items-center gap-2 text-xs font-semibold">
+          <span className="bg-slate-800 text-slate-300 px-2.5 py-1 rounded-full border border-slate-700">
+            📏 {distanceKm} km
+          </span>
+          <span className="bg-amber-500/20 text-amber-300 px-2.5 py-1 rounded-full border border-amber-500/40">
+            ⏱️ {etaMinutes} min ETA
+          </span>
+        </div>
+      </div>
+
+      {/* Leaflet Map Area */}
+      <div className="relative h-64 md:h-80 w-full bg-slate-100">
+        <div ref={mapContainerRef} className="absolute inset-0 z-0" />
+        
+        {!mapLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-900/80 text-white text-xs font-semibold z-10">
+            <span className="animate-spin mr-2 text-amber-400">🌀</span> Carregando mapa de entrega interativo...
+          </div>
+        )}
+
+        {/* Floating Motoboy Badge */}
+        <div className="absolute bottom-3 left-3 z-10 bg-slate-900/90 text-white backdrop-blur-md border border-slate-700 px-3.5 py-2 rounded-xl text-xs flex items-center gap-2 shadow-xl">
+          <span className="text-lg">🛵</span>
+          <div>
+            <div className="font-bold text-amber-400">Motoboy Anne & Tom</div>
+            <div className="text-[10px] text-slate-300">
+              {orderStatus === "ENTREGUE" ? "Pedido Entregue com Sucesso!" : "Em deslocamento para o destino"}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer Info */}
+      <div className="p-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-600 flex items-center justify-between">
+        <span className="truncate">📍 <strong className="text-slate-800">Destino:</strong> {destinationAddress}</span>
+        <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">OpenSource Map Engine</span>
       </div>
     </div>
   );
