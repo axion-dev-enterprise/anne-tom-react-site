@@ -58,6 +58,7 @@ const AppContent = () => {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/confirmacao" element={<OrderConfirmationPage />} />
               <Route path="/minha-conta" element={<CustomerDashboardPage />} />
+              <Route path="/me" element={<CustomerDashboardPage />} />
               <Route path="/auth" element={<CustomerDashboardPage />} />
               <Route path="/sobre" element={<AboutPage />} />
               <Route path="/contato" element={<ContactPage />} />

@@ -7,21 +7,14 @@ import { Link, NavLink } from "react-router-dom";
 
 
 const navItems = [
-
+  { to: "/me", label: "👤 Minha Conta" },
+  { to: "/cardapio", label: "Cardápio" },
   { to: "/sobre", label: "Sobre" },
-
-  { to: "/cardapio", label: "Cardapio" },
-
   { to: "/entrega", label: "Entrega" },
-
-  { to: "/promocoes", label: "Promocoes" },
-
+  { to: "/promocoes", label: "Promoções" },
   { to: "/eventos", label: "Eventos" },
-
   { to: "/faq", label: "FAQ" },
-
   { to: "/contato", label: "Contato" },
-
 ];
 
 
