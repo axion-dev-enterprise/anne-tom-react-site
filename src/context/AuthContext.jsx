@@ -12,20 +12,16 @@ export const AuthProvider = ({ children }) => {
       if (!raw) return null;
       const parsed = JSON.parse(raw);
       if (parsed && Array.isArray(parsed.orders)) {
-        // Sanitize and deduplicate orders from local storage
+        // Sanitize and deduplicate orders from local storage, removing zero-total loop artifacts
         const uniqueMap = new Map();
         parsed.orders.forEach((ord) => {
-          if (ord && ord.id) {
+          if (ord && ord.id && Number(ord.total) > 0) {
             const key = String(ord.id);
-            const existing = uniqueMap.get(key);
-            // Prefer order entry with valid total > 0
-            if (!existing || (Number(ord.total) > 0 && Number(existing.total) === 0)) {
-              uniqueMap.set(key, {
-                ...ord,
-                total: Number(ord.total) || 0,
-                pointsEarned: ord.pointsEarned ?? Math.floor(Number(ord.total) || 0),
-              });
-            }
+            uniqueMap.set(key, {
+              ...ord,
+              total: Number(ord.total) || 0,
+              pointsEarned: ord.pointsEarned ?? Math.floor(Number(ord.total) || 0),
+            });
           }
         });
         parsed.orders = Array.from(uniqueMap.values());
@@ -162,6 +158,16 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
+  const clearOrders = useCallback(() => {
+    setCustomer((prevCustomer) => {
+      if (!prevCustomer) return prevCustomer;
+      return {
+        ...prevCustomer,
+        orders: [],
+      };
+    });
+  }, []);
+
   const redeemPoints = (pointsToRedeem) => {
     if (!customer) return false;
     const currentPoints = customer.points ?? 0;
@@ -187,10 +193,11 @@ export const AuthProvider = ({ children }) => {
       logout,
       redeemPoints,
       recordOrder,
+      clearOrders,
       isAuthenticated: !!customer,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [customer, loading, recordOrder]
+    [customer, loading, recordOrder, clearOrders]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -7,7 +7,7 @@ import { useCart } from "../context/CartContext";
 import { formatCurrencyBRL } from "../utils/menu";
 
 export const CustomerDashboardPage = () => {
-  const { customer, isAuthenticated, loginOrRegister, logout, loadingAuth } = useAuth();
+  const { customer, isAuthenticated, loginOrRegister, logout, clearOrders, loadingAuth } = useAuth();
   const { addItem } = useCart();
   const [phoneInput, setPhoneInput] = useState("");
   const [nameInput, setNameInput] = useState("");
@@ -43,10 +43,9 @@ export const CustomerDashboardPage = () => {
     const raw = customer?.orders || [];
     const map = new Map();
     raw.forEach((o) => {
-      if (o && o.id) {
+      if (o && o.id && Number(o.total) > 0) {
         const key = String(o.id);
         const existing = map.get(key);
-        // Prefer object with non-zero total
         if (!existing || (Number(o.total) > 0 && Number(existing.total) === 0)) {
           map.set(key, o);
         }
@@ -231,9 +230,16 @@ export const CustomerDashboardPage = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-slate-900">Seus Pedidos Anteriores</h3>
-              <button onClick={logout} className="text-xs text-rose-600 hover:text-rose-800 font-bold underline">
-                Sair da conta
-              </button>
+              <div className="flex items-center gap-3">
+                {Array.isArray(customer?.orders) && customer.orders.length > 0 && (
+                  <button onClick={clearOrders} className="text-xs text-slate-500 hover:text-rose-600 font-bold underline">
+                    Limpar histórico
+                  </button>
+                )}
+                <button onClick={logout} className="text-xs text-rose-600 hover:text-rose-800 font-bold underline">
+                  Sair da conta
+                </button>
+              </div>
             </div>
 
             {ordersList.length === 0 ? (
